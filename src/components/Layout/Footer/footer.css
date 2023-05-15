@@ -1,0 +1,9 @@
+.div{
+    height: 20px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #20d1ab;
+    padding: 20px;
+    font-size: large;
+}

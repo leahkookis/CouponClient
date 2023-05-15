@@ -1,0 +1,71 @@
+
+
+  Login.main{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 90px 0 90px 0;
+  }
+
+  .sub-main-reg{
+    display: flex;
+    justify-content: center;
+    height: 700px;
+    width: 35%;
+    box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
+    padding-top: 40px;
+    border-radius:  60px;
+    background-color: white;
+  } 
+
+  .input-reg{
+    width: 380px;
+    height: 50px;
+    border-radius: 60px;
+    box-shadow: inset 0px 0px 25px 0px #888;
+    border:none;
+    outline: none;
+    background-color: hsl(0, 0%, 100%);
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: medium;
+    
+  }
+
+  .button-reg{
+    width: 380px;
+    height: 50px;
+    border-radius: 60px;
+    background-color: #b103fc;
+    color: white;
+    font-size: 25px;
+    border: none;
+  }
+
+  .imgs-reg{
+    padding-top: 0px;
+    justify-content: center;
+    display: flex;
+  }
+  
+  .container-image-reg{
+    background-color: #b103fc;
+    border-radius: 80px;
+    align-items: center;
+    display: flex;
+    height: 100px;
+    width: 100px;
+  }
+
+
+
+  .personplus{
+    padding-left: 10px;
+    height: 80px;
+    width: 80px;
+    border-radius: 110px ;
+  }
+
+  .all-inputs{
+    margin-top: 60px;
+  }

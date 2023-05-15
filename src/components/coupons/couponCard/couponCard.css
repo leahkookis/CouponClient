@@ -1,0 +1,24 @@
+.coupon-card{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: rgb(135, 235, 227);
+    padding: 5px;
+    margin-left: 1%;
+    margin-bottom: 8px;
+    transition: 1s;
+    
+}
+.coupon-card:hover {
+    background: rgb(206, 243, 248);
+}
+.img-coupon{
+    width: 98%;
+    
+    padding: 2px;
+}
+.coupon-name{
+    font-size: 20px;
+    font-weight: bold;
+}

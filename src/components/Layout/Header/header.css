@@ -1,0 +1,33 @@
+
+.header-nav{
+    display: inline-block;
+    padding: 15px;
+    background: #009688;
+    color: #fff;
+    font-size: 15px;
+    transition: all 2s;
+    border-width: 0px;
+   
+}
+.header-nav:hover{
+    background: #fff;
+    color: black;
+}
+.header-navigation{
+    display: block;
+    background: #009688;
+  
+}
+.header-page{
+    background: black;
+    display: block;
+    padding: 15px;
+    color: #fff;
+}
+.signin-btn{
+    float: right;
+}
+.search{
+    float: left;
+    
+}

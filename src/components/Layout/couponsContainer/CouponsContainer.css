@@ -1,0 +1,9 @@
+.Coupons-container{
+                display: flex;
+                padding: 20px;
+                transition: all 1s;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+    
+    
+}
