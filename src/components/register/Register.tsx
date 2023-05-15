@@ -43,7 +43,7 @@ function App() {
         <input className='input-reg'type="text" placeholder="Phone Number" onChange={event => setPhoneNumber(event.target.value)} /><br />
         <input className='input-reg'type="text" placeholder="User name" onChange={event => setUserName(event.target.value)} /><br />
         <input className='input-reg'type="password" placeholder="Password" onChange={event => setPassword(event.target.value)} /><br />
-        <input className='button-reg'type="button" value="Submit" onClick={register} />
+        <input className='sumbit'type="button" value="Submit" onClick={register} />
         </div>
         </div>
       </div>

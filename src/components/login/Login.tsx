@@ -59,7 +59,7 @@ function Login() {
             </div>
           </div>
           <div>
-            <h1>Login page</h1>
+            <h1>Login</h1>
             <div >
               <img src={email} alt="email" className="email" />
               <input type="text" className="name input-login" placeholder='User Name' onChange={event => setUserName(event.target.value)} /><br />

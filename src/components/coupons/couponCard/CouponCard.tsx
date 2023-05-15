@@ -2,19 +2,21 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ICouponsData from "../../../models/ICouponsData";
 import { AppState } from "../../../redux/app-state";
-import EditCoupon from "../editCoupon/editCoupon";
 import './couponCard.css';
 import Modal from 'react-modal';
 import { useState } from "react";
+import EditCoupon from "../editCoupon/editCoupon";
 
 const customStyles = {
     content: {
-        top: '50%',
+        top: '60%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
+        
+        
     },
 };
 
@@ -76,26 +78,30 @@ function Coupon(props: ICouponsData) {
                 style={customStyles}
                 contentLabel="Example Modal"
             >
-                <button onClick={closeModal}>close</button>
                 <div className="coupon-card-modal">
-                    <img className="img-coupon-modal" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
-                    <div className="coupon-name">
+                    
+                <img className="img-coupon-modal" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
+                <div className="name-and-price">
+                    <div className="coupon-name-modal">
                         {props.name}
                     </div>
-                    <div>
-                        {props.price} ILS
+                    <div className="fields">
+                     Price:{props.price} ILS
                     </div>
-                    <div>
-                        {props.description}
                     </div>
-                    <div>
-                        {props.categoryName}
+                    <div className="fields">
+                     About:  {props.description}
                     </div>
-                    <div>
-                        {props.endDate}
+                    <div className="fields">
+                     Category:{props.categoryName}
+                    </div>
+                    <div className="fields">
+                      Expiration Date:  {props.endDate}
                     </div>
                     <button className="button-modal" onClick={event=> addToCart(props.id)}>Add to cart</button>
                     <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
+                    <button className="button-modal" onClick={closeModal}>close</button>
+
                     <div className="edit-button">
                         {loginData?.userType == "admin" && (<input type="button" value={"edit"} onClick={editCoupon} />)}
                     </div>

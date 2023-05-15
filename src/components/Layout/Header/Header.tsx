@@ -17,10 +17,10 @@ function Header() {
         <div className='header-navigation'>
         <input className='header-nav search' type="text" placeholder='Search' onChange={event=> sendSearchText(event.target.value)}/>
 
-        <Link to="/"><button className='header-nav'>Category A</button></Link> 
-        <Link to="/"><button className='header-nav'>Category B</button></Link> 
-        <Link to="/"><button className='header-nav'>Category C</button></Link> 
-        <Link to="/"><button className='header-nav'>Category D</button></Link> 
+        <Link to="/"><button className='header-nav'>Flights</button></Link> 
+        <Link to="/"><button className='header-nav'>Food</button></Link> 
+        <Link to="/"><button className='header-nav'>Hotels</button></Link> 
+        <Link to="/"><button className='header-nav'>Games</button></Link> 
         <Link to="/login"><button className='header-nav signin-btn'>Sign In</button></Link>
         </div>
         </div>

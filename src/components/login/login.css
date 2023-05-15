@@ -10,11 +10,12 @@
     display: flex;
        justify-content: center;
        height:100%;
-       width: 40%;
+       width: auto;
        box-shadow:11px 12px 13px  rgb(106, 106, 106);
        padding-top: 30px;
-       border-radius:  60px;
-       background-color: #f4fffd96
+       border-radius:  20px;
+       background-color: #dff0ee;
+       padding:  30px;
   } 
   
   .imgs{
@@ -44,7 +45,7 @@
   .input-login{
     width:70%;
     height: 50px;
-    border-radius: 60px;
+    border-radius: 20px;
     box-shadow: inset 0px 0px 25px 0px #888;
     border:none;
     outline: none;
@@ -60,7 +61,7 @@
     height: 25px;
     width: 25px;
     position: absolute;
-    padding: 14px 0 0 25px;
+    padding: 20px 0 0 25px;
     background-color: transparent;
   }
   
@@ -83,7 +84,7 @@
   .button{
     width: 380px;
     height: 50px;
-    border-radius: 60px;
+    border-radius: 20px;
     background-color: #009688;
     color: white;
     font-size: 25px;
@@ -95,9 +96,9 @@
    
     width: 380px;
     height: 50px;
-    border-radius: 60px;
+    border-radius: 20px;
     background-color: #009688;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 25px;
     border: none;
     cursor: pointer;
@@ -105,7 +106,7 @@
     transition: .3s all ease;
   }
   .login-button:hover{
-    background-color: #009688;
+    background-color: #35d4c4;
     flex: 2;
     scale: 1.03;
   }
@@ -118,16 +119,16 @@
     cursor: pointer;
     width: 190px;
     height: 50px;   
-    border-radius: 50px;
+    border-radius: 20px;
     font-size:medium;
     margin: 20px;
-    background-color: #5ef5e6;
+    background-color: #009688;
     flex: 1;
     transition: .3s all ease;
    }
 
    .forgotPassword:hover{
-    background-color: #009688;
+    background-color: #35d4c4;
     flex: 2;
     scale: 1.03;
    }
@@ -136,10 +137,10 @@
     cursor: pointer;
     width:120px;
     height: 50px;   
-    border-radius: 50px;
+    border-radius: 20px;
     font-size:medium;
     margin: 20px;
-    background-color: #5ef5e6; 
+    background-color: #009688; 
     flex:1;
     transition: .3s all ease;
     
@@ -147,6 +148,6 @@
 
    .signUp:hover{
     flex:2;
-    background-color: #009688;
+    background-color: #35d4c4;
     scale: 1.03;
    }

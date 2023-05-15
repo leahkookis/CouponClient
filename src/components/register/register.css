@@ -1,71 +1,106 @@
 
 
-  Login.main{
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    padding: 90px 0 90px 0;
-  }
+.main{
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 90px 0 90px 0;
+}
 
-  .sub-main-reg{
-    display: flex;
-    justify-content: center;
-    height: 700px;
-    width: 35%;
-    box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
-    padding-top: 40px;
-    border-radius:  60px;
-    background-color: white;
-  } 
+.sub-main-reg{
+  display: flex;
+       justify-content: center;
+       height:100%;
+       width: auto;
+       box-shadow:11px 12px 13px  rgb(106, 106, 106);
+       padding-top: 30px;
+       border-radius:  20px;
+       background-color: #dff0ee;
+       padding:  30px;
+} 
 
-  .input-reg{
-    width: 380px;
-    height: 50px;
-    border-radius: 60px;
-    box-shadow: inset 0px 0px 25px 0px #888;
-    border:none;
-    outline: none;
-    background-color: hsl(0, 0%, 100%);
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: medium;
-    
-  }
+.input-reg{
+  width: 380px;
+  height: 50px;
+  border-radius: 20px;
+  box-shadow: inset 0px 0px 25px 0px #888;
+  border:none;
+  outline: none;
+  background-color: hsla(0, 0%, 100%, 0.164);
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: medium;
+  flex:1;
+  transition: .3s all ease;
+  cursor:pointer;    
+}
+.input-reg:hover{
+  flex :2;
+  background-color: hsla(0, 0%, 100%, 0.774);
+}
 
-  .button-reg{
-    width: 380px;
-    height: 50px;
-    border-radius: 60px;
-    background-color: #b103fc;
-    color: white;
-    font-size: 25px;
-    border: none;
-  }
+.imgs-reg{
+  padding-top: 0px;
+  justify-content: center;
+  display: flex;
+}
 
-  .imgs-reg{
-    padding-top: 0px;
-    justify-content: center;
-    display: flex;
-  }
+.container-image-reg{
+  background-color: #009688;
+  border-radius: 20px;
+  align-items: center;
+  display: flex;
+  height: 100px;
+  width: 100px;
+}
+
+
+
+.personplus{
+  padding-left: 10px;
+  height: 80px;
+  width: 80px;
+  border-radius: 110px ;
+}
+
+.all-inputs{
+  margin-top: 60px;
+}
+
+.already-member{
+  cursor: pointer;
+  width: 250px;
+  height: 50px;   
+  border-radius: 20px;
+  font-size:medium;
+  margin: 20px;
+  background-color: #009688;
   
-  .container-image-reg{
-    background-color: #b103fc;
-    border-radius: 80px;
-    align-items: center;
-    display: flex;
-    height: 100px;
-    width: 100px;
-  }
+  flex: 1;
+  transition: .3s all ease;
 
+}
 
-
-  .personplus{
-    padding-left: 10px;
-    height: 80px;
-    width: 80px;
-    border-radius: 110px ;
-  }
-
-  .all-inputs{
-    margin-top: 60px;
-  }
+.already-member:hover{
+  flex: 2;
+  scale: 1.03;
+  background-color: #70dfd4;
+}
+.sumbit{
+ 
+  width: 380px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #009688;
+  color: white;
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  transition: .3s all ease;
+}
+.sumbit:hover{
+  background-color: #70dfd4;
+  flex: 2;
+  scale: 1.03;
+}
