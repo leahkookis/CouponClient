@@ -1,0 +1,157 @@
+body {
+    background-image: url('../images/love.png');
+     background-size: cover;
+     background-position: center;
+   }
+   .main{
+       text-align: center;
+       justify-content: center;
+       display: flex;
+       padding: 90px 0 90px 0;
+       
+     }
+     
+     .sub-main{
+       display: flex;
+       justify-content: center;
+       height:100%;
+       width: 40%;
+       box-shadow: 11px 12px 13px  rgb(245, 215, 215);
+       padding-top: 30px;
+       border-radius:  60px;
+       background-color: rgba(232, 190, 190, 0.827);
+      
+     } 
+     
+     .imgs{
+       padding-top: 20px;
+       justify-content: center;
+       display: flex;
+     
+     }
+     
+     .container-image{
+       background-color: #9d1313;
+       border-radius: 150px;
+       align-items: center;
+       display: inline;
+       display: flex;
+       height: 115px;
+       width: 29%;
+     }
+    
+     .profile{
+       padding-left: 7px;
+       height: 100px;
+       width: 100px;
+       border-radius: 130px ;
+     }
+     
+     input{
+       width:70%;
+       height: 50px;
+       border-radius: 60px;
+       box-shadow: inset 0px 0px 25px 0px #888;
+       border:none;
+       outline: none;
+       background-color: hsla(0, 0%, 100%, 0.164);
+       caret-color: #9d1313; 
+       cursor: pointer;  
+       
+     }
+     
+     
+     .email{
+       height: 25px;
+       width: 25px;
+       position: absolute;
+       padding: 14px 0 0 25px;
+       background-color: transparent;
+     }
+     
+     .name{
+       padding-left:20% ;
+       font-size: 110%;
+       width: 70%;
+       flex:1;
+       transition: .3s all ease;    
+     }
+     .name:hover{
+       flex :2;
+       background-color: hsla(0, 0%, 100%, 0.774);
+     }
+     
+     .second-input{
+       padding-top:  20px;
+     }
+     
+     .button{
+       width: 380px;
+       height: 50px;
+       border-radius: 60px;
+       background-color: #9d1313;
+       color: white;
+       font-size: 25px;
+       border: none;
+       cursor: pointer;
+     }
+     
+     .login-button{
+      
+       width: 380px;
+       height: 50px;
+       border-radius: 60px;
+       background-color: #9d1313;
+       color: white;
+       font-size: 25px;
+       border: none;
+       cursor: pointer;
+       flex: 1;
+       transition: .3s all ease;
+     }
+     .login-button:hover{
+       background-color: #7f0e0e;
+       flex: 2;
+       scale: 1.03;
+     }
+     
+     .link{
+       font-size: 20px;
+       font-weight: 400px ;
+     }
+      .forgotPassword{
+       cursor: pointer;
+       width: 190px;
+       height: 50px;   
+       border-radius: 50px;
+       font-size:medium;
+       margin: 20px;
+       background-color: #964141;
+       flex: 1;
+       transition: .3s all ease;
+      }
+   
+      .forgotPassword:hover{
+       background-color: #9d1313;
+       flex: 2;
+       scale: 1.03;
+      }
+   
+      .signUp{
+       cursor: pointer;
+       width:120px;
+       height: 50px;   
+       border-radius: 50px;
+       font-size:medium;
+       margin: 20px;
+       background-color: #964141; 
+       flex:1;
+       transition: .3s all ease;
+       
+      }
+   
+      .signUp:hover{
+       flex:2;
+       background-color: #9d1313;
+       scale: 1.03;
+      }

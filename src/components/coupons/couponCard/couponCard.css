@@ -8,6 +8,7 @@
     margin-left: 1%;
     margin-bottom: 8px;
     transition: 1s;
+    border-radius: 10px;
     
 }
 .coupon-card:hover {
@@ -15,7 +16,7 @@
 }
 .img-coupon{
     width: 98%;
-    
+    border-radius: 10px;
     padding: 2px;
 }
 .coupon-name{

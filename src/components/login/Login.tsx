@@ -41,6 +41,13 @@ function Login() {
         alert("Login invalid, try later")
       }
     }
+  
+  }
+  function onSignUpClick(){
+    navigate("/register")
+  }
+  function onForgotPasswordClick(){
+    navigate("/forgotPassword");
   }
   return (
     <div className="login-main">
@@ -53,21 +60,22 @@ function Login() {
           </div>
           <div>
             <h1>Login page</h1>
-            <div className='login-input'>
+            <div >
               <img src={email} alt="email" className="email" />
-              <input type="text" className="name" placeholder='User Name' onChange={event => setUserName(event.target.value)} /><br />
+              <input type="text" className="name input-login" placeholder='User Name' onChange={event => setUserName(event.target.value)} /><br />
             </div>
-            <div className="login-input">
+            <div >
               <img src={lock} alt="lock" className="email" />
-              <input type="password" className="name" placeholder='Password' onChange={event => setPassword(event.target.value)} /><br />
+              <input type="password" className="name input-login" placeholder='Password' onChange={event => setPassword(event.target.value)} /><br />
             </div>
-            <div className="login-button">
-              <input type="button" className="submit-button" value="Login" onClick={onButtonClick} /><br />
+            <div >
+              <input type="button" className="login-button input-login" value="Login" onClick={onButtonClick} /><br />
             </div>
 
-            <p className="link">
-              <a href="#"> Forgot Password?</a> or <Link to="/register" > Sign up</Link>
-            </p>
+           
+            <input type="button" className="forgotPassword input-login" value="Forgot password" onClick={onForgotPasswordClick} />
+            <input type="button" className="signUp input-login" value="sign up" onClick={onSignUpClick} /><br />
+            
 
           </div>
         </div>
