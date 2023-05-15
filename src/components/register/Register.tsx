@@ -2,10 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import './register.css';
 import personplus from "../images/personplus.png"
+import { useNavigate } from "react-router-dom";
 
 
 function App() {
 
+    const navigate = useNavigate();
     let [userName, setUserName] = useState("");
     let [password, setPassword] = useState("");
     let [name, setName] = useState("");
@@ -17,8 +19,11 @@ function App() {
   
     async function register() {
       try {
-        const response = await axios.post("http://localhost:8080/customers", {user:{userName, password}, name, address, phoneNumber });
-        console.error(response);
+        
+      const response = await axios.post("http://localhost:8080/customers", {user:{userName, password}, name, address, phoneNumber });
+      console.log("fff");
+      navigate("/");
+        
       } catch (e) { }
     }
     return (
