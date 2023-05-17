@@ -48,7 +48,7 @@ function Login() {
       if (e.response?.data?.error?.message) {
         alert(e.response.data.error.message)
       } else {
-        alert("Login invalid, try later")
+        alert("Login invalid, try laterט")
       }
     }
 
