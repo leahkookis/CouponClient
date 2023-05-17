@@ -1,5 +1,8 @@
 export enum ActionType{
     GetCoupons,
     LoginData,
-    SendSearchText
+    SendSearchText,
+    CustomerData,
+    AddToCart,
+    BuyNow
 }

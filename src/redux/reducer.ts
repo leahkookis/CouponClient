@@ -16,6 +16,16 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.SendSearchText:
             newAppState.sendSearchText = action.payload.subText;
             break;
+        case ActionType.CustomerData:
+            newAppState.customerData = action.payload.customerData;
+            break;
+        case ActionType.AddToCart:
+            newAppState.addToCart = action.payload.countOfCartProduct;
+            break;
+        case ActionType.BuyNow:
+            newAppState.buyNow = action.payload.countOfBuyProduct;
+            break;
+
     }
 
     return newAppState;

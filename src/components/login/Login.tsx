@@ -11,6 +11,7 @@ import ISuccessfulLoginData from '../../models/ISuccessfulLoginData';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ActionType } from '../../redux/action-types';
+import IPurchaseData from '../../models/IPurchaseData';
 
 function Login() {
   const navigate = useNavigate();
@@ -23,13 +24,24 @@ function Login() {
       let token = response.data;
       let decodedToken: any = jwt_decode(token)
       let strSuccessfullLoginResponse: string = decodedToken.sub
-      let successfullLoginResponse: ISuccessfulLoginData = JSON.parse(strSuccessfullLoginResponse)
-      dispatch({ type: ActionType.LoginData, payload: { loginData: successfullLoginResponse } })
+      let successfullLoginResponse: ISuccessfulLoginData = JSON.parse(strSuccessfullLoginResponse);
+      dispatch({ type: ActionType.LoginData, payload: { loginData: successfullLoginResponse } });
       console.log(" Decoded: ", successfullLoginResponse)
       axios.defaults.headers.common['Authorization'] = "Bearer " + token;
       navigate("/");
 
+      const customerDataResponse = await axios.get("http://localhost:8080/customer/" + successfullLoginResponse.id);
+      let customerDataRe = customerDataResponse.data;
+      console.log(customerDataRe)
+      dispatch({ type: ActionType.CustomerData, payload: { customerData: customerDataRe } });
 
+      const customerPurchase = await axios.get(`http://localhost:8080/purchase/bycustomer`, { params: { customerid: successfullLoginResponse.id } });
+      let purchaseData: IPurchaseData[] = customerPurchase.data;
+      let countOfCartProduct = purchaseData.filter(purchase => purchase.buy === false).length;
+      let countOfBuyProduct = purchaseData.filter(purchase => purchase.buy === true).length;
+      debugger;
+      dispatch({ type: ActionType.BuyNow, payload: {countOfBuyProduct} });
+      dispatch({ type: ActionType.AddToCart, payload: {countOfCartProduct} });
 
     } catch (e: any) {
       console.error(e);
