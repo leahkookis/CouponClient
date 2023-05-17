@@ -73,3 +73,10 @@
   .name-and-price{
     display: inline;
   }
+  .enter-coupon{
+    background-color: none;
+    border: none;
+    appearance: none;
+    color: none;
+    cursor: none;
+  }
