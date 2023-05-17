@@ -20,17 +20,15 @@ function Login() {
   async function onButtonClick() {
     try {
       const response = await axios.post("http://localhost:8080/users/login", { userName, password });
-      //  console.log(response)
-
       let token = response.data;
-      let decodedToken : any = jwt_decode(token)
+      let decodedToken: any = jwt_decode(token)
       let strSuccessfullLoginResponse: string = decodedToken.sub
       let successfullLoginResponse: ISuccessfulLoginData = JSON.parse(strSuccessfullLoginResponse)
-      dispatch({type: ActionType.LoginData, payload:{loginData:successfullLoginResponse}})
+      dispatch({ type: ActionType.LoginData, payload: { loginData: successfullLoginResponse } })
       console.log(" Decoded: ", successfullLoginResponse)
       axios.defaults.headers.common['Authorization'] = "Bearer " + token;
       navigate("/");
-      
+
 
 
     } catch (e: any) {
@@ -41,12 +39,12 @@ function Login() {
         alert("Login invalid, try later")
       }
     }
-  
+
   }
-  function onSignUpClick(){
+  function onSignUpClick() {
     navigate("/register")
   }
-  function onForgotPasswordClick(){
+  function onForgotPasswordClick() {
     navigate("/forgotPassword");
   }
   return (
@@ -72,10 +70,10 @@ function Login() {
               <input type="button" className="login-button input-login" value="Login" onClick={onButtonClick} /><br />
             </div>
 
-           
+
             <input type="button" className="forgotPassword input-login" value="Forgot password" onClick={onForgotPasswordClick} />
             <input type="button" className="signUp input-login" value="sign up" onClick={onSignUpClick} /><br />
-            
+
 
           </div>
         </div>

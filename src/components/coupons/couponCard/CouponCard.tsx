@@ -1,10 +1,13 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ICouponsData from "../../../models/ICouponsData";
 import { AppState } from "../../../redux/app-state";
 import './couponCard.css';
 import Modal from 'react-modal';
 import { useState } from "react";
+import axios from "axios";
+import IPurchaseData from "../../../models/IPurchaseData";
+
 import EditCoupon from "../editCoupon/editCoupon";
 
 const customStyles = {
@@ -22,10 +25,35 @@ const customStyles = {
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
+
 function Coupon(props: ICouponsData) {
     let loginData = useSelector((state: AppState) => state.loginData)
     function editCoupon() {
         <EditCoupon id={props.id} name={props.name} price={props.price} description={props.description} startDate={props.startDate} endDate={props.endDate} categoryName={props.categoryName} companyName={props.companyName} amount={props.amount} />
+    }
+    const navigate = useNavigate();
+    let coupon = props;
+    let user = loginData;
+    let userId = loginData?.id;
+    let timeStamp = "2024-02-02T00:00:00.000+00:00";
+    let isBuy = false;
+    async function addToCart(id: number) {
+        if (loginData == null) {
+            navigate("/login")
+            return;
+        }
+        try {
+
+            const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer:{user}, coupon, isBuy });
+        }
+        catch (e: any) {
+            console.error(e);
+            if (e.response?.data?.error?.message) {
+                alert(e.response.data.error.message)
+            } else {
+                alert("failed to add to cart")
+            }
+        }
     }
 
 
@@ -46,11 +74,9 @@ function Coupon(props: ICouponsData) {
     function closeModal() {
         setIsOpen(false);
     }
-    function buyNow(id:number): void {
-        throw new Error("Function not implemented.");
-    }
 
-    function addToCart(id:number): void {
+
+    function buyNow(id: number): void {
         throw new Error("Function not implemented.");
     }
 
@@ -98,7 +124,7 @@ function Coupon(props: ICouponsData) {
                     <div className="fields">
                       Expiration Date:  {props.endDate}
                     </div>
-                    <button className="button-modal" onClick={event=> addToCart(props.id)}>Add to cart</button>
+                    <button className="button-modal" onClick={event => addToCart(props.id)}>Add to cart</button>
                     <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
                     <button className="button-modal" onClick={closeModal}>close</button>
 
@@ -107,6 +133,7 @@ function Coupon(props: ICouponsData) {
                     </div>
                 </div>
             </Modal>
+
         </div>
     )
 }
