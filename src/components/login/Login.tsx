@@ -41,7 +41,7 @@ function Login() {
       let countOfBuyProduct = purchaseData.filter(purchase => purchase.buy === true).length;
       debugger;
       dispatch({ type: ActionType.BuyNow, payload: {countOfBuyProduct} });
-      dispatch({ type: ActionType.AddToCart, payload: {countOfCartProduct} });
+      dispatch({ type: ActionType.AddToCartCount, payload: {countOfCartProduct} });
 
     } catch (e: any) {
       console.error(e);

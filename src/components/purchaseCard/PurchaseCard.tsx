@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import ICouponsData from "../../../models/ICouponsData";
-import { AppState } from "../../../redux/app-state";
-import './couponCard.css';
+
+import './PurchaseCard.css';
 import Modal from 'react-modal';
 import { useState } from "react";
 
 import axios from "axios";
-import IPurchaseData from "../../../models/IPurchaseData";
-import EditCoupon from "../editCoupon/editCoupon";
-import ICustomerData from "../../../models/ICustomerData";
-import { ActionType } from "../../../redux/action-types";
+import IPurchaseData from "../../models/IPurchaseData";
+import EditCoupon from "../coupons/editCoupon/editCoupon";
+import { AppState } from "../../redux/app-state";
+import { ActionType } from "../../redux/action-types";
+
 
 
 
@@ -30,11 +30,9 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
-function Coupon(props: ICouponsData) {
+function Coupon(props: IPurchaseData) {
     let loginData = useSelector((state: AppState) => state.loginData)
-    function editCoupon() {
-        <EditCoupon id={props.id} name={props.name} price={props.price} description={props.description} startDate={props.startDate} endDate={props.endDate} categoryName={props.categoryName} companyName={props.companyName} amount={props.amount} />
-    }
+  
     const navigate = useNavigate();
     let dispatch = useDispatch();
     let coupon = props;
@@ -106,59 +104,26 @@ function Coupon(props: ICouponsData) {
 
     return (
         <div className="coupon-card">
-            <button className="enter-coupon" onClick={openCouponModal}>
+
                 <img className="img-coupon" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
                 <div className="coupon-name">
-                    {props.name}
+                    {props.companyName}
                 </div>
                 <div>
                     {props.price} ILS
                 </div>
-                <div>
-                    {props.description}
+                <div >
+                    {props.categoryName}
                 </div>
-                <div className="edit-button">
-                    {loginData?.userType == "admin" && (<input type="button" value={"edit"} onClick={editCoupon} />)}
-                </div>
-            </button>
-            <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-                <div className="coupon-card-modal">
+                <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
 
-                    <img className="img-coupon-modal" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
-                    <div className="name-and-price">
-                        <div className="coupon-name-modal">
-                            {props.name}
-                        </div>
-                        <div className="fields">
-                            Price:{props.price} ILS
-                        </div>
+               
+            
+            
+                
                     </div>
-                    <div className="fields">
-                        About:  {props.description}
-                    </div>
-                    <div className="fields">
-                        Category:{props.categoryName}
-                    </div>
-                    <div className="fields">
-                        Expiration Date:  {props.endDate}
-                    </div>
-                    <button className="button-modal" onClick={event => addToCart(props.id)}>Add to cart</button>
-                    <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
-                    <button className="button-modal" onClick={closeModal}>close</button>
+        
 
-                    <div className="edit-button">
-                        {loginData?.userType == "admin" && (<input type="button" value={"edit"} onClick={editCoupon} />)}
-                    </div>
-                </div>
-            </Modal>
-
-        </div>
     )
 }
 

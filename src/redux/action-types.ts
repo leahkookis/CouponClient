@@ -3,6 +3,8 @@ export enum ActionType{
     LoginData,
     SendSearchText,
     CustomerData,
-    AddToCart,
-    BuyNow
+    AddToCartCount,
+    BuyNow,
+    GetPurchase
+
 }
