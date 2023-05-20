@@ -23,6 +23,9 @@
   .layout>main {
     grid-column: span 12;   
   } 
+  .footer{
+    visibility: hidden;
+  }
 
   
   

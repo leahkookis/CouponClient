@@ -27,7 +27,7 @@ function App() {
       } catch (e) { }
     }
     return (
-        <div className="main">
+        <div className="main-reg">
         <div className="sub-main-reg">
             
 

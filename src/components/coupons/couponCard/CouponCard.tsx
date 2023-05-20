@@ -33,23 +33,23 @@ Modal.setAppElement('#root');
 function Coupon(props: ICouponsData) {
     let loginData = useSelector((state: AppState) => state.loginData)
     function editCoupon() {
-        <EditCoupon id={props.id} name={props.name} price={props.price} description={props.description} startDate={props.startDate} endDate={props.endDate} categoryName={props.categoryName} companyName={props.companyName} amount={props.amount} />
+        setEditAble(true);
     }
     const navigate = useNavigate();
     let dispatch = useDispatch();
     let coupon = props;
     let customer = useSelector((state: AppState) => state.customerData)
     let timeStamp = "2024-02-02T00:00:00.000+00:00";
-    let countOfCartProduct = useSelector((state: AppState) => state.addToCart)+1;
-    let countOfBuyProduct = useSelector((state: AppState) => state.buyNow)+1;
+    let countOfCartProduct = useSelector((state: AppState) => state.addToCart) + 1;
+    let countOfBuyProduct = useSelector((state: AppState) => state.buyNow) + 1;
     async function buyNow(id: number) {
         if (loginData == null) {
             navigate("/login")
             return;
         }
         try {
-            const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon,isBuy: true });
-            dispatch({ type: ActionType.BuyNow, payload: {countOfBuyProduct} });
+            const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon, isBuy: true });
+            dispatch({ type: ActionType.BuyNow, payload: { countOfBuyProduct } });
             closeModal();
         }
         catch (e: any) {
@@ -69,8 +69,13 @@ function Coupon(props: ICouponsData) {
         }
         try {
 
+<<<<<<< HEAD
             const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon,isBuy: false });
             dispatch({ type: ActionType.AddToCartCount, payload: {countOfCartProduct} });
+=======
+            const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon, isBuy: false });
+            dispatch({ type: ActionType.AddToCart, payload: { countOfCartProduct } });
+>>>>>>> afb0aec2fdf77ba8a5df0f1c41ab644f00ab997b
             closeModal();
         }
         catch (e: any) {
@@ -102,7 +107,20 @@ function Coupon(props: ICouponsData) {
         setIsOpen(false);
     }
 
+    //edit coupon
+    let[editAble,setEditAble]= useState(false);
 
+    let[name,setName]= useState(""+props.name);
+    let[price,setPrice]= useState(""+props.price);
+    let[description,setDescription]= useState(""+props.description);
+    let[endDate,setEndDate]= useState(""+props.endDate);
+    
+
+
+
+    function saveCoupon(): void {
+        throw new Error("Function not implemented.");
+    }
 
     return (
         <div className="coupon-card">
@@ -114,12 +132,7 @@ function Coupon(props: ICouponsData) {
                 <div>
                     {props.price} ILS
                 </div>
-                <div>
-                    {props.description}
-                </div>
-                <div className="edit-button">
-                    {loginData?.userType == "admin" && (<input type="button" value={"edit"} onClick={editCoupon} />)}
-                </div>
+                
             </button>
             <Modal
                 isOpen={modalIsOpen}
@@ -128,33 +141,40 @@ function Coupon(props: ICouponsData) {
                 style={customStyles}
                 contentLabel="Example Modal"
             >
+
+                <button className="button-close" onClick={closeModal}>X</button>
                 <div className="coupon-card-modal">
-
-                    <img className="img-coupon-modal" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
                     <div className="name-and-price">
-                        <div className="coupon-name-modal">
-                            {props.name}
-                        </div>
-                        <div className="fields">
-                            Price:{props.price} ILS
-                        </div>
-                    </div>
-                    <div className="fields">
-                        About:  {props.description}
-                    </div>
-                    <div className="fields">
-                        Category:{props.categoryName}
-                    </div>
-                    <div className="fields">
-                        Expiration Date:  {props.endDate}
-                    </div>
-                    <button className="button-modal" onClick={event => addToCart(props.id)}>Add to cart</button>
-                    <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
-                    <button className="button-modal" onClick={closeModal}>close</button>
 
-                    <div className="edit-button">
-                        {loginData?.userType == "admin" && (<input type="button" value={"edit"} onClick={editCoupon} />)}
+                        <img className="img-coupon-modal" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
+                        
+                        {editAble==false&&(<div className="coupon-name-modal">
+                         {props.name}
+                        </div>)}
+                        {editAble==true && (<input type="text" onChange={event => setName(event.target.value)} value={name}></input>)}
+                        {editAble==false&&(<div className="fields">
+                            Price:{props.price} ILS
+                        </div>)}
+
+                        {editAble==false&&(<div className="fields">
+                            About:  {props.description}
+                        </div>)}
+                        <div className="fields">
+                            Category:{props.categoryName}
+                        </div>
+                        {editAble==false&&(<div className="fields">
+                            Expiration Date:  {props.endDate}
+                        </div>)}
                     </div>
+                    {loginData?.userType != "admin"&&( <div className="button-section">
+                        <button className="button-modal" onClick={event => addToCart(props.id)}>Add to cart</button>
+                        <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
+                    </div>)}
+
+                    {loginData?.userType == "admin"&&( <div className="button-section">
+                        <button className="button-modal" onClick={e=>setEditAble(true)}>Edit</button>
+                        <button className="button-modal" onClick={saveCoupon}>Save</button>
+                    </div>)}
                 </div>
             </Modal>
 
