@@ -5,6 +5,7 @@ export enum ActionType{
     CustomerData,
     AddToCartCount,
     BuyNow,
-    GetPurchase
+    GetPurchase,
+    SendPurchaseToBuy
 
 }

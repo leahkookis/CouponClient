@@ -69,13 +69,8 @@ function Coupon(props: ICouponsData) {
         }
         try {
 
-<<<<<<< HEAD
             const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon,isBuy: false });
             dispatch({ type: ActionType.AddToCartCount, payload: {countOfCartProduct} });
-=======
-            const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon, isBuy: false });
-            dispatch({ type: ActionType.AddToCart, payload: { countOfCartProduct } });
->>>>>>> afb0aec2fdf77ba8a5df0f1c41ab644f00ab997b
             closeModal();
         }
         catch (e: any) {

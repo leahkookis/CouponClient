@@ -25,9 +25,12 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.BuyNow:
             newAppState.buyNow = action.payload.countOfBuyProduct;
             break;
-            case ActionType.GetPurchase:
-                newAppState.purchaseData = action.payload.purchaseData;
-                break;
+        case ActionType.GetPurchase:
+            newAppState.purchaseData = action.payload.purchaseData;
+            break;
+        case ActionType.SendPurchaseToBuy:
+            newAppState.sendPurchaseToBuy.push(action.payload.purchaseId);
+            break;
 
     }
 

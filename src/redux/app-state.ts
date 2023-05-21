@@ -11,5 +11,5 @@ export class AppState{
  public buyNow: number = 0;
  public addToCart:number = 0;
  public purchaseData: IPurchaseData[] = [];
-
+public sendPurchaseToBuy : number[] = [];
 }

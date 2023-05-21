@@ -1,0 +1,10 @@
+.purchase-container {
+    display: flex;
+    padding: 40px;
+    padding-top: 80px;
+    transition: all 1s;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+
+}

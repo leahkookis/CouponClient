@@ -7,11 +7,8 @@ import Register from '../../register/Register';
 import './header.css';
 import { AppState } from '../../../redux/app-state';
 import ICustomerData from '../../../models/ICustomerData';
-<<<<<<< HEAD
 import cart from "../../images/cart.png"
-=======
 import axios from 'axios';
->>>>>>> afb0aec2fdf77ba8a5df0f1c41ab644f00ab997b
 
 
 function Header() {
@@ -23,9 +20,6 @@ function Header() {
     }
     let countOfCartProduct = useSelector((state: AppState) => state.addToCart);
     let countOfBuyProduct = useSelector((state: AppState) => state.buyNow);
-<<<<<<< HEAD
-   
-=======
     
     async function getCouponsByCategory(category: number) {
         try {
@@ -39,7 +33,6 @@ function Header() {
             
         }
     }
->>>>>>> afb0aec2fdf77ba8a5df0f1c41ab644f00ab997b
 
     return (
         <div>
@@ -47,19 +40,11 @@ function Header() {
             <div className='header-navigation'>
                 <input className='header-nav search' type="text" placeholder='Search' onChange={event => sendSearchText(event.target.value)} />
 
-<<<<<<< HEAD
-                <Link to="/"><button className='header-nav'>Flights</button></Link>
-                <Link to="/"><button className='header-nav'>Food</button></Link>
-                <Link to="/"><button className='header-nav'>Hotels</button></Link>
-                <Link to="/"><button className='header-nav'>Games</button></Link>
-
-=======
                 <Link to="/"><button onClick={()=>getCouponsByCategory(1)} className='header-nav'>Travels</button></Link>
                 <Link to="/"><button onClick={()=>getCouponsByCategory(2)} className='header-nav'>Food</button></Link>
                 <Link to="/"><button onClick={()=>getCouponsByCategory(3)} className='header-nav'>Hotels</button></Link>
                 <Link to="/"><button onClick={()=>getCouponsByCategory(4)} className='header-nav'>Games</button></Link>
                 <Link to="/"><button onClick={()=>getCouponsByCategory(5)} className='header-nav'>Kids</button></Link>
->>>>>>> afb0aec2fdf77ba8a5df0f1c41ab644f00ab997b
                 {customer == null && (
                     <Link to="/login"><button className='header-nav signin-btn'>Sign In</button></Link>)}
                 {customer != null && (
