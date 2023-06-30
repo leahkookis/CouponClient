@@ -10,6 +10,9 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.GetCoupons:
             newAppState.coupons = action.payload.response;
             break;
+            case ActionType.GetCompanies:
+            newAppState.companiesData = action.payload.response;
+            break;
         case ActionType.LoginData:
             newAppState.loginData = action.payload.loginData;
             break;

@@ -1,3 +1,4 @@
+import ICompanyData from "../models/ICompanyData";
 import ICouponsData from "../models/ICouponsData";
 import ICustomerData from "../models/ICustomerData";
 import IPurchaseData from "../models/IPurchaseData";
@@ -12,4 +13,5 @@ export class AppState{
  public addToCart:number = 0;
  public purchaseData: IPurchaseData[] = [];
 public sendPurchaseToBuy : number[] = [];
+public companiesData: ICompanyData[] = [];
 }

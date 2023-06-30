@@ -7,8 +7,9 @@ import Login from "../login/Login";
 import Register from "../register/Register";
 import CouponsConrainer from "./couponsContainer/CouponsContainer";
 import Main from "./Main/Main";
-import EditCoupon from "../coupons/editCoupon/editCoupon";
+
 import CartShop from "../cartShop/cartShop";
+import Companies from "./Companies/Companies";
 
 function Layout() {
     return (
@@ -22,6 +23,7 @@ function Layout() {
             <main  className="main">
                     <Routes> 
                         <Route path="/login" element={<Login/>} />
+                        <Route path="/companies" element={<Companies/>} />
                         <Route path="/register" element={<Register/>} />
                         <Route path="/" element={<Main/>}/>
                         <Route path="/cart" element={<CartShop/>}/>

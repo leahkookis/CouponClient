@@ -7,7 +7,7 @@ import { useState } from "react";
 
 import axios from "axios";
 import IPurchaseData from "../../models/IPurchaseData";
-import EditCoupon from "../coupons/editCoupon/editCoupon";
+
 import { AppState } from "../../redux/app-state";
 import { ActionType } from "../../redux/action-types";
 import { choices } from "yargs";

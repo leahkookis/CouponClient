@@ -6,9 +6,9 @@ import { ActionType } from "../../../redux/action-types";
 import { AppState } from "../../../redux/app-state";
 import Coupon from "../../coupons/CouponCard";
 
-import './CouponsContainer.css';
+import './adminView.css';
 
-function CouponsContainer(){
+function AdminView(){
      const couponArray: ICouponsData[]= useSelector((state: AppState)=> state.coupons)
      let[pageNumber, setPageNumber]  = useState(1);
      let amountOfPage: number = 5;
@@ -35,13 +35,9 @@ function CouponsContainer(){
      }
     return(
         <div className="Coupons-container">
-            {couponArray.filter((coupon)=>{
-                    if(normalizeSubText===""){return true}
-                    return coupon.name.toLowerCase().trim().includes(normalizeSubText)||coupon.description.toLowerCase().trim().includes(normalizeSubText)||coupon.categoryName.toLowerCase().trim().includes(normalizeSubText);
-                })
-            .map((coupon, index) => <Coupon key={index} id={coupon.id} name={coupon.name} price={coupon.price} description={coupon.description} startDate={coupon.startDate} endDate={coupon.endDate} categoryName={coupon.categoryName} companyName={coupon.companyName} amount={coupon.amount}/>)}
+            
         </div>
     );
 
 }
-export default CouponsContainer;
+export default AdminView;

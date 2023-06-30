@@ -30,6 +30,7 @@ function Login() {
       axios.defaults.headers.common['Authorization'] = "Bearer " + token;
       navigate("/");
 
+      if(successfullLoginResponse.userType=='customer'){
       const customerDataResponse = await axios.get("http://localhost:8080/customer/" + successfullLoginResponse.id);
       let customerDataRe = customerDataResponse.data;
       console.log(customerDataRe)
@@ -42,6 +43,7 @@ function Login() {
       debugger;
       dispatch({ type: ActionType.BuyNow, payload: {countOfBuyProduct} });
       dispatch({ type: ActionType.AddToCartCount, payload: {countOfCartProduct} });
+      }
 
     } catch (e: any) {
       console.error(e);

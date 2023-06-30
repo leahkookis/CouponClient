@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import ICouponsData from "../../../models/ICouponsData";
-import { AppState } from "../../../redux/app-state";
+import ICouponsData from "../../models/ICouponsData";
+import { AppState } from "../../redux/app-state";
 import './couponCard.css';
 import Modal from 'react-modal';
 import { useState } from "react";
 
 import axios from "axios";
-import IPurchaseData from "../../../models/IPurchaseData";
-import EditCoupon from "../editCoupon/editCoupon";
-import ICustomerData from "../../../models/ICustomerData";
-import { ActionType } from "../../../redux/action-types";
+import IPurchaseData from "../../models/IPurchaseData";
+
+import ICustomerData from "../../models/ICustomerData";
+import { ActionType } from "../../redux/action-types";
 
 
 

@@ -3,7 +3,7 @@ import IPurchaseData from "../../models/IPurchaseData";
 import { AppState } from "../../redux/app-state";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Coupon from "../coupons/couponCard/CouponCard";
+import Coupon from "../coupons/CouponCard";
 import PurchaseCard from "../purchaseCard/PurchaseCard";
 import { ActionType } from "../../redux/action-types";
 import './cartShop.css';
