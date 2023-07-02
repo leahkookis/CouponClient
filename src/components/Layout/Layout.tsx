@@ -8,9 +8,10 @@ import Register from "../register/Register";
 import CouponsConrainer from "./couponsContainer/CouponsContainer";
 import Main from "./Main/Main";
 
-import CartShop from "../cartShop/cartShop";
+
 import Companies from "./Companies/Companies";
 import Users from "./Menu/Users/Users";
+import CartShop from "../cartShop/cartShop";
 
 function Layout() {
     return (

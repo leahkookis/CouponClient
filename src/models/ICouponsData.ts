@@ -6,7 +6,9 @@ export default interface ICouponsData{
     startDate: any;
     endDate: any;
     categoryName: String;
+    categotyId: number;
     companyName : String;
+    companyId: number;
     amount: number;
  
 }

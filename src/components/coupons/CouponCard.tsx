@@ -4,7 +4,7 @@ import ICouponsData from "../../models/ICouponsData";
 import { AppState } from "../../redux/app-state";
 import './couponCard.css';
 import Modal from 'react-modal';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 import IPurchaseData from "../../models/IPurchaseData";
@@ -42,6 +42,26 @@ function Coupon(props: ICouponsData) {
     let timeStamp = "2024-02-02T00:00:00.000+00:00";
     let countOfCartProduct = useSelector((state: AppState) => state.addToCart) + 1;
     let countOfBuyProduct = useSelector((state: AppState) => state.buyNow) + 1;
+    let categories: any[] = [];
+
+    useEffect(()=> {
+        getAllCategories()
+    }, []);
+    
+    async function getAllCategories() {
+        try {
+           
+            let url= await axios.get(`http://localhost:8080/category/all`);
+            let response = url.data;
+           categories = response;
+
+        } catch (error) {
+            alert("something...");
+            
+        }
+        
+     }
+    
     async function buyNow(id: number) {
         if (loginData == null) {
             navigate("/login")
@@ -104,18 +124,48 @@ function Coupon(props: ICouponsData) {
 
     //edit coupon
     let[editAble,setEditAble]= useState(false);
-
+    let id = props.id;
     let[name,setName]= useState(""+props.name);
     let[price,setPrice]= useState(""+props.price);
     let[description,setDescription]= useState(""+props.description);
+    let[category,setCategory]= useState(props.categotyId);
     let[endDate,setEndDate]= useState(""+props.endDate);
+    let company = props.companyId;
+    let startDate = endDate;
+    let amount = 6;
     
 
 
-
-    function saveCoupon(): void {
-        throw new Error("Function not implemented.");
-    }
+    async function saveCoupon() {
+        try {
+            const response = await axios.put("http://localhost:8080/coupons", {
+            id,
+            name,
+            price,
+            description,
+            startDate,
+            endDate,
+            category:{ id:category},
+            company:{id:company},
+            amount
+            
+          })
+        }
+        catch (e: any) {
+            console.error(e);
+            if (e.response?.data?.error?.message) {
+                alert(e.response.data.error.message)
+            } else {
+                alert("failed to update coupon")
+            }
+        }
+    };
+    const handleCategorySelectChange = (
+        event: React.ChangeEvent<HTMLSelectElement>
+      ) => {
+        const selectedCategory = +event.target.value;
+        setCategory(selectedCategory);
+      };
 
     return (
         <div className="coupon-card">
@@ -143,23 +193,36 @@ function Coupon(props: ICouponsData) {
 
                         <img className="img-coupon-modal" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
                         
-                        {editAble==false&&(<div className="coupon-name-modal">
-                         {props.name}
-                        </div>)}
-                        {editAble==true && (<input type="text" onChange={event => setName(event.target.value)} value={name}></input>)}
-                        {editAble==false&&(<div className="fields">
-                            Price:{props.price} ILS
-                        </div>)}
-
-                        {editAble==false&&(<div className="fields">
-                            About:  {props.description}
-                        </div>)}
-                        <div className="fields">
-                            Category:{props.categoryName}
-                        </div>
-                        {editAble==false&&(<div className="fields">
-                            Expiration Date:  {props.endDate}
-                        </div>)}
+                        
+                        {editAble? (<><label>Name: </label><input type="text" onChange={event => setName(event.target.value)} value={name}></input>
+                        <label>Price: </label><input type="text" onChange={event => setPrice(event.target.value)} value={price}></input>
+                        <label>Description: </label><input type="text" onChange={event => setDescription(event.target.value)} value={description}></input>
+                        <div className="drop-down-box">
+          <label>Category: </label>
+          <select
+                id="categories"
+                defaultValue={""+props.categoryName}
+                onChange={handleCategorySelectChange}
+              >
+                {categories.map((category,index)=><option value={category.id}>{category.name}</option>)}
+                
+              </select>
+          </div>
+          <label>End Date: </label><input type="text" onChange={event => setEndDate(event.target.value)} value={endDate}></input></>):
+                        
+                        
+                        (<><div className="coupon-name-modal">{props.name}</div><div className="fields">
+                                Price:{props.price} ILS
+                            </div><div className="fields">
+                                    About:  {props.description}
+                                </div><div className="fields">
+                                    Category:{props.categoryName}
+                                </div><div className="fields">
+                                    Expiration Date:  {props.endDate}
+                                </div></>)}
+                        
+                        
+                        
                     </div>
                     {loginData?.userType != "admin"&&( <div className="button-section">
                         <button className="button-modal" onClick={event => addToPurchase(props.id)}>Add to cart</button>
