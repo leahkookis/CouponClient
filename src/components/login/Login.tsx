@@ -27,7 +27,7 @@ function Login() {
       let successfullLoginResponse: ISuccessfulLoginData = JSON.parse(strSuccessfullLoginResponse);
       dispatch({ type: ActionType.LoginData, payload: { loginData: successfullLoginResponse } });
       console.log(" Decoded: ", successfullLoginResponse)
-      axios.defaults.headers.common['Authorization'] = "Bearer " + token;
+      axios.defaults.headers.common['Authorization'] = token;
       navigate("/");
 
       if(successfullLoginResponse.userType=='customer'){

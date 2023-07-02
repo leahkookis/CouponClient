@@ -8,7 +8,7 @@ import Register from "../register/Register";
 import CouponsConrainer from "./couponsContainer/CouponsContainer";
 import Main from "./Main/Main";
 
-import CartShop from "../cartShop/cartShop";
+
 import Companies from "./Companies/Companies";
 
 function Layout() {
@@ -26,7 +26,7 @@ function Layout() {
                         <Route path="/companies" element={<Companies/>} />
                         <Route path="/register" element={<Register/>} />
                         <Route path="/" element={<Main/>}/>
-                        <Route path="/cart" element={<CartShop/>}/>
+                        
 
                         
                     </Routes>
