@@ -10,5 +10,6 @@ export default interface ICouponsData{
     companyName : String;
     companyId: number;
     amount: number;
+    url:string;
  
 }

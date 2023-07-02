@@ -38,9 +38,9 @@ function CartShop() {
     return (
         <div >
             <div className="purchase-container">
-                {cartProductsArray.filter((coupon) => coupon.buy == false).map((coupon, index) => <PurchaseCard key={index} id={coupon.id} name={coupon.name} couponPrice={coupon.couponPrice} couponName={coupon.couponName} categoryName={coupon.categoryName} companyName={coupon.companyName} buy={coupon.buy} timeStamp={coupon.timeStamp} />)}
+                {cartProductsArray.map((coupon, index) => <PurchaseCard key={index} id={coupon.id} name={coupon.name} couponPrice={coupon.couponPrice} couponName={coupon.couponName} categoryName={coupon.categoryName} companyName={coupon.companyName} amount={coupon.amount} timeStamp={coupon.timeStamp} />)}
             </div>
-            <button className="button-modal" >Buy Coupons</button>
+            
         </div>
 
     );

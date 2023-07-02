@@ -36,13 +36,8 @@ function Login() {
       console.log(customerDataRe)
       dispatch({ type: ActionType.CustomerData, payload: { customerData: customerDataRe } });
 
-      const customerPurchase = await axios.get(`http://localhost:8080/purchase/bycustomer`, { params: { customerid: successfullLoginResponse.id } });
-      let purchaseData: IPurchaseData[] = customerPurchase.data;
-      let countOfCartProduct = purchaseData.filter(purchase => purchase.buy === false).length;
-      let countOfBuyProduct = purchaseData.filter(purchase => purchase.buy === true).length;
-      debugger;
-      dispatch({ type: ActionType.BuyNow, payload: {countOfBuyProduct} });
-      dispatch({ type: ActionType.AddToCartCount, payload: {countOfCartProduct} });
+      
+      
       }
 
     } catch (e: any) {

@@ -5,7 +5,7 @@ export default interface IPurchaseData{
     couponName : String;
     categoryName: String;
     companyName : String;
-    buy: boolean;
+    amount: string;
     timeStamp: string
 
 }

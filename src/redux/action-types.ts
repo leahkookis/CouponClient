@@ -1,4 +1,4 @@
-export enum ActionType{
+export enum ActionType {
     GetCoupons,
     GetUsers,
     GetCompanies,
@@ -8,6 +8,6 @@ export enum ActionType{
     AddToCartCount,
     BuyNow,
     GetPurchase,
-    SendPurchaseToBuy
-
+    SendPurchaseToBuy,
+    GetCategories
 }

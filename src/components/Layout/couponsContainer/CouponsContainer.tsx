@@ -10,11 +10,13 @@ import './CouponsContainer.css';
 
 function CouponsContainer(){
      const couponArray: ICouponsData[]= useSelector((state: AppState)=> state.coupons)
+
      let[pageNumber, setPageNumber]  = useState(1);
      let amountOfPage: number = 5;
      let dispatch = useDispatch();
      useEffect(()=> {
         getAllCoupons(pageNumber,amountOfPage)
+        getAllCategories()
     }, [pageNumber]);
     let subText = useSelector((state:AppState)=>state.sendSearchText);
     let normalizeSubText = subText.toLowerCase().trim();
@@ -33,13 +35,27 @@ function CouponsContainer(){
         }
         
      }
+
+     async function getAllCategories() {
+        try {
+
+            let url = await axios.get(`http://localhost:8080/category`);
+            let response = url.data;
+            dispatch({type: ActionType.GetCategories, payload: {response}})
+
+        } catch (error) {
+            alert("something...");
+
+        }
+
+    }
     return(
         <div className="Coupons-container">
             {couponArray.filter((coupon)=>{
                     if(normalizeSubText===""){return true}
                     return coupon.name.toLowerCase().trim().includes(normalizeSubText)||coupon.description.toLowerCase().trim().includes(normalizeSubText)||coupon.categoryName.toLowerCase().trim().includes(normalizeSubText);
                 })
-            .map((coupon, index) => <Coupon key={index} id={coupon.id} name={coupon.name} price={coupon.price} description={coupon.description} startDate={coupon.startDate} endDate={coupon.endDate} categoryName={coupon.categoryName} categotyId={coupon.categotyId}  companyName={coupon.companyName} companyId={coupon.companyId} amount={coupon.amount}/>)}
+            .map((coupon, index) => <Coupon key={index} id={coupon.id} name={coupon.name} price={coupon.price} description={coupon.description} startDate={coupon.startDate} endDate={coupon.endDate} categoryName={coupon.categoryName} categotyId={coupon.categotyId} companyName={coupon.companyName} companyId={coupon.companyId} amount={coupon.amount} url={coupon.url}/>)}
         </div>
     );
 
