@@ -10,6 +10,7 @@ import Main from "./Main/Main";
 
 import CartShop from "../cartShop/cartShop";
 import Companies from "./Companies/Companies";
+import Users from "./Menu/Users/Users";
 
 function Layout() {
     return (
@@ -27,6 +28,8 @@ function Layout() {
                         <Route path="/register" element={<Register/>} />
                         <Route path="/" element={<Main/>}/>
                         <Route path="/cart" element={<CartShop/>}/>
+                        <Route path="/admin/users" element={<Users />} />
+
 
                         
                     </Routes>

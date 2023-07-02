@@ -61,8 +61,8 @@ function Coupon(props: ICouponsData) {
             }
         }
     }
-
-    async function addToCart(id: number) {
+   
+    async function addToPurchase(id: number) {
         if (loginData == null) {
             navigate("/login")
             return;
@@ -162,7 +162,7 @@ function Coupon(props: ICouponsData) {
                         </div>)}
                     </div>
                     {loginData?.userType != "admin"&&( <div className="button-section">
-                        <button className="button-modal" onClick={event => addToCart(props.id)}>Add to cart</button>
+                        <button className="button-modal" onClick={event => addToPurchase(props.id)}>Add to cart</button>
                         <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
                     </div>)}
 

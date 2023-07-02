@@ -34,6 +34,9 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.SendPurchaseToBuy:
             newAppState.sendPurchaseToBuy.push(action.payload.purchaseId);
             break;
+            case ActionType.GetUsers:
+                newAppState.users = action.payload.response;
+                break;
 
     }
 
