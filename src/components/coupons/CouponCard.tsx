@@ -44,23 +44,23 @@ function Coupon(props: ICouponsData) {
     let countOfBuyProduct = useSelector((state: AppState) => state.buyNow) + 1;
     let categories: any[] = [];
 
-    useEffect(()=> {
-        getAllCategories()
-    }, []);
+    // useEffect(()=> {
+    //     getAllCategories()
+    // }, []);
     
-    async function getAllCategories() {
-        try {
+    // async function getAllCategories() {
+    //     try {
            
-            let url= await axios.get(`http://localhost:8080/category/all`);
-            let response = url.data;
-           categories = response;
+    //         let url= await axios.get(`http://localhost:8080/category/all`);
+    //         let response = url.data;
+    //        categories = response;
 
-        } catch (error) {
-            alert("something...");
+    //     } catch (error) {
+    //         alert("something...");
             
-        }
+    //     }
         
-     }
+    //  }
     
     async function buyNow(id: number) {
         if (loginData == null) {

@@ -30,12 +30,8 @@ function Layout() {
                         <Route path="/" element={<Main/>}/>
                         <Route path="/cart" element={<CartShop/>}/>
                         <Route path="/admin/users" element={<Users />} />
-
-
-                        
                     </Routes>
             </main>
-                
           
             <footer className="footer">
                 <Footer/>

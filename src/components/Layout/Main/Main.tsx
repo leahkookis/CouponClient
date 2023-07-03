@@ -5,6 +5,7 @@ import CouponsContainer from "../couponsContainer/CouponsContainer";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../redux/app-state";
 import AdminView from "../adminView/adminView";
+import Menu from "../Menu/Menu";
 
 function Main() {
     let loginData = useSelector((state: AppState) => state.loginData)
@@ -12,7 +13,7 @@ function Main() {
         <div>
               
            <CouponsContainer/>
-              
+              <Menu/>
         </div>
     
     );
