@@ -39,37 +39,11 @@ function Purchase(props: IPurchaseData) {
     let coupon = props;
     let customer = useSelector((state: AppState) => state.customerData)
     let timeStamp = "2024-02-02T00:00:00.000+00:00";
-    let countOfCartProduct = useSelector((state: AppState) => state.addToCart) + 1;
-    let countOfBuyProduct = useSelector((state: AppState) => state.buyNow) + 1;
     
-    async function buyNow(id: number) {
-        if (loginData == null) {
-            navigate("/login")
-            return;
-        }
-        try {
-            const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon, isBuy: true });
-            dispatch({ type: ActionType.BuyNow, payload: { countOfBuyProduct } });
+    
+    
 
-        }
-        catch (e: any) {
-            console.error(e);
-            if (e.response?.data?.error?.message) {
-                alert(e.response.data.error.message)
-            } else {
-                alert("failed to buy now")
-            }
-        }
-    }
-
-    function addToBuy() {
-        debugger;
-        let purchaseId = props.id;
-        
-        
-        dispatch({ type: ActionType.SendPurchaseToBuy, payload: { purchaseId } });
-    }
-
+    
 
 
 
@@ -77,7 +51,7 @@ function Purchase(props: IPurchaseData) {
 
     return (
         <div className="purchase-card">
-            <input className="checkbox" type="checkbox" onClick={addToBuy}></input>
+           
             <img className="img-purchase" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
             <div className="details-pur">
                 <div className="purchase-name">
@@ -90,11 +64,7 @@ function Purchase(props: IPurchaseData) {
                     {props.categoryName}
                 </div>
             </div>
-            <div className="button-purchase">
-                <button className="button-modal" onClick={event => buyNow(props.id)}>buy now</button>
-                <button className="button-modal" onClick={event => buyNow(props.id)}>Remove</button>
-
-            </div>
+           
 
 
 

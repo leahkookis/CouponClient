@@ -15,4 +15,5 @@ export class AppState{
  public purchaseData: IPurchaseData[] = [];
 public sendPurchaseToBuy : number[] = [];
 public companiesData: ICompanyData[] = [];
+public categories: any[]=[];
 }

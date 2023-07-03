@@ -19,6 +19,7 @@ function Header() {
     let dispatch = useDispatch();
     let adminMode= loginData?.userType=='admin'?true:false;
     
+    
     function sendSearchText(subText: string) {
         dispatch({ type: ActionType.SendSearchText, payload: { subText } });
     }
@@ -44,6 +45,7 @@ function Header() {
             <div className='header-navigation'>
                 <input className='header-nav search' type="text" placeholder='Search' onChange={event => sendSearchText(event.target.value)} />
                 <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Travels</button></Link>
+                <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Travels</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(2)} className='header-nav'>Food</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(3)} className='header-nav'>Hotels</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(4)} className='header-nav'>Games</button></Link>
@@ -56,7 +58,7 @@ function Header() {
                     <div className='customer-data signin-btn'>
                         {adminMode&&(<div className='header-nav'>Hello Admin</div>)}
                         {customer!=null&&(<><div className='header-nav'>Hello {customer.name}</div>
-                        <Link to="/cart"><button className='header-nav customer-name'><img src={cart} alt="cart" className="cart" />{countOfCartProduct} </button></Link></>)}
+                        <Link to="/cart"><button className='header-nav customer-name'><img src={cart} alt="cart" className="cart" /> </button></Link></>)}
                         <Link to="/logout">Log out</Link>
 
                     </div>)}

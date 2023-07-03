@@ -112,3 +112,17 @@
   color: antiquewhite;
   font-size: medium;
 }
+.counter{
+  display: flex;
+  margin-left: auto;
+}
+.counter-btn{
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 20px;
+}
+.button-icon{
+  background: none;
+  border: none;
+}

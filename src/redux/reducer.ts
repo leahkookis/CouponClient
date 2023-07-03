@@ -38,6 +38,10 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
                 newAppState.users = action.payload.response;
                 break;
 
+                case ActionType.GetCategories:
+                    newAppState.categories = action.payload.response;
+                    break;
+
     }
 
     return newAppState;
