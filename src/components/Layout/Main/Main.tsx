@@ -4,7 +4,7 @@ import Register from "../../register/Register";
 import CouponsContainer from "../couponsContainer/CouponsContainer";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../redux/app-state";
-import AdminView from "../adminView/adminView";
+
 
 function Main() {
     let loginData = useSelector((state: AppState) => state.loginData)

@@ -41,6 +41,12 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
                 case ActionType.GetCategories:
                     newAppState.categories = action.payload.response;
                     break;
+                    case ActionType.RemoveDecryptedToken:
+            newAppState.token = {id: 0, userType: "", companyId: 0};
+            break;
+            case ActionType.SaveDecryptedToken:
+                newAppState.token = action.payload.decodedToken;
+                break;
 
     }
 

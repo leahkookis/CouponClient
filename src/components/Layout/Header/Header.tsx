@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { ActionType } from '../../../redux/action-types';
@@ -17,32 +17,41 @@ function Header() {
     let loginData = useSelector((state: AppState) => state.loginData)
     let customer = useSelector((state: AppState) => state.customerData)
     let dispatch = useDispatch();
-    let adminMode= loginData?.userType=='admin'?true:false;
+    let adminMode = loginData?.userType == 'admin' ? true : false;
+    let companyAdminMode = loginData?.userType == 'company' ? true : false;
+    let [showAccountOptions, setShowAccountOptions] = useState(false);
+
     
-    
+
+    function logout() {
+        sessionStorage.removeItem("token");
+        dispatch({ type: ActionType.RemoveDecryptedToken });
+        window.location.reload();
+    }
+
     function sendSearchText(subText: string) {
         dispatch({ type: ActionType.SendSearchText, payload: { subText } });
     }
     let countOfCartProduct = useSelector((state: AppState) => state.addToCart);
     let countOfBuyProduct = useSelector((state: AppState) => state.buyNow);
-    
+
     async function getCouponsByCategory(category: number) {
         try {
-           
-            let url= await axios.get(`http://localhost:8080/coupons/bycategory?categoryid=${category}`);
+
+            let url = await axios.get(`http://localhost:8080/coupons/bycategory?categoryid=${category}`);
             let response = url.data;
-            dispatch({type: ActionType.GetCoupons, payload: {response}})
+            dispatch({ type: ActionType.GetCoupons, payload: { response } })
 
         } catch (error) {
             alert("something...");
-            
+
         }
     }
 
     return (
         <div>
             <div className='header-page'>My coupons site</div>
-            <div className='header-navigation'>
+            <div className='header-navigation header-wrapper'>
                 <input className='header-nav search' type="text" placeholder='Search' onChange={event => sendSearchText(event.target.value)} />
                 <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Travels</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Travels</button></Link>
@@ -51,22 +60,92 @@ function Header() {
                 <Link to="/"><button onClick={() => getCouponsByCategory(4)} className='header-nav'>Games</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(5)} className='header-nav'>Kids</button></Link>
 
-                
                 {loginData == null && (
                     <Link to="/login"><button className='header-nav signin-btn'>Sign In</button></Link>)}
                 {loginData != null && (
                     <div className='customer-data signin-btn'>
-                        {adminMode&&(<div className='header-nav'>Hello Admin</div>)}
-                        {customer!=null&&(<><div className='header-nav'>Hello {customer.name}</div>
-                        <Link to="/cart"><button className='header-nav customer-name'><img src={cart} alt="cart" className="cart" /> </button></Link></>)}
-                        <Link to="/logout">Log out</Link>
+                        
+                        {adminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello Admin</div>)}
+                        {customer != null && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {customer.name}</div>)}
+                        <div className={showAccountOptions ? "account-options" : "account-options-active"}
+                                onMouseEnter={() => setShowAccountOptions(true)}
+                                onMouseLeave={() => setShowAccountOptions(false)}>    
+                            <Link className="header-menu-links" to="/account/settings">
+                                <button className="header-menu-links-button" onClick={() => setShowAccountOptions(!showAccountOptions)}>My Account</button>
+                            </Link>
+                            {adminMode && (
+                                <><Link className="header-menu-links" to="/admin/users">
+                                    <button
+                                        className="header-menu-links-button"
+                                        onClick={() => setShowAccountOptions(!showAccountOptions)}
+                                    >
+                                        Users
+                                    </button></Link><Link className="header-menu-links" to="/admin/companies">
+                                        <button
+                                            className="header-menu-links-button"
+                                            onClick={() => setShowAccountOptions(!showAccountOptions)}
+                                        >
+                                            Companies
+                                        </button>
+                                    </Link><Link className="header-menu-links" to="/admin/purchases">
+                                        <button
+                                            className="header-menu-links-button"
+                                            onClick={() => setShowAccountOptions(!showAccountOptions)}
+                                        >
+                                            Purchases
+                                        </button>
+                                    </Link></>
+
+                            )}
+                            {loginData.userType == 'customer' && (
+                                <Link className="header-menu-links" to="/cart">
+                                    <button
+                                        className="header-menu-links-button"
+                                        onClick={() => setShowAccountOptions(!showAccountOptions)}
+                                    >
+                                        My Purchases
+                                    </button>
+
+                                </Link>
+
+                            )}
+                            {companyAdminMode && (
+                                <><Link className="header-menu-links" to="/company/coupons">
+                                    <button
+                                        className="header-menu-links-button"
+                                        onClick={() => setShowAccountOptions(!showAccountOptions)}
+                                    >
+                                        Coupons
+                                    </button>
+                                </Link><Link className="header-menu-links" to="/company/purchases">
+                                        <button
+                                            className="header-menu-links-button"
+                                            onClick={() => setShowAccountOptions(!showAccountOptions)}
+                                        >
+                                            Purchases
+                                        </button>
+                                    </Link></>
+                            )}
+                            <Link className="header-menu-links" to="/">
+                                <button
+                                    className="header-menu-links-button"
+                                    onClick={() => logout()}
+                                >
+                                    Logout
+                                </button>
+                            </Link></div>
 
                     </div>)}
             </div>
         </div>
 
-    );
+
+
+
+    )
 }
+
+
 export default Header;
 
 

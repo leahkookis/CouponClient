@@ -47,3 +47,86 @@
     padding: 5.5px;
 }
 
+.header-wrapper .header-menu-links-button , .login-button{
+    height: 3rem;
+    width: 8rem;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    color: white;
+    background-color: #009688;
+}
+
+.header-wrapper .header-menu-links-button:hover, .login-button:hover{
+    color: #87faee;
+    border: 1px solid #053b36;
+    cursor: pointer;
+}
+
+.login-registration-modal{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: auto;
+    inset: 0px;
+}
+
+.ReactModal__Overlay--after-open{
+    display: flex;
+}
+
+.header-wrapper .buttons{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.header-wrapper .icons{
+    color: white;
+    display: none;
+}
+
+.header-wrapper .account-icon-container>h3{
+    color: #dee1e3;
+    position: relative;
+    left: 2%;
+}
+
+.header-wrapper .account-icon-container{
+    color: #dee1e3;
+    height: 100%;
+    width: 100%;
+    min-height: 4vh;
+    min-width: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-wrapper .account-icon-container:hover{
+    color: white;
+}
+
+
+.header-wrapper .account-icon{
+    color: #dee1e3;
+    height: 8vh;
+    width: 8vh;
+    min-height: 4vh;
+    min-width: 4vh;
+}
+
+.header-wrapper .account-options{
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    position: absolute;
+    top:100px;
+}
+
+.header-wrapper .account-options-active{
+    display: none;
+}
+
+
+

@@ -16,14 +16,14 @@ function CartShop() {
     let dispatch = useDispatch();
     useEffect(() => {
         getPurchaseByCustomer()
-    }, []);
+    }, [1]);
 
+    
     async function getPurchaseByCustomer() {
         try {
-
-            
-            let customerPurchase = await axios.get(`http://localhost:8080/purchase/bycustomer`, { params: { customerid: customer.id } });
-            let purchaseData: IPurchaseData[] = customerPurchase.data;
+            let url = `http://localhost:8080/purchase/bycustomer?customerid=${customer.id}`;
+            let customerPurchase = await axios.get(url);
+            let purchaseData = customerPurchase.data;
             dispatch({ type: ActionType.GetPurchase, payload: { purchaseData: purchaseData } })
         } catch (error) {
             alert("something...");
