@@ -4,6 +4,7 @@ import Register from "../../register/Register";
 import CouponsContainer from "../couponsContainer/CouponsContainer";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../redux/app-state";
+import Menu from "../Menu/Menu";
 
 
 function Main() {
