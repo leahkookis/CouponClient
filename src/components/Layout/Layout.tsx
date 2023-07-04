@@ -12,8 +12,29 @@ import Main from "./Main/Main";
 import Companies from "./Companies/Companies";
 import Users from "./Menu/Users/Users";
 import CartShop from "../cartShop/cartShop";
+import { useEffect } from "react";
+import ISuccessfulLoginData from "../../models/ISuccessfulLoginData";
+import { useDispatch } from "react-redux";
+import { ActionType } from "../../redux/action-types";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 function Layout() {
+    let dispatch = useDispatch();
+    useEffect(() => {
+        const token = sessionStorage.getItem("token");
+        if (token != null) {
+            let decodedToken: any = jwt_decode(token)
+            let strSuccessfullLoginResponse: string = decodedToken.sub
+            let successfullLoginResponse: ISuccessfulLoginData = JSON.parse(strSuccessfullLoginResponse);
+          dispatch({
+            type: ActionType.SaveDecryptedToken,
+            payload: { successfullLoginResponse },
+          });
+          axios.defaults.headers.common["Authorization"] = token;
+        }
+      }, []);
+    
     return (
        
         <section className="layout">

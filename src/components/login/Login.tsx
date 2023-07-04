@@ -29,6 +29,11 @@ function Login() {
       console.log(" Decoded: ", successfullLoginResponse)
       axios.defaults.headers.common['Authorization'] =  token;
       navigate("/");
+      sessionStorage.setItem("token", token);
+      dispatch({
+        type: ActionType.SaveDecryptedToken,
+        payload: { successfullLoginResponse },
+      });
 
       if(successfullLoginResponse.userType=='customer'){
       const customerDataResponse = await axios.get("http://localhost:8080/customer/" + successfullLoginResponse.id);
