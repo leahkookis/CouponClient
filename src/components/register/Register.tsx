@@ -20,7 +20,7 @@ function App() {
     async function register() {
       try {
         
-      const response = await axios.post("http://localhost:8080/customer", {user:{userName, password}, name, address, phoneNumber });
+      const response = await axios.post("http://localhost:8080/customer", {user:{userName, password, company:{}}, name, address, phoneNumber });
       console.log("fff");
       navigate("/");
         

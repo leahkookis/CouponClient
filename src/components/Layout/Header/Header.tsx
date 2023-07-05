@@ -16,11 +16,13 @@ function Header() {
     let navigate = useNavigate();
     let loginData = useSelector((state: AppState) => state.loginData)
     let customer = useSelector((state: AppState) => state.customerData)
+    let coupons = useSelector((state: AppState) => state.coupons)
     let dispatch = useDispatch();
     let adminMode = loginData?.userType == 'admin' ? true : false;
     let companyAdminMode = loginData?.userType == 'company' ? true : false;
     let [showAccountOptions, setShowAccountOptions] = useState(false);
-
+    let[pageNumber, setPageNumber]  = useState(1);
+    let amountOfPage: number = 5;
     
 
     function logout() {
@@ -47,18 +49,32 @@ function Header() {
 
         }
     }
+        async function getAllCoupons(pageNumber: number, amountOfPage: number) {
+            try {
+    
+                let url = await axios.get(`http://localhost:8080/coupons?page=${pageNumber}`);
+                let response = url.data;
+                dispatch({ type: ActionType.GetCoupons, payload: { response } })
+    
+            } catch (error) {
+                alert("something...");
+    
+            }
+        }
+    
+
 
     return (
         <div>
             <div className='header-page'>My coupons site</div>
             <div className='header-navigation header-wrapper'>
                 <input className='header-nav search' type="text" placeholder='Search' onChange={event => sendSearchText(event.target.value)} />
-                <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Travels</button></Link>
-                <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Travels</button></Link>
+                <Link className='cate' to="/"><button onClick={() => getAllCoupons(pageNumber,amountOfPage) } className='header-nav'>Home</button></Link>
+                <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Movies</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(2)} className='header-nav'>Food</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(3)} className='header-nav'>Hotels</button></Link>
-                <Link to="/"><button onClick={() => getCouponsByCategory(4)} className='header-nav'>Games</button></Link>
-                <Link to="/"><button onClick={() => getCouponsByCategory(5)} className='header-nav'>Kids</button></Link>
+                <Link to="/"><button onClick={() => getCouponsByCategory(4)} className='header-nav'>Flights</button></Link>
+                <Link className='cats'to="/"><button onClick={() => getCouponsByCategory(5)} className='header-nav'>Massage</button></Link>
 
                 {loginData == null && (
                     <Link to="/login"><button className='header-nav signin-btn'>Sign In</button></Link>)}

@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { ActionType } from "../../redux/action-types";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import Purchases from "./Menu/Purchases/Purchases";
 
 function Layout() {
     let dispatch = useDispatch();
@@ -51,6 +52,8 @@ function Layout() {
                         <Route path="/" element={<Main/>}/>
                         <Route path="/cart" element={<CartShop/>}/>
                         <Route path="/admin/users" element={<Users />} />
+                        <Route path="/admin/purchases" element={<Purchases />} />
+
                     </Routes>
             </main>
           

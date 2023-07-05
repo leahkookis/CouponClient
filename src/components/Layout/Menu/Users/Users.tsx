@@ -28,7 +28,7 @@ function Users() {
   const [id, setId] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
+  const [userType, setUserType] = useState("admin");
   const [companyName, setCompanyName] = useState("");
   const [companyId, setCompanyId] = useState(0);
   let [usersList, setUsersList] = useState<IUserData[]>([]);
@@ -52,8 +52,8 @@ function Users() {
     try {
       let url = `http://localhost:8080/users?page=${pageNumber}`;
       let response = await axios.get(url);
-      let companies = response.data;
-      setUsersList(companies);
+      let users = response.data;
+      setUsersList(users);
     } catch (e) {
       console.error(e);
       alert("Failed to retrieve users");
@@ -94,6 +94,8 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
             }
         }
     };
+
+
     function openUserModal() {
       setIsOpen(true);
   }

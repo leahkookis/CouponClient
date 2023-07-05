@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
-import IUserData from "../../../../../models/IUserData";
 import axios from "axios";
-import Companies from "../../../Companies/Companies";
 import { ModifierFlags } from "typescript";
 import Modal from 'react-modal';
-import { ActionType } from "../../../../../redux/action-types";
 import { useDispatch } from "react-redux";
-import "./User.css";
+import "./Purchase.css";
+import IPurchaseData from "../../../../models/IPurchaseData";
 
 
 Modal.setAppElement('#root');
 
-function User(props: IUserData) {
+function User(props: IPurchaseData) {
     let[pageNumber, setPageNumber]  = useState(1);
     let amountOfPage: number = 5;
-    const [id, setId] = useState(props.id);
-    const [userName, setUserName] = useState(props.userName);
-    const [password, setPassword] = useState(props.password);
-    const [userType, setUserType] = useState(props.userType);
-    const [companyName, setCompanyName] = useState(props.companyName);
+    const [id, setId] = useState('');
+    const [name, setName] = useState('');
+    const [couponName, setCouponName] = useState('');
+    const [categoryName, setCategoryName] = useState('');
+    const [companyName, setCompanyName] = useState('');
+    const [companyId, setCompanyId] = useState(1);
+    const [categoryId, setCategoryId] = useState(1);
+    const [amount, setAmount] = useState(0);
+    const [timeStamp, setTimeStamp] = useState('');
     const [removeUserModalIsOpen, setRemoveUserModalIsOpen] = useState(false);
     const [customerDetailsModalIsOpen, setCustomerDetailsModalIsOpen] = useState(false);
     const [saveEditDetailsModalIsOpen, setSaveEditDetailsModalIsOpen] = useState(false);
@@ -27,35 +29,22 @@ function User(props: IUserData) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [text, setText] = useState("");
     let dispatch = useDispatch();
-    let [usersList, setUsersList] = useState<IUserData[]>([]);
+    let [purchasesList, setPurchasesList] = useState<IPurchaseData[]>([]);
 
 
 
-    async function removeUser() {
-        if(userType!="customer"){
+    async function removePurchase() {
         try {
-            let url = `http://localhost:8080/users/${id}`;
+            let url = `http://localhost:8080/purchase/${id}`;
             let response = await axios.delete(url);
         } catch (e: any) {
             if (e.response?.data?.errorMessage) {
                 alert(e.response.data.errorMessage);
             } else {
-                alert("Failed to retrieve user");
+                alert("Failed to delete purchase");
             }
         }
-    } else{
-        try {
-            let url = `http://localhost:8080/customer/${id}`;
-            let response = await axios.delete(url);
-        } catch (e: any) {
-            if (e.response?.data?.errorMessage) {
-                alert(e.response.data.errorMessage);
-            } else {
-                alert("Failed to retrieve customer");
-            }
-        }
-
-    }
+  
 }
    
     
@@ -86,17 +75,20 @@ function User(props: IUserData) {
     
 
     return (
-              
+       
                 <tr >
-                    {!editClicked && <td>{userName}</td>}
-                    {!editClicked && <td>{userType}</td>}
+                    {!editClicked && <td>{name}</td>}
+                    {!editClicked && <td>{couponName}</td>}
+                    {!editClicked && <td>{categoryName}</td>}  
                     {!editClicked && <td>{companyName}</td>}                  
+                    {!editClicked && <td>{amount}</td>}                  
+                    {!editClicked && <td>{timeStamp}</td>}                  
                     {editClicked && (
         <td>
           <input
             type="text"
-            defaultValue={userName}
-            onChange={(event) => setUserName(event.target.value)}
+            defaultValue={name}
+            onChange={(event) => setName(event.target.value)}
           />
         </td>
       )}
@@ -104,8 +96,17 @@ function User(props: IUserData) {
         <td>
           <input
             type="text"
-            defaultValue={userType}
-            onChange={(event) => setUserType(event.target.value)}
+            defaultValue={couponName}
+            onChange={(event) => setCouponName(event.target.value)}
+          />
+        </td>
+      )}
+      {editClicked && (
+        <td>
+          <input
+            type="text"
+            defaultValue={categoryName}
+            onChange={(event) => setCategoryName(event.target.value)}
           />
         </td>
       )}
@@ -153,14 +154,14 @@ function User(props: IUserData) {
         <div className="edit-buttons-container">
           <button
             className="edit-button"
-            onClick={() =>removeUser()}
+            onClick={() =>removePurchase()}
           > remove
           </button>
           
         </div>
       </td>
       <td>
-        {userType == "CUSTOMER" && (
+        {companyName == "CUSTOMER" && (
           <div className="edit-buttons-container">
             <button
               className="edit-button"

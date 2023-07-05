@@ -9,6 +9,12 @@
     border-width: 0px;
    
 }
+.cate{
+    padding-left: 300px;
+}
+.cats{
+    padding-right: 400px;
+}
 .header-nav:hover{
     background: #fff;
     color: black;
@@ -16,6 +22,7 @@
 .header-navigation{
     display: flex;
     background: #009688;
+
   
 }
 .header-page{
@@ -24,12 +31,14 @@
     padding: 15px;
     color: #fff;
 }
-.signin-btn{
-    justify-self: flex-end;
-}
+
 .search{
     float: left;
-    
+    background-color: #fff;
+    border-color: #053b36;
+    border-width: 2px;
+
+      
 }
 .customer-data{
     margin: 0;

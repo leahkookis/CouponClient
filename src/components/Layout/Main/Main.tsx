@@ -13,7 +13,7 @@ function Main() {
         <div>
               
            <CouponsContainer/>
-              <Menu/>
+             
         </div>
     
     );
