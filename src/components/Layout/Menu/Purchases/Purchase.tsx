@@ -118,7 +118,22 @@ function User(props: IPurchaseData) {
             onChange={(event) => setCompanyName(event.target.value)}
           />
         </td>
+        
       )}
+        <td>
+          <input
+            type="text"
+            defaultValue={amount}
+            onChange={(event) => setAmount(+event.target.value)}
+          />
+        </td>
+          <td>
+          <input
+            type="date"
+            defaultValue={timeStamp}
+            onChange={(event) => setTimeStamp(event.target.value)}
+          />
+        </td>
       <td>
         {editClicked ? (
           <div className="edit-buttons-container">

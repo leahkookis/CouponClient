@@ -29,6 +29,7 @@ function Header() {
         sessionStorage.removeItem("token");
         dispatch({ type: ActionType.RemoveDecryptedToken });
         window.location.reload();
+        getAllCoupons(1,amountOfPage)
     }
 
     function sendSearchText(subText: string) {

@@ -159,14 +159,14 @@ function User(props: IUserData) {
           
         </div>
       </td>
-      <td>
+      {/* <td>
         {userType == "CUSTOMER" && (
           <div className="edit-buttons-container">
             <button
               className="edit-button"
               onClick={openCustomerDetailsModalIsOpen}
             >
-              {/* <TbListDetails className="icon" /> */}
+              <TbListDetails className="icon" />
             </button>
             <Modal
                 className="modal"
@@ -174,11 +174,11 @@ function User(props: IUserData) {
                 onRequestClose={closeCustomerDetailsModalIsOpen}
                 contentLabel="Customer details"
               >
-                {/* <CustomerDetailsModal customerId={id} closeModel={() => closeCustomerDetailsModalIsOpen()}/> */}
+                <CustomerDetailsModal customerId={id} closeModel={() => closeCustomerDetailsModalIsOpen()}/>
               </Modal>
           </div>
         )}
-      </td>
+      </td> */}
     </tr>
                 
 );

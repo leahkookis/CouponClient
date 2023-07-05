@@ -124,7 +124,6 @@ const Purchases: React.FC = () => {
             {categories.map((category, index) => (
               <option value={category.id}>{category.name}</option>
             ))}
-            <option value="none">none</option>
           </select>
         </div>
         <div>

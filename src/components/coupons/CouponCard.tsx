@@ -217,7 +217,7 @@ function Coupon(props: ICouponsData) {
 
                                 </select>
                             </div>
-                            <label>End Date: </label><input type="text" onChange={event => setEndDate(event.target.value)} value={endDate}></input>
+                            <label>End Date: </label><input type="date" onChange={event => setEndDate(event.target.value)} value={endDate}></input>
                             <label>Image URL </label><input type="text" onChange={event => setUrl(event.target.value)} value={url}></input></>) :
 
 
