@@ -13,6 +13,7 @@ import IPurchaseData from "../../models/IPurchaseData";
 
 import ICustomerData from "../../models/ICustomerData";
 import { ActionType } from "../../redux/action-types";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 
 
@@ -47,24 +48,18 @@ function Coupon(props: ICouponsData) {
     let countOfBuyProduct = useSelector((state: AppState) => state.buyNow) + 1;
     let categories: any[] = [];
 
-    // useEffect(()=> {
-    //     getAllCategories()
-    // }, []);
+   
+    let massage: string="";
+    let title: string="";
+     
+    let [isSuccessPurchase, setIsSuccessPurchase] = useState(false);
+    function closeConirmationModal(){
+        setIsSuccessPurchase(false);
+    }
     
-    // async function getAllCategories() {
-    //     try {
-           
-    //         let url= await axios.get(`http://localhost:8080/category/all`);
-    //         let response = url.data;
-    //        categories = response;
-
-    //     } catch (error) {
-    //         alert("something...");
-            
-    //     }
-        
-    //  }
-    
+    function openIsSuccessPurchase(){
+        setIsSuccessPurchase(true);
+    }
 
    
 
@@ -79,6 +74,11 @@ function Coupon(props: ICouponsData) {
             const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon, amount });
             dispatch({ type: ActionType.BuyNow, payload: { countOfBuyProduct } });
             closeModal();
+            debugger;
+            title = "success";
+            massage = "Successffuly purchase {coupon.name}";
+            openIsSuccessPurchase();
+            
         }
         catch (e: any) {
             console.error(e);
@@ -122,6 +122,7 @@ function Coupon(props: ICouponsData) {
     let company = props.companyId;
     let startDate = endDate;
     let [url, setUrl] = useState("" + props.url);
+    
 
 
 
@@ -151,11 +152,12 @@ function Coupon(props: ICouponsData) {
                 url
 
             })
+            
         }
         catch (e: any) {
             console.error(e);
             if (e.response?.data?.error?.message) {
-                alert(e.response.data.error.message)
+                
             } else {
                 alert("failed to update coupon")
             }
@@ -190,7 +192,6 @@ function Coupon(props: ICouponsData) {
             </button>
             <Modal
                 isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStyles}
                 contentLabel="Example Modal"
@@ -236,6 +237,7 @@ function Coupon(props: ICouponsData) {
                     </div>
                     {loginData?.userType != "admin" && (<div className="button-section">
                         <button className="button-modal" onClick={event => buyNow(props.id)}>Buy Now</button>
+                    
                     </div>)}
 
                     {loginData?.userType == "admin" && (<div className="button-section">
@@ -244,6 +246,13 @@ function Coupon(props: ICouponsData) {
                     </div>)}
                 </div>
             </Modal>
+            <Modal
+                className="modal"
+                isOpen={isSuccessPurchase}
+                onRequestClose={closeConirmationModal}
+                >
+                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon" +{name}}  closeModel={() => closeConirmationModal()}/>
+              </Modal>
 
         </div>
     )

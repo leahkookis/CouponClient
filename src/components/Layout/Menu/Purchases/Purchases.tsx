@@ -151,7 +151,7 @@ const Purchases: React.FC = () => {
     </thead>
     <tbody>
       {purchaseList.map((purchase) => (
-        <PurchaseCard
+        <Purchase
           key={purchase.id}
           id={purchase.id}
           name={purchase.name}

@@ -77,12 +77,12 @@ function User(props: IPurchaseData) {
     return (
        
                 <tr >
-                    {!editClicked && <td>{name}</td>}
-                    {!editClicked && <td>{couponName}</td>}
-                    {!editClicked && <td>{categoryName}</td>}  
-                    {!editClicked && <td>{companyName}</td>}                  
-                    {!editClicked && <td>{amount}</td>}                  
-                    {!editClicked && <td>{timeStamp}</td>}                  
+                    {!editClicked && <td>{props.name}</td>}
+                    {!editClicked && <td>{props.couponName}</td>}
+                    {!editClicked && <td>{props.categoryName}</td>}  
+                    {!editClicked && <td>{props.companyName}</td>}                  
+                    {!editClicked && <td>{props.amount}</td>}                  
+                    {!editClicked && <td>{props.timeStamp}</td>}                  
                     {editClicked && (
         <td>
           <input
