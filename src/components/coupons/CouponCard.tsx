@@ -49,22 +49,22 @@ function Coupon(props: ICouponsData) {
     let countOfBuyProduct = useSelector((state: AppState) => state.buyNow) + 1;
     let categories: any[] = [];
 
-   
-    let massage: string="";
-    let title: string="";
-     
+
+    let massage: string = "";
+    let title: string = "";
+
     let [isSuccessPurchase, setIsSuccessPurchase] = useState(false);
-    function closeConirmationModal(){
+    function closeConirmationModal() {
         setIsSuccessPurchase(false);
     }
-    
-    function openIsSuccessPurchase(){
+
+    function openIsSuccessPurchase() {
         setIsSuccessPurchase(true);
     }
 
-   
 
-    
+
+
 
     async function buyNow(id: number) {
         if (loginData == null) {
@@ -79,7 +79,7 @@ function Coupon(props: ICouponsData) {
             title = "success";
             massage = "Successffuly purchase {coupon.name}";
             openIsSuccessPurchase();
-            
+
         }
         catch (e: any) {
             console.error(e);
@@ -123,7 +123,7 @@ function Coupon(props: ICouponsData) {
     let company = props.companyId;
     let startDate = endDate;
     let [url, setUrl] = useState("" + props.url);
-    
+
 
 
 
@@ -153,12 +153,12 @@ function Coupon(props: ICouponsData) {
                 url
 
             })
-            
+
         }
         catch (e: any) {
             console.error(e);
             if (e.response?.data?.error?.message) {
-                
+
             } else {
                 alert("failed to update coupon")
             }
@@ -186,7 +186,7 @@ function Coupon(props: ICouponsData) {
                     <div>{amount}</div>
                     <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}>-</button>
                 </div>
-                <button disabled={amount <= 0} title="Buy Now" className=" button-icon"  onClick={event => buyNow(props.id)}><img src={cart} alt="Buy now" className="cart" /></button>
+                <button disabled={amount <= 0} title="Buy Now" className=" button-icon" onClick={event => buyNow(props.id)}><img src={cart} alt="Buy now" className="cart" /></button>
                 <button className=" button-icon" title="More Details" onClick={event => openCouponModal()}><img src={details} alt="Buy now" className="cart" /></button>
 
 
@@ -228,24 +228,24 @@ function Coupon(props: ICouponsData) {
                             </div><div className="fields">
                                     <strong>About:</strong>  {props.description}
                                 </div><div className="fields">
-                                   <strong> Category:</strong>{props.categoryName}
+                                    <strong> Category:</strong>{props.categoryName}
                                 </div><div className="fields">
                                     <strong>Expiration Date:</strong>  {props.endDate}
                                 </div>
                                 <div className="counter">
-                    <button className="counter-btn" onClick={incrementCount}>+</button>
-                    <div>{amount}</div>
-                    <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}>-</button>
-                </div>
+                                    <button className="counter-btn" onClick={incrementCount}>+</button>
+                                    <div>{amount}</div>
+                                    <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}>-</button>
+                                </div>
 
-                                </>)}
+                            </>)}
 
 
 
                     </div>
                     {loginData?.userType != "admin" && (<div className="button-section">
                         <button className="button-modal" onClick={event => buyNow(props.id)}>Buy Now</button>
-                    
+
                     </div>)}
 
                     {loginData?.userType == "admin" && (<div className="button-section">
@@ -258,10 +258,10 @@ function Coupon(props: ICouponsData) {
                 className="modal"
                 isOpen={isSuccessPurchase}
                 onRequestClose={closeConirmationModal}
-                >
+            >
                 <SuccessBuyCoupon id={id} name={name} price={props.price} description={description} startDate={startDate} endDate={endDate} categoryName={props.categoryName} categotyId={category} companyName={props.companyName} companyId={company} amount={amount} url={url} />
-              </Modal>
-              
+            </Modal>
+
 
         </div>
     )
