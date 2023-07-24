@@ -7,91 +7,104 @@ import Modal from 'react-modal';
 import { ActionType } from "../../../../../redux/action-types";
 import { useDispatch } from "react-redux";
 import "./User.css";
+import ConfirmationModal from "../../../../ConfirmationModal/ConfirmationModal";
+import CustomerDetailsModal from "../../customer-details-modal/CustomerDetailsModal";
 
 
 Modal.setAppElement('#root');
 
 function User(props: IUserData) {
-    let[pageNumber, setPageNumber]  = useState(1);
-    let amountOfPage: number = 5;
-    const [id, setId] = useState(props.id);
-    const [userName, setUserName] = useState(props.userName);
-    const [password, setPassword] = useState(props.password);
-    const [userType, setUserType] = useState(props.userType);
-    const [companyName, setCompanyName] = useState(props.companyName);
-    const [removeUserModalIsOpen, setRemoveUserModalIsOpen] = useState(false);
-    const [customerDetailsModalIsOpen, setCustomerDetailsModalIsOpen] = useState(false);
-    const [saveEditDetailsModalIsOpen, setSaveEditDetailsModalIsOpen] = useState(false);
-    const [editClicked, setEditClicked] = useState(false);
-    let companies: any[] = [];
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [text, setText] = useState("");
-    let dispatch = useDispatch();
-    let [usersList, setUsersList] = useState<IUserData[]>([]);
+  let [pageNumber, setPageNumber] = useState(1);
+  let amountOfPage: number = 5;
+  const [id, setId] = useState(props.id);
+  const [userName, setUserName] = useState(props.userName);
+  const [password, setPassword] = useState(props.password);
+  const [userType, setUserType] = useState(props.userType);
+  const [companyName, setCompanyName] = useState(props.companyName);
+  const [removeUserModalIsOpen, setRemoveUserModalIsOpen] = useState(false);
+  const [customerDetailsModalIsOpen, setCustomerDetailsModalIsOpen] = useState(false);
+  const [saveEditDetailsModalIsOpen, setSaveEditDetailsModalIsOpen] = useState(false);
+  const [editClicked, setEditClicked] = useState(false);
+  let companies: any[] = [];
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [text, setText] = useState("");
+  let dispatch = useDispatch();
+  let [usersList, setUsersList] = useState<IUserData[]>([]);
 
 
 
-    async function removeUser() {
-        if(userType!="customer"){
-        try {
-            let url = `http://localhost:8080/users/${id}`;
-            let response = await axios.delete(url);
-        } catch (e: any) {
-            if (e.response?.data?.errorMessage) {
-                alert(e.response.data.errorMessage);
-            } else {
-                alert("Failed to retrieve user");
-            }
-        }
-    } else{
-        try {
-            let url = `http://localhost:8080/customer/${id}`;
-            let response = await axios.delete(url);
-        } catch (e: any) {
-            if (e.response?.data?.errorMessage) {
-                alert(e.response.data.errorMessage);
-            } else {
-                alert("Failed to retrieve customer");
-            }
-        }
+  async function removeUser() {
 
+    try {
+      let url = `http://localhost:8080/users/${id}`;
+      let response = await axios.delete(url);
+      openRemoveUserModalIsOpen();
+    } catch (e: any) {
+      if (e.response?.data?.errorMessage) {
+        alert(e.response.data.errorMessage);
+      } else {
+        alert("Failed to retrieve user");
+      }
     }
-}
-   
-    
-    function openRemoveUserModalIsOpen() {
-        setRemoveUserModalIsOpen(true);
-      }
-    
-      const closeRemoveUserModalIsOpen = () => {
-        setRemoveUserModalIsOpen(false);
-      };
-    
-      function openCustomerDetailsModalIsOpen() {
-        setCustomerDetailsModalIsOpen(true);
-      }
-    
-      const closeCustomerDetailsModalIsOpen = () => {
-        setCustomerDetailsModalIsOpen(false);
-      };
-    
-      function openSaveEditDetailsModalIsOpen() {
-        setSaveEditDetailsModalIsOpen(true);
-      }
-    
-      const closeSaveEditDetailsModalIsOpen = () => {
-        setSaveEditDetailsModalIsOpen(false);
-      };
 
-    
+  }
 
-    return (
-              
-                <tr >
-                    {!editClicked && <td>{userName}</td>}
-                    {!editClicked && <td>{userType}</td>}
-                    {!editClicked && <td>{companyName}</td>}                  
-                    {editClicked && (
+  async function updateUser() {
+    
+    let user = {id, userName, password, userType };
+    try {
+      let response = await axios.put("http://localhost:8080/users", user);
+      closeEditMode();
+      openSaveEditDetailsModalIsOpen();
+    } catch (e: any) {
+      if (e.response?.data?.errorMessage) {
+        alert(e.response.data.errorMessage);
+      } else {
+        alert("Failed to retrieve user");
+      }
+    }
+
+  }
+
+  function closeEditMode(){
+    setEditClicked(false);
+  }
+
+
+  function openRemoveUserModalIsOpen() {
+    setRemoveUserModalIsOpen(true);
+  }
+
+  const closeRemoveUserModalIsOpen = () => {
+    setRemoveUserModalIsOpen(false);
+  };
+
+  function openCustomerDetailsModalIsOpen() {
+    setCustomerDetailsModalIsOpen(true);
+  }
+
+  const closeCustomerDetailsModalIsOpen = () => {
+    setCustomerDetailsModalIsOpen(false);
+  };
+
+  function openSaveEditDetailsModalIsOpen() {
+    setSaveEditDetailsModalIsOpen(true);
+  }
+
+  const closeSaveEditDetailsModalIsOpen = () => {
+    setSaveEditDetailsModalIsOpen(false);
+  };
+
+
+
+
+  return (
+
+    <tr >
+      {!editClicked && <td>{userName}</td>}
+      {!editClicked && <td>{userType}</td>}
+      {!editClicked && <td>{companyName}</td>}
+      {editClicked && (
         <td>
           <input
             type="text"
@@ -121,27 +134,27 @@ function User(props: IUserData) {
       <td>
         {editClicked ? (
           <div className="edit-buttons-container">
-            <button className="save-button" onClick={openSaveEditDetailsModalIsOpen}>cancle
+            <button className="save-button" onClick={()=>updateUser()}>Save
             </button>
             <Modal
-                className="modal"
-                isOpen={saveEditDetailsModalIsOpen}
-                onRequestClose={closeSaveEditDetailsModalIsOpen}
-                contentLabel="Save edited details"
-              >
-                {/* <ConfirmationModal message={"Are you sure you want to save?"} action={() => null} closeModel={() => closeSaveEditDetailsModalIsOpen()}/> */}
-              </Modal>
+              className="modal"
+              isOpen={saveEditDetailsModalIsOpen}
+              onRequestClose={closeSaveEditDetailsModalIsOpen}
+              contentLabel="Save edited details"
+            >
+               <ConfirmationModal title="Success!!" massage={"User details update successfuly."} closeModel={() => closeSaveEditDetailsModalIsOpen()}/>
+            </Modal>
             <button
               className="edit-button"
               onClick={() => setEditClicked(!editClicked)}
             >
-              {/* <FaRegWindowClose className="icon" /> */}
+              Cancel
             </button>
           </div>
         ) : (
           <div className="edit-buttons-container">
             <button
-            
+
               className="edit-button"
               onClick={() => setEditClicked(!editClicked)}
             > edit
@@ -153,20 +166,27 @@ function User(props: IUserData) {
         <div className="edit-buttons-container">
           <button
             className="edit-button"
-            onClick={() =>removeUser()}
+            onClick={() => removeUser()}
           > remove
           </button>
-          
+          <Modal
+              className="modal"
+              isOpen={removeUserModalIsOpen}
+              onRequestClose={closeRemoveUserModalIsOpen}
+              contentLabel="Save edited details"
+            >
+               <ConfirmationModal title="Success!!" massage={"User removed successfuly."} closeModel={() => closeRemoveUserModalIsOpen()}/>
+            </Modal>
         </div>
       </td>
-      {/* <td>
-        {userType == "CUSTOMER" && (
+      <td>
+        <>{userType == "customer" && (
           <div className="edit-buttons-container">
             <button
               className="edit-button"
               onClick={openCustomerDetailsModalIsOpen}
             >
-              <TbListDetails className="icon" />
+              Details
             </button>
             <Modal
                 className="modal"
@@ -174,15 +194,16 @@ function User(props: IUserData) {
                 onRequestClose={closeCustomerDetailsModalIsOpen}
                 contentLabel="Customer details"
               >
-                <CustomerDetailsModal customerId={id} closeModel={() => closeCustomerDetailsModalIsOpen()}/>
+                <CustomerDetailsModal customerId={props.id} closeModel={() => closeCustomerDetailsModalIsOpen()}/>
               </Modal>
           </div>
-        )}
-      </td> */}
+        )}</>
+      </td> 
     </tr>
-                
-);
-    
-            }
-                export default User;
+
+  );
+}
+
+
+export default User;
 

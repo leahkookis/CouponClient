@@ -33,7 +33,7 @@ function Users() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("admin");
-  const [companyName, setCompanyName] = useState(companies[0].name);
+  const [companyName, setCompanyName] = useState("");
   const [companyId, setCompanyId] = useState(0);
   let [usersList, setUsersList] = useState<IUserData[]>([]);
   let [pageNumber, setPageNumber] = useState(1);
@@ -131,17 +131,11 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
 
 
 let [addUserOpen, setAddUserOpen]=useState(false);
-let [removeUserOpen, setRemoveUserOpen] = useState(false);
-let [updateUserOpen, setUpdateUserOpen] = useState(false);
+
 function closeAddUserOpen(){
   setAddUserOpen(false);
 }
-function closeRemoveUserOpen(){
-  setRemoveUserOpen(false);
-}
-function closeUpdateUserOpen(){
-  setUpdateUserOpen(false);
-}
+
 
   return (
     <div>
@@ -191,6 +185,7 @@ function closeUpdateUserOpen(){
           <th>Company</th>
           <th>Edit</th>
           <th>Remove</th>
+          <th>Customer details</th>
         </tr>
         
         {usersList.map((user) => (
@@ -204,22 +199,9 @@ function closeUpdateUserOpen(){
                 isOpen={addUserOpen}
                 onRequestClose={closeAddUserOpen}
                 >
-                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon" }  closeModel={() => closeAddUserOpen()}/>
+                <ConfirmationModal title="Success!!" massage={"User added successfully." }  closeModel={() => closeAddUserOpen()}/>
               </Modal>
-              <Modal
-                className="modal"
-                isOpen={updateUserOpen}
-                onRequestClose={closeUpdateUserOpen}
-                >
-                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon" }  closeModel={() => closeUpdateUserOpen()}/>
-              </Modal>
-              <Modal
-                className="modal"
-                isOpen={removeUserOpen}
-                onRequestClose={closeRemoveUserOpen}
-                >
-                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon"}  closeModel={() => closeRemoveUserOpen()}/>
-              </Modal>
+              
         
     </div>
   );
