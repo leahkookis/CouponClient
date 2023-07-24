@@ -14,6 +14,7 @@ import IPurchaseData from "../../models/IPurchaseData";
 import ICustomerData from "../../models/ICustomerData";
 import { ActionType } from "../../redux/action-types";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import SuccessBuyCoupon from "../SuccessBuyCoupon/SuccessBuyCoupon";
 
 
 
@@ -126,7 +127,7 @@ function Coupon(props: ICouponsData) {
 
 
 
-    let [amount, setAmount] = useState(0);
+    let [amount, setAmount] = useState(1);
 
     function incrementCount() {
         amount = amount + 1;
@@ -223,14 +224,21 @@ function Coupon(props: ICouponsData) {
 
 
                             (<><div className="coupon-name-modal">{props.name}</div><div className="fields">
-                                Price:{props.price} ILS
+                                <strong>Price:</strong>{props.price} ILS
                             </div><div className="fields">
-                                    About:  {props.description}
+                                    <strong>About:</strong>  {props.description}
                                 </div><div className="fields">
-                                    Category:{props.categoryName}
+                                   <strong> Category:</strong>{props.categoryName}
                                 </div><div className="fields">
-                                    Expiration Date:  {props.endDate}
-                                </div></>)}
+                                    <strong>Expiration Date:</strong>  {props.endDate}
+                                </div>
+                                <div className="counter">
+                    <button className="counter-btn" onClick={incrementCount}>+</button>
+                    <div>{amount}</div>
+                    <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}>-</button>
+                </div>
+
+                                </>)}
 
 
 
@@ -251,8 +259,9 @@ function Coupon(props: ICouponsData) {
                 isOpen={isSuccessPurchase}
                 onRequestClose={closeConirmationModal}
                 >
-                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon" +{name}}  closeModel={() => closeConirmationModal()}/>
+                <SuccessBuyCoupon id={id} name={name} price={props.price} description={description} startDate={startDate} endDate={endDate} categoryName={props.categoryName} categotyId={category} companyName={props.companyName} companyId={company} amount={amount} url={url} />
               </Modal>
+              
 
         </div>
     )

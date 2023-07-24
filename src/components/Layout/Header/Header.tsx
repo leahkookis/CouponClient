@@ -87,9 +87,7 @@ function Header() {
                         <div className={showAccountOptions ? "account-options" : "account-options-active"}
                                 onMouseEnter={() => setShowAccountOptions(true)}
                                 onMouseLeave={() => setShowAccountOptions(false)}>    
-                            <Link className="header-menu-links" to="/account/settings">
-                                <button className="header-menu-links-button" onClick={() => setShowAccountOptions(!showAccountOptions)}>My Account</button>
-                            </Link>
+                           
                             {adminMode && (
                                 <><Link className="header-menu-links" to="/admin/users">
                                     <button

@@ -7,6 +7,8 @@ import { ActionType } from "../../../../redux/action-types";
 import User from "./User/User";
 import "./Users.css";
 import Modal from 'react-modal';
+import ConfirmationModal from "../../../ConfirmationModal/ConfirmationModal";
+import Company from "../../../company/Company";
 
 
 const customStyles = {
@@ -25,15 +27,17 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function Users() {
+
+  let companies= useSelector((state: AppState)=> state.companiesData)
   const [id, setId] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("admin");
-  const [companyName, setCompanyName] = useState("");
+  const [companyName, setCompanyName] = useState(companies[0].name);
   const [companyId, setCompanyId] = useState(0);
   let [usersList, setUsersList] = useState<IUserData[]>([]);
   let [pageNumber, setPageNumber] = useState(1);
-  let companies= useSelector((state: AppState)=> state.companiesData)
+  
     const [modalIsOpen, setIsOpen] = useState(false);
     const [text, setText] = useState("");
     let dispatch = useDispatch();
@@ -84,6 +88,16 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
     }
         try {
             const response = await axios.post("http://localhost:8080/users", user)
+            closeModal()
+            let newUser: IUserData = {
+              id: response?.data,
+              userName: userName,
+              password: password,
+              userType: userType
+
+            }
+            usersList.push(newUser);
+            setAddUserOpen(true);
         }
         catch (e: any) {
             console.error(e);
@@ -113,6 +127,21 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
     const selectedCompany = +event.target.value;
     setCompanyId(selectedCompany);
 };
+
+
+
+let [addUserOpen, setAddUserOpen]=useState(false);
+let [removeUserOpen, setRemoveUserOpen] = useState(false);
+let [updateUserOpen, setUpdateUserOpen] = useState(false);
+function closeAddUserOpen(){
+  setAddUserOpen(false);
+}
+function closeRemoveUserOpen(){
+  setRemoveUserOpen(false);
+}
+function closeUpdateUserOpen(){
+  setUpdateUserOpen(false);
+}
 
   return (
     <div>
@@ -170,6 +199,28 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
        
       </table>
     </div>
+    <Modal
+                className="modal"
+                isOpen={addUserOpen}
+                onRequestClose={closeAddUserOpen}
+                >
+                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon" }  closeModel={() => closeAddUserOpen()}/>
+              </Modal>
+              <Modal
+                className="modal"
+                isOpen={updateUserOpen}
+                onRequestClose={closeUpdateUserOpen}
+                >
+                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon" }  closeModel={() => closeUpdateUserOpen()}/>
+              </Modal>
+              <Modal
+                className="modal"
+                isOpen={removeUserOpen}
+                onRequestClose={closeRemoveUserOpen}
+                >
+                <ConfirmationModal title="success to buy" massage={"congrutotation!!! success to buy coupon"}  closeModel={() => closeRemoveUserOpen()}/>
+              </Modal>
+        
     </div>
   );
 }
