@@ -35,7 +35,7 @@ function Users() {
   const [userType, setUserType] = useState("admin");
   const [companyName, setCompanyName] = useState("");
   const [companyId, setCompanyId] = useState(0);
-  let [usersList, setUsersList] = useState<IUserData[]>([]);
+  let usersList: IUserData[] = useSelector((state: AppState)=> state.users)
   let [pageNumber, setPageNumber] = useState(1);
   
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -55,9 +55,10 @@ function Users() {
   async function getUsersByPage(pageNumber: number) {
     try {
       let url = `http://localhost:8080/users?page=${pageNumber}`;
-      let response = await axios.get(url);
-      let users = response.data;
-      setUsersList(users);
+      let response1 = await axios.get(url);
+      let response = response1.data;
+
+      dispatch({ type: ActionType.GetUsers, payload: { response } });
     } catch (e) {
       console.error(e);
       alert("Failed to retrieve users");
@@ -188,7 +189,7 @@ function closeAddUserOpen(){
           <th>Customer details</th>
         </tr>
         
-        {usersList.map((user) => (
+        {usersList.map((user,index) => (
           <User id={user.id} password={user.password} userName={user.userName} userType={user.userType}  companyName={user.companyName}/>
         ))}
        

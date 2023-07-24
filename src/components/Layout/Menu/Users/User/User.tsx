@@ -34,11 +34,12 @@ function User(props: IUserData) {
 
 
   async function removeUser() {
-
+    
     try {
       let url = `http://localhost:8080/users/${id}`;
       let response = await axios.delete(url);
       openRemoveUserModalIsOpen();
+      dispatch({ type: ActionType.RemoveIndex, payload: { id:id, nameOfList:"users" } });
     } catch (e: any) {
       if (e.response?.data?.errorMessage) {
         alert(e.response.data.errorMessage);
