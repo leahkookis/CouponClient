@@ -2,208 +2,121 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ModifierFlags } from "typescript";
 import Modal from 'react-modal';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Purchase.css";
 import IPurchaseData from "../../../../models/IPurchaseData";
+import ConfirmationModal from "../../../ConfirmationModal/ConfirmationModal";
+import ICouponsData from "../../../../models/ICouponsData";
+import { AppState } from "../../../../redux/app-state";
+import ICustomerData from "../../../../models/ICustomerData";
+import { ActionType } from "../../../../redux/action-types";
 
 
 Modal.setAppElement('#root');
 
 function User(props: IPurchaseData) {
-    let[pageNumber, setPageNumber]  = useState(1);
-    let amountOfPage: number = 5;
-    const [id, setId] = useState('');
-    const [name, setName] = useState('');
-    const [couponName, setCouponName] = useState('');
-    const [categoryName, setCategoryName] = useState('');
-    const [companyName, setCompanyName] = useState('');
-    const [couponPrice, setCouponPrice] = useState(0);
-    const [companyId, setCompanyId] = useState(1);
-    const [categoryId, setCategoryId] = useState(1);
-    const [amount, setAmount] = useState(0);
-    const [timeStamp, setTimeStamp] = useState('');
-    const [removeUserModalIsOpen, setRemoveUserModalIsOpen] = useState(false);
-    const [customerDetailsModalIsOpen, setCustomerDetailsModalIsOpen] = useState(false);
-    const [saveEditDetailsModalIsOpen, setSaveEditDetailsModalIsOpen] = useState(false);
-    const [editClicked, setEditClicked] = useState(false);
-    let companies: any[] = [];
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [text, setText] = useState("");
-    let dispatch = useDispatch();
-    let [purchasesList, setPurchasesList] = useState<IPurchaseData[]>([]);
+  let [pageNumber, setPageNumber] = useState(1);
+  let amountOfPage: number = 5;
+  const [id, setId] = useState(props.id);
+  const [name, setName] = useState(props.name);
+  const [couponName, setCouponName] = useState(props.couponName);
+  const [categoryName, setCategoryName] = useState(props.categoryName);
+  const [companyName, setCompanyName] = useState(props.companyName);
+  const [couponPrice, setCouponPrice] = useState(props.couponPrice);
+  const [companyId, setCompanyId] = useState(1);
+  const [categoryId, setCategoryId] = useState(1);
+  const [amount, setAmount] = useState(props.amount);
+  const [timeStamp, setTimeStamp] = useState(props.timeStamp);
+  const [removeUserModalIsOpen, setRemoveUserModalIsOpen] = useState(false);
+  const [customerDetailsModalIsOpen, setCustomerDetailsModalIsOpen] = useState(false);
+  const [saveEditDetailsModalIsOpen, setSaveEditDetailsModalIsOpen] = useState(false);
+  const [editClicked, setEditClicked] = useState(false);
+  let companies: any[] = [];
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [text, setText] = useState("");
+  let dispatch = useDispatch();
+  let [purchasesList, setPurchasesList] = useState<IPurchaseData[]>([]);
+  let couponList: ICouponsData[] = useSelector((state: AppState)=> state.coupons)
 
 
 
-    async function removePurchase() {
-        try {
-            let url = `http://localhost:8080/purchase/${id}`;
-            let response = await axios.delete(url);
-        } catch (e: any) {
-            if (e.response?.data?.errorMessage) {
-                alert(e.response.data.errorMessage);
-            } else {
-                alert("Failed to delete purchase");
-            }
-        }
+
+  async function removePurchase() {
+    try {
+      let url = `http://localhost:8080/purchase/${id}`;
+      let response = await axios.delete(url);
+      debugger;
+      dispatch({ type: ActionType.RemoveIndex, payload: { id:id, nameOfList:"purchases" } });
+
+    } catch (e: any) {
+      if (e.response?.data?.errorMessage) {
+        alert(e.response.data.errorMessage);
+      } else {
+        alert("Failed to delete purchase");
+      }
+    }
+
+  }
+
   
-}
-   
-    
-    function openRemoveUserModalIsOpen() {
-        setRemoveUserModalIsOpen(true);
-      }
-    
-      const closeRemoveUserModalIsOpen = () => {
-        setRemoveUserModalIsOpen(false);
-      };
-    
-      function openCustomerDetailsModalIsOpen() {
-        setCustomerDetailsModalIsOpen(true);
-      }
-    
-      const closeCustomerDetailsModalIsOpen = () => {
-        setCustomerDetailsModalIsOpen(false);
-      };
-    
-      function openSaveEditDetailsModalIsOpen() {
-        setSaveEditDetailsModalIsOpen(true);
-      }
-    
-      const closeSaveEditDetailsModalIsOpen = () => {
-        setSaveEditDetailsModalIsOpen(false);
-      };
+  function closeEditMode() {
+    setEditClicked(false);
+  }
 
+
+  function openRemoveUserModalIsOpen() {
+    setRemoveUserModalIsOpen(true);
+  }
+
+  const closeRemoveUserModalIsOpen = () => {
+    setRemoveUserModalIsOpen(false);
+  };
+
+  function openCustomerDetailsModalIsOpen() {
+    setCustomerDetailsModalIsOpen(true);
+  }
+
+  const closeCustomerDetailsModalIsOpen = () => {
+    setCustomerDetailsModalIsOpen(false);
+  };
+
+  function openSaveEditDetailsModalIsOpen() {
+    setSaveEditDetailsModalIsOpen(true);
+  }
+
+  const closeSaveEditDetailsModalIsOpen = () => {
+    setSaveEditDetailsModalIsOpen(false);
+  };
+
+
+  return (
+
+    <tr >
+      <td>{props.name}</td>
+      <td>{props.couponPrice}</td>
+        <td>{props.couponName}</td>
+      <td>{props.categoryName}</td>
+       <td>{props.companyName}</td>
+      <td>{props.amount}</td>
+      <td>{props.timeStamp}</td>
+      
     
 
-    return (
-       
-                <tr >
-                    {!editClicked && <td>{props.name}</td>}
-                    {!editClicked && <td>{props.couponPrice}</td>}
-                    {!editClicked && <td>{props.couponName}</td>}
-                    {!editClicked && <td>{props.categoryName}</td>}  
-                    {!editClicked && <td>{props.companyName}</td>}                  
-                    {!editClicked && <td>{props.amount}</td>}                  
-                    {!editClicked && <td>{props.timeStamp}</td>}                  
-                    {editClicked && (
-        <td>
-          <input
-            type="text"
-            defaultValue={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </td>
-      )}
-      {editClicked && (
-        <td>
-          <input
-            type="text"
-            defaultValue={couponPrice}
-            onChange={(event) => setCouponPrice(+event.target.value)}
-          />
-        </td>
-      )}
-      {editClicked && (
-        <td>
-          <input
-            type="text"
-            defaultValue={couponName}
-            onChange={(event) => setCouponName(event.target.value)}
-          />
-        </td>
-      )}
-      {editClicked && (
-        <td>
-          <input
-            type="text"
-            defaultValue={categoryName}
-            onChange={(event) => setCategoryName(event.target.value)}
-          />
-        </td>
-      )}
-      {editClicked && (
-        <td>
-          <input
-            type="text"
-            defaultValue={companyName}
-            onChange={(event) => setCompanyName(event.target.value)}
-          />
-        </td>
-        
-      )}
-        {/* <td>
-          <input
-            type="text"
-            defaultValue={amount}
-            onChange={(event) => setAmount(+event.target.value)}
-          />
-        </td> */}
-        
-      <td>
-        {editClicked ? (
-          <div className="edit-buttons-container">
-            <button className="save-button" onClick={openSaveEditDetailsModalIsOpen}>cancle
-            </button>
-            <Modal
-                className="modal"
-                isOpen={saveEditDetailsModalIsOpen}
-                onRequestClose={closeSaveEditDetailsModalIsOpen}
-                contentLabel="Save edited details"
-              >
-            {/* //    <ConfirmationModal message={"Are you sure you want to save?"} action={() => null} closeModel={() => closeSaveEditDetailsModalIsOpen()}/> */}
-              </Modal>
-            <button
-              className="edit-button"
-              onClick={() => setEditClicked(!editClicked)}
-            >
-             {/* <FaRegWindowClose className="icon" /> */}
-            </button>
-          </div>
-        ) : (
-          <div className="edit-buttons-container">
-            <button
-            
-              className="edit-button"
-              onClick={() => setEditClicked(!editClicked)}
-            > edit
-            </button>
-          </div>
-        )}
-      </td>
       <td>
         <div className="edit-buttons-container">
           <button
             className="edit-button"
-            onClick={() =>removePurchase()}
+            onClick={() => removePurchase()}
           > remove
           </button>
-          
+
         </div>
       </td>
-      {/* <td>
-        {companyName == "CUSTOMER" && (
-          <div className="edit-buttons-container">
-            <button
-              className="edit-button"
-              onClick={openCustomerDetailsModalIsOpen}
-            >
-              <TbListDetails className="icon" />
-            </button>
-            <Modal
-                className="modal"
-                isOpen={customerDetailsModalIsOpen}
-                onRequestClose={closeCustomerDetailsModalIsOpen}
-                contentLabel="Customer details"
-              >
-                <CustomerDetailsModal customerId={id} closeModel={() => closeCustomerDetailsModalIsOpen()}/>
-              </Modal>
-          </div>
-        )}
-      </td> */}
+     
     </tr>
-                
-);
-    
-            }
-                export default User;
+
+  );
+
+}
+export default User;
 

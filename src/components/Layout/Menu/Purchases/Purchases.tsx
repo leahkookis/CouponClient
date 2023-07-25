@@ -33,8 +33,7 @@ const Purchases: React.FC = () => {
   const [categoryId, setCategoryId] = useState(1);
   const [amount, setAmount] = useState(0);
   const [timeStamp, setTimeStamp] = useState('');
-
-  const [purchaseList, setPurchaseList] = useState<IPurchaseData[]>([]);
+  const purchaseList: IPurchaseData[] = useSelector((state: AppState) => state.purchases);
   const [pageNumber, setPageNumber] = useState(1);
   const companies = useSelector((state: AppState) => state.companiesData);
   const categories = useSelector((state: AppState) => state.categories);
@@ -55,9 +54,9 @@ const Purchases: React.FC = () => {
   async function getPurchaseByPage(pageNumber: number) {
     try {
       const url = `http://localhost:8080/purchase?page=${pageNumber}`;
-      const response = await axios.get(url);
-      const purchases = response.data;
-      setPurchaseList(purchases);
+      const response1 = await axios.get(url);
+      const response = response1.data;
+      dispatch({ type: ActionType.GetPurchase, payload: { response } });
     } catch (e) {
       console.error(e);
       alert('Failed to retrieve purchases');
@@ -147,7 +146,6 @@ const Purchases: React.FC = () => {
         <th>Company Name</th>
         <th>Amount</th>
         <th>Timestamp</th>
-        <th>Edit</th>
         <th>Remove</th>
       </tr>
     </thead>

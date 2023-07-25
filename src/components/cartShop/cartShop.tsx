@@ -12,7 +12,7 @@ import ICouponsData from "../../models/ICouponsData";
 function CartShop() {
     const customer = useSelector((state: AppState) => state.customerData)
     const getSelectedCouponsIds = useSelector((state: AppState) => state.sendPurchaseToBuy)
-    const cartProductsArray: IPurchaseData[] = useSelector((state: AppState) => state.purchaseData)
+    const cartProductsArray: IPurchaseData[] = useSelector((state: AppState) => state.purchases)
     let dispatch = useDispatch();
     useEffect(() => {
         getPurchaseByCustomer()

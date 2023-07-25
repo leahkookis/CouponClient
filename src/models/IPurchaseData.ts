@@ -1,10 +1,10 @@
 export default interface IPurchaseData{
     id: number;
-    name : String;
+    name : string;
     couponPrice: number;
-    couponName : String;
-    categoryName: String;
-    companyName : String;
+    couponName : string;
+    categoryName: string;
+    companyName : string;
     amount: number;
     timeStamp: string
 
