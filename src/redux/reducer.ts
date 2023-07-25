@@ -70,7 +70,7 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
             if (action.payload.nameOfList == "purchases") {
                 const idToRemove = action.payload.id;
                 const updatedList = oldAppState.purchases.filter((element: IPurchaseData) => element.id !== idToRemove);
-                newAppState.users = updatedList;
+                newAppState.purchases = updatedList;
             }
             break;
 

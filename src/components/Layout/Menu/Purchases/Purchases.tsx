@@ -7,6 +7,7 @@ import { AppState } from '../../../../redux/app-state';
 import IPurchaseData from '../../../../models/IPurchaseData';
 import Purchase from './Purchase';
 import "./Purchases.css";
+import ICompanyData from '../../../../models/ICompanyData';
 
 
 const customStyles = {
@@ -35,7 +36,7 @@ const Purchases: React.FC = () => {
   const [timeStamp, setTimeStamp] = useState('');
   const purchaseList: IPurchaseData[] = useSelector((state: AppState) => state.purchases);
   const [pageNumber, setPageNumber] = useState(1);
-  const companies = useSelector((state: AppState) => state.companiesData);
+  const companies :ICompanyData[] = useSelector((state: AppState) => state.companiesData);
   const categories = useSelector((state: AppState) => state.categories);
 
   const [modalIsOpen, setIsOpen] = useState(false);

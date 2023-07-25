@@ -131,7 +131,7 @@ function Company(props: ICompanyData) {
         <td>
           <input
             type="text"
-            defaultValue={name}
+            defaultValue={""+name}
             onChange={(event) => setName(event.target.value)}
           />
         </td>
@@ -140,7 +140,7 @@ function Company(props: ICompanyData) {
         <td>
           <input
             type="text"
-            defaultValue={address}
+            defaultValue={""+address}
             onChange={(event) => setAddress(event.target.value)}
           />
         </td>
@@ -149,7 +149,7 @@ function Company(props: ICompanyData) {
         <td>
           <input
             type="text"
-            defaultValue={phoneNumber}
+            defaultValue={""+phoneNumber}
             onChange={(event) => setPhoneNumber(event.target.value)}
           />
         </td>

@@ -10,11 +10,14 @@ import ICustomerData from '../../../models/ICustomerData';
 import cart from "../../images/cart.png"
 import axios from 'axios';
 import Companies from '../Menu/Companies/Companies';
+import ICompanyData from '../../../models/ICompanyData';
+import Company from '../Menu/Companies/company/Company';
 
 
 function Header() {
     let navigate = useNavigate();
     let loginData = useSelector((state: AppState) => state.loginData)
+    let company:ICompanyData[] = useSelector((state: AppState) => state.companiesData)
     let customer = useSelector((state: AppState) => state.customerData)
     let coupons = useSelector((state: AppState) => state.coupons)
     let dispatch = useDispatch();
@@ -23,7 +26,21 @@ function Header() {
     let [showAccountOptions, setShowAccountOptions] = useState(false);
     let[pageNumber, setPageNumber]  = useState(1);
     let amountOfPage: number = 5;
-    
+    let companyName = 0;
+
+    // async function getCompanyByCompanyId(id:number){
+    //     try {
+           
+    //         let url= await axios.get(`http://localhost:8080/company/{id}`);
+    //         let response1 = url.data;
+    //         let response = response1.data;
+
+    //     } catch (error) {
+    //         alert("something went wrong");
+            
+    //     }
+        
+    //  }
 
     function logout() {
         sessionStorage.removeItem("token");
@@ -83,7 +100,9 @@ function Header() {
                     <div className='customer-data signin-btn'>
                         
                         {adminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello Admin</div>)}
+                        {companyAdminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {companyName}</div>)}
                         {customer != null && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {customer.name}</div>)}
+
                         <div className={showAccountOptions ? "account-options" : "account-options-active"}
                                 onMouseEnter={() => setShowAccountOptions(true)}
                                 onMouseLeave={() => setShowAccountOptions(false)}>    

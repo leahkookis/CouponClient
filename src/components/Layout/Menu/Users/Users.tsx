@@ -9,6 +9,7 @@ import "./Users.css";
 import Modal from 'react-modal';
 import ConfirmationModal from "../../../ConfirmationModal/ConfirmationModal";
 import Company from "../Companies/company/Company";
+import ICompanyData from "../../../../models/ICompanyData";
 
 
 const customStyles = {
@@ -28,7 +29,7 @@ Modal.setAppElement('#root');
 
 function Users() {
 
-  let companies= useSelector((state: AppState)=> state.companiesData)
+  let companies : ICompanyData []= useSelector((state: AppState)=> state.companiesData)
   const [id, setId] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");

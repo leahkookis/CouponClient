@@ -3,7 +3,7 @@ import IPurchaseData from "./IPurchaseData";
 
 export default interface ICompanyData{
     id: number;
-    name : string;
+    name : String;
     address: string;
     phoneNumber: string;
     coupons?: ICouponsData[];

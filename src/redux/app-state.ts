@@ -14,7 +14,7 @@ export class AppState{
  public addToCart:number = 0;
  public purchases: any = [];
 public sendPurchaseToBuy : number[] = [];
-public companiesData: ICompanyData[] = [];
+public companiesData: any = [];
 public categories: any[]=[];
 public token:ISuccessfulLoginData = {id: 0, userType: "", companyId: 0}
 public removeIndex = {index: 0, nameOfList:""}
