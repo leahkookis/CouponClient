@@ -20,6 +20,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Purchases from "./Menu/Purchases/Purchases";
 import SuccessBuyCoupon from "../SuccessBuyCoupon/SuccessBuyCoupon";
+import Coupons from "./Menu/Coupons/Coupons";
 
 function Layout() {
     let dispatch = useDispatch();
@@ -55,6 +56,8 @@ function Layout() {
                         <Route path="/admin/users" element={<Users />} />
                         <Route path="/admin/purchases" element={<Purchases />} />
                         <Route path="/admin/companies" element={<Companies />} />
+                        <Route path="/company/coupons" element={<Coupons />} />
+
                         
 
                     </Routes>

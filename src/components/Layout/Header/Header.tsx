@@ -100,7 +100,7 @@ function Header() {
                     <div className='customer-data signin-btn'>
                         
                         {adminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello Admin</div>)}
-                        {companyAdminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {companyName}</div>)}
+                        {companyAdminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello</div>)}
                         {customer != null && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {customer.name}</div>)}
 
                         <div className={showAccountOptions ? "account-options" : "account-options-active"}

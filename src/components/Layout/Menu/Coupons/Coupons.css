@@ -1,0 +1,37 @@
+.coupons{
+    width: 80%;
+}
+
+.coupons > table ,
+.coupons > table > tr > th,
+.coupons > table > tr > td {
+    
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+}
+
+.coupons > table , .coupons > table > tr{
+    width: 100%;
+margin-left: 150px;}
+
+.coupons > table > tr > th,
+.coupons > table > tr > td {
+    width: 20%;
+}
+
+.add-coupons-button{
+    width: 170px;
+  height: 50px;
+ color: #009688;
+  border-radius: 20px;
+  box-shadow: inset 0px 0px 25px 0px #c0c0c0;
+  border: none;
+  outline: none;
+  background-color: hsla(0, 0%, 100%, 0.909);
+  margin: 3% 2%;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
