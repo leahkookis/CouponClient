@@ -9,7 +9,7 @@ import CouponsConrainer from "./couponsContainer/CouponsContainer";
 import Main from "./Main/Main";
 
 
-import Companies from "./Companies/Companies";
+import Companies from "./Menu/Companies/Companies";
 import Users from "./Menu/Users/Users";
 import CartShop from "../cartShop/cartShop";
 import { useEffect } from "react";
@@ -54,6 +54,7 @@ function Layout() {
                         <Route path="/cart" element={<CartShop/>}/>
                         <Route path="/admin/users" element={<Users />} />
                         <Route path="/admin/purchases" element={<Purchases />} />
+                        <Route path="/admin/companies" element={<Companies />} />
                         
 
                     </Routes>

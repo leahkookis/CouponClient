@@ -23,8 +23,8 @@ function CartShop() {
         try {
             let url = `http://localhost:8080/purchase/bycustomer?customerid=${customer.id}`;
             let customerPurchase = await axios.get(url);
-            let purchaseData = customerPurchase.data;
-            dispatch({ type: ActionType.GetPurchase, payload: { purchaseData: purchaseData } })
+            let response = customerPurchase.data;
+            dispatch({ type: ActionType.GetPurchase, payload: { purchaseData: response } })
         } catch (error) {
             alert("something...");
 

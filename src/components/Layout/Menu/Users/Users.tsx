@@ -8,7 +8,7 @@ import User from "./User/User";
 import "./Users.css";
 import Modal from 'react-modal';
 import ConfirmationModal from "../../../ConfirmationModal/ConfirmationModal";
-import Company from "../../../company/Company";
+import Company from "../Companies/company/Company";
 
 
 const customStyles = {

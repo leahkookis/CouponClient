@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import IUserData from "../../../../../models/IUserData";
 import axios from "axios";
-import Companies from "../../../Companies/Companies";
+import Companies from "../../Companies/Companies";
 import { ModifierFlags } from "typescript";
 import Modal from 'react-modal';
 import { ActionType } from "../../../../../redux/action-types";

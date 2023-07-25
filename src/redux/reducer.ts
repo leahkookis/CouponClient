@@ -36,6 +36,9 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.SendPurchaseToBuy:
             newAppState.sendPurchaseToBuy.push(action.payload.purchaseId);
             break;
+            case ActionType.AddCompanies:
+            newAppState.companiesData.push(action.payload.newCompany);
+            break;
         case ActionType.GetUsers:
             newAppState.users = action.payload.response;
             break;
@@ -51,13 +54,14 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
             break;
         case
             ActionType.RemoveIndex:
-         
+            debugger
+            if(action.payload.nameOfList==("users")) {
             const idToRemove = action.payload.id;
             const updatedUsers = oldAppState.users.filter((element: IUserData) => element.id !== idToRemove);
-            newAppState.users = updatedUsers;
+            newAppState.users = updatedUsers;}
+            
             break;
-
-        //if(action.payload.list.equals("users")) {
+        
 
 
 

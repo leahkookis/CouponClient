@@ -9,7 +9,7 @@ import { AppState } from '../../../redux/app-state';
 import ICustomerData from '../../../models/ICustomerData';
 import cart from "../../images/cart.png"
 import axios from 'axios';
-import Companies from '../Companies/Companies';
+import Companies from '../Menu/Companies/Companies';
 
 
 function Header() {
