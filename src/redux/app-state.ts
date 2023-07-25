@@ -17,4 +17,5 @@ public sendPurchaseToBuy : number[] = [];
 public companiesData: ICompanyData[] = [];
 public categories: any[]=[];
 public token:ISuccessfulLoginData = {id: 0, userType: "", companyId: 0}
+public removeIndex = {index: 0, nameOfList:""}
 }

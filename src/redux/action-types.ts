@@ -11,5 +11,6 @@ export enum ActionType {
   SendPurchaseToBuy,
   GetCategories,
   RemoveDecryptedToken,
-  SaveDecryptedToken
+  SaveDecryptedToken,
+  RemoveIndex
 }

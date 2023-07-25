@@ -1,3 +1,5 @@
+import Users from "../components/Layout/Menu/Users/Users";
+import IUserData from "../models/IUserData";
 import { Action } from "./action";
 import { ActionType } from "./action-types";
 import { AppState } from "./app-state";
@@ -10,7 +12,7 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.GetCoupons:
             newAppState.coupons = action.payload.response;
             break;
-            case ActionType.GetCompanies:
+        case ActionType.GetCompanies:
             newAppState.companiesData = action.payload.response;
             break;
         case ActionType.LoginData:
@@ -34,21 +36,36 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.SendPurchaseToBuy:
             newAppState.sendPurchaseToBuy.push(action.payload.purchaseId);
             break;
-            case ActionType.GetUsers:
-                newAppState.users = action.payload.response;
-                break;
-
-                case ActionType.GetCategories:
-                    newAppState.categories = action.payload.response;
-                    break;
-                    case ActionType.RemoveDecryptedToken:
-            newAppState.token = {id: 0, userType: "", companyId: 0};
+        case ActionType.GetUsers:
+            newAppState.users = action.payload.response;
             break;
-            case ActionType.SaveDecryptedToken:
-                newAppState.token = action.payload.decodedToken;
-                break;
+
+        case ActionType.GetCategories:
+            newAppState.categories = action.payload.response;
+            break;
+        case ActionType.RemoveDecryptedToken:
+            newAppState.token = { id: 0, userType: "", companyId: 0 };
+            break;
+        case ActionType.SaveDecryptedToken:
+            newAppState.token = action.payload.decodedToken;
+            break;
+        case
+            ActionType.RemoveIndex:
+         
+            const idToRemove = action.payload.id;
+            const updatedUsers = oldAppState.users.filter((element: IUserData) => element.id !== idToRemove);
+            newAppState.users = updatedUsers;
+            break;
+
+        //if(action.payload.list.equals("users")) {
+
+
+
+
 
     }
 
     return newAppState;
 }
+
+

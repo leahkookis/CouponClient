@@ -7,6 +7,8 @@ import { ActionType } from "../../../../redux/action-types";
 import User from "./User/User";
 import "./Users.css";
 import Modal from 'react-modal';
+import ConfirmationModal from "../../../ConfirmationModal/ConfirmationModal";
+import Company from "../../../company/Company";
 
 
 const customStyles = {
@@ -25,15 +27,17 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function Users() {
+
+  let companies= useSelector((state: AppState)=> state.companiesData)
   const [id, setId] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("admin");
   const [companyName, setCompanyName] = useState("");
   const [companyId, setCompanyId] = useState(0);
-  let [usersList, setUsersList] = useState<IUserData[]>([]);
+  let usersList: IUserData[] = useSelector((state: AppState)=> state.users)
   let [pageNumber, setPageNumber] = useState(1);
-  let companies= useSelector((state: AppState)=> state.companiesData)
+  
     const [modalIsOpen, setIsOpen] = useState(false);
     const [text, setText] = useState("");
     let dispatch = useDispatch();
@@ -51,9 +55,10 @@ function Users() {
   async function getUsersByPage(pageNumber: number) {
     try {
       let url = `http://localhost:8080/users?page=${pageNumber}`;
-      let response = await axios.get(url);
-      let users = response.data;
-      setUsersList(users);
+      let response1 = await axios.get(url);
+      let response = response1.data;
+
+      dispatch({ type: ActionType.GetUsers, payload: { response } });
     } catch (e) {
       console.error(e);
       alert("Failed to retrieve users");
@@ -84,6 +89,16 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
     }
         try {
             const response = await axios.post("http://localhost:8080/users", user)
+            closeModal()
+            let newUser: IUserData = {
+              id: response?.data,
+              userName: userName,
+              password: password,
+              userType: userType
+
+            }
+            usersList.push(newUser);
+            setAddUserOpen(true);
         }
         catch (e: any) {
             console.error(e);
@@ -113,6 +128,15 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
     const selectedCompany = +event.target.value;
     setCompanyId(selectedCompany);
 };
+
+
+
+let [addUserOpen, setAddUserOpen]=useState(false);
+
+function closeAddUserOpen(){
+  setAddUserOpen(false);
+}
+
 
   return (
     <div>
@@ -162,14 +186,24 @@ async function getAllCompanies(pageNumber: number, amountOfPage: number){
           <th>Company</th>
           <th>Edit</th>
           <th>Remove</th>
+          <th>Customer details</th>
         </tr>
         
-        {usersList.map((user) => (
+        {usersList.map((user,index) => (
           <User id={user.id} password={user.password} userName={user.userName} userType={user.userType}  companyName={user.companyName}/>
         ))}
        
       </table>
     </div>
+    <Modal
+                className="modal"
+                isOpen={addUserOpen}
+                onRequestClose={closeAddUserOpen}
+                >
+                <ConfirmationModal title="Success!!" massage={"User added successfully." }  closeModel={() => closeAddUserOpen()}/>
+              </Modal>
+              
+        
     </div>
   );
 }
