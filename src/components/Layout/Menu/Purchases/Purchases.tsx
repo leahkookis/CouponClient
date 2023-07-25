@@ -5,8 +5,9 @@ import Modal from 'react-modal';
 import { ActionType } from '../../../../redux/action-types';
 import { AppState } from '../../../../redux/app-state';
 import IPurchaseData from '../../../../models/IPurchaseData';
-import PurchaseCard from '../../../purchaseCard/PurchaseCard';
-import Purchase from '../../../purchaseCard/PurchaseCard';
+import Purchase from './Purchase';
+import "./Purchases.css";
+
 
 const customStyles = {
   content: {
@@ -24,7 +25,8 @@ Modal.setAppElement('#root');
 const Purchases: React.FC = () => {
   const [id, setId] = useState('');
   const [name, setName] = useState('');
-  const [couponName, setCouponName] = useState('');
+  const [couponName, setCouponName] = useState('');  
+  const [couponPrice, setCouponPrice] = useState(0);
   const [categoryName, setCategoryName] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyId, setCompanyId] = useState(1);
@@ -134,7 +136,7 @@ const Purchases: React.FC = () => {
         </div>
       </Modal>
 
-      <div className="users">
+      <div className="purchases">
   <table>
     <thead>
       <tr>

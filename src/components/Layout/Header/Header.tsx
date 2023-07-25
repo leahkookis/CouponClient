@@ -71,11 +71,11 @@ function Header() {
             <div className='header-navigation header-wrapper'>
                 <input className='header-nav search' type="text" placeholder='Search' onChange={event => sendSearchText(event.target.value)} />
                 <Link className='cate' to="/"><button onClick={() => getAllCoupons(pageNumber,amountOfPage) } className='header-nav'>Home</button></Link>
-                <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Movies</button></Link>
+                <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Massage</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(2)} className='header-nav'>Food</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(3)} className='header-nav'>Hotels</button></Link>
-                <Link to="/"><button onClick={() => getCouponsByCategory(4)} className='header-nav'>Flights</button></Link>
-                <Link className='cats'to="/"><button onClick={() => getCouponsByCategory(5)} className='header-nav'>Massage</button></Link>
+                <Link to="/"><button onClick={() => getCouponsByCategory(4)} className='header-nav'>Movies</button></Link>
+                <Link className='cats'to="/"><button onClick={() => getCouponsByCategory(5)} className='header-nav'>Flights</button></Link>
 
                 {loginData == null && (
                     <Link to="/login"><button className='header-nav signin-btn'>Sign In</button></Link>)}

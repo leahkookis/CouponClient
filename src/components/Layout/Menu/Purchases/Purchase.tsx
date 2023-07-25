@@ -17,6 +17,7 @@ function User(props: IPurchaseData) {
     const [couponName, setCouponName] = useState('');
     const [categoryName, setCategoryName] = useState('');
     const [companyName, setCompanyName] = useState('');
+    const [couponPrice, setCouponPrice] = useState(0);
     const [companyId, setCompanyId] = useState(1);
     const [categoryId, setCategoryId] = useState(1);
     const [amount, setAmount] = useState(0);
@@ -78,6 +79,7 @@ function User(props: IPurchaseData) {
        
                 <tr >
                     {!editClicked && <td>{props.name}</td>}
+                    {!editClicked && <td>{props.couponPrice}</td>}
                     {!editClicked && <td>{props.couponName}</td>}
                     {!editClicked && <td>{props.categoryName}</td>}  
                     {!editClicked && <td>{props.companyName}</td>}                  
@@ -89,6 +91,15 @@ function User(props: IPurchaseData) {
             type="text"
             defaultValue={name}
             onChange={(event) => setName(event.target.value)}
+          />
+        </td>
+      )}
+      {editClicked && (
+        <td>
+          <input
+            type="text"
+            defaultValue={couponPrice}
+            onChange={(event) => setCouponPrice(+event.target.value)}
           />
         </td>
       )}
@@ -120,20 +131,14 @@ function User(props: IPurchaseData) {
         </td>
         
       )}
-        <td>
+        {/* <td>
           <input
             type="text"
             defaultValue={amount}
             onChange={(event) => setAmount(+event.target.value)}
           />
-        </td>
-          <td>
-          <input
-            type="date"
-            defaultValue={timeStamp}
-            onChange={(event) => setTimeStamp(event.target.value)}
-          />
-        </td>
+        </td> */}
+        
       <td>
         {editClicked ? (
           <div className="edit-buttons-container">
@@ -145,13 +150,13 @@ function User(props: IPurchaseData) {
                 onRequestClose={closeSaveEditDetailsModalIsOpen}
                 contentLabel="Save edited details"
               >
-                {/* <ConfirmationModal message={"Are you sure you want to save?"} action={() => null} closeModel={() => closeSaveEditDetailsModalIsOpen()}/> */}
+            {/* //    <ConfirmationModal message={"Are you sure you want to save?"} action={() => null} closeModel={() => closeSaveEditDetailsModalIsOpen()}/> */}
               </Modal>
             <button
               className="edit-button"
               onClick={() => setEditClicked(!editClicked)}
             >
-              {/* <FaRegWindowClose className="icon" /> */}
+             {/* <FaRegWindowClose className="icon" /> */}
             </button>
           </div>
         ) : (
@@ -175,14 +180,14 @@ function User(props: IPurchaseData) {
           
         </div>
       </td>
-      <td>
+      {/* <td>
         {companyName == "CUSTOMER" && (
           <div className="edit-buttons-container">
             <button
               className="edit-button"
               onClick={openCustomerDetailsModalIsOpen}
             >
-              {/* <TbListDetails className="icon" /> */}
+              <TbListDetails className="icon" />
             </button>
             <Modal
                 className="modal"
@@ -190,11 +195,11 @@ function User(props: IPurchaseData) {
                 onRequestClose={closeCustomerDetailsModalIsOpen}
                 contentLabel="Customer details"
               >
-                {/* <CustomerDetailsModal customerId={id} closeModel={() => closeCustomerDetailsModalIsOpen()}/> */}
+                <CustomerDetailsModal customerId={id} closeModel={() => closeCustomerDetailsModalIsOpen()}/>
               </Modal>
           </div>
         )}
-      </td>
+      </td> */}
     </tr>
                 
 );

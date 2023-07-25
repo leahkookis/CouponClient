@@ -31,7 +31,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
-function Purchase(props: IPurchaseData) {
+function PurchaseCard(props: IPurchaseData) {
     let loginData = useSelector((state: AppState) => state.loginData)
 
     const navigate = useNavigate();
@@ -74,4 +74,4 @@ function Purchase(props: IPurchaseData) {
     )
 }
 
-export default Purchase;
+export default PurchaseCard;
