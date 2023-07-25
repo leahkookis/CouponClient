@@ -34,7 +34,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function Company(props: ICompanyData) {
-    let loginData = useSelector((state: AppState) => state.loginData)
+    let loginData = useSelector((state: AppState) => state.token)
     const [id, setId] = useState(props.id);
     const [name, setName] = useState(props.name);
     const [address, setAddress] = useState(props.address);
@@ -110,12 +110,13 @@ function Company(props: ICompanyData) {
   function openSaveEditDetailsModalIsOpen() {
     
     setSaveEditDetailsModalIsOpen(true);
-    closeEditMode()
+    
     
   }
 
   const closeSaveEditDetailsModalIsOpen = () => {
     setSaveEditDetailsModalIsOpen(false);
+    closeEditMode()
   };
 
 
@@ -202,7 +203,7 @@ function Company(props: ICompanyData) {
             </Modal>
         </div>
       </td>
-      <td>
+      {/*<td>
         
           <div className="edit-buttons-container">
             <button
@@ -221,7 +222,7 @@ function Company(props: ICompanyData) {
               </Modal>
           </div>
         
-      </td> 
+        </td> */}
     </tr>
 
   );

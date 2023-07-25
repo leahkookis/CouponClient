@@ -35,7 +35,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function Coupon(props: ICouponsData) {
-    let loginData = useSelector((state: AppState) => state.loginData)
+    let loginData = useSelector((state: AppState) => state.token)
     let categoriesData = useSelector((state: AppState) => state.categories)
     function editCoupon() {
         setEditAble(true);

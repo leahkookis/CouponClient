@@ -27,7 +27,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function Users() {
-
+  let loginData = useSelector((state: AppState) => state.token)
   let companies= useSelector((state: AppState)=> state.companiesData)
   const [id, setId] = useState("");
   const [userName, setUserName] = useState("");

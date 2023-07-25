@@ -8,7 +8,7 @@ import Menu from "../Menu/Menu";
 
 
 function Main() {
-    let loginData = useSelector((state: AppState) => state.loginData)
+    let loginData = useSelector((state: AppState) => state.token)
     return (
         <div>
               

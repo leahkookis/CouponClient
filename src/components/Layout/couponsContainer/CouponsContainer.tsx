@@ -14,6 +14,7 @@ function CouponsContainer(){
      let[pageNumber, setPageNumber]  = useState(1);
      let amountOfPage: number = 5;
      let dispatch = useDispatch();
+     
      useEffect(()=> {
         getAllCoupons(pageNumber,amountOfPage)
         getAllCategories()

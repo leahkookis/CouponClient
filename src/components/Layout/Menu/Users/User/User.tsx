@@ -55,7 +55,7 @@ function User(props: IUserData) {
     let user = {id, userName, password, userType };
     try {
       let response = await axios.put("http://localhost:8080/users", user);
-      closeEditMode();
+      
       openSaveEditDetailsModalIsOpen();
     } catch (e: any) {
       if (e.response?.data?.errorMessage) {
@@ -94,6 +94,7 @@ function User(props: IUserData) {
 
   const closeSaveEditDetailsModalIsOpen = () => {
     setSaveEditDetailsModalIsOpen(false);
+    closeEditMode()
   };
 
 
@@ -147,7 +148,7 @@ function User(props: IUserData) {
             </Modal>
             <button
               className="edit-button"
-              onClick={() => setEditClicked(!editClicked)}
+              onClick={() => setEditClicked(false)}
             >
               Cancel
             </button>
@@ -157,7 +158,7 @@ function User(props: IUserData) {
             <button
 
               className="edit-button"
-              onClick={() => setEditClicked(!editClicked)}
+              onClick={() => setEditClicked(true)}
             > edit
             </button>
           </div>
@@ -166,6 +167,7 @@ function User(props: IUserData) {
       <td>
         <div className="edit-buttons-container">
           <button
+          disabled={userType=="customer"}
             className="edit-button"
             onClick={() => removeUser()}
           > remove

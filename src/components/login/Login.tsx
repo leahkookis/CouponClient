@@ -29,10 +29,11 @@ function Login() {
       console.log(" Decoded: ", successfullLoginResponse)
       axios.defaults.headers.common['Authorization'] =  token;
       navigate("/");
+      let decryptedToken: ISuccessfulLoginData = successfullLoginResponse;
       sessionStorage.setItem("token", token);
       dispatch({
         type: ActionType.SaveDecryptedToken,
-        payload: { successfullLoginResponse },
+        payload: { decryptedToken },
       });
 
       if(successfullLoginResponse.userType=='customer'){

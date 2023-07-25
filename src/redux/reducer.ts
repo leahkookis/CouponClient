@@ -18,7 +18,7 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
             newAppState.companiesData = action.payload.response;
             break;
         case ActionType.LoginData:
-            newAppState.loginData = action.payload.loginData;
+            newAppState.token = action.payload.loginData;
             break;
         case ActionType.SendSearchText:
             newAppState.sendSearchText = action.payload.subText;
@@ -48,12 +48,12 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
         case ActionType.GetCategories:
             newAppState.categories = action.payload.response;
             break;
-        case ActionType.RemoveDecryptedToken:
-            newAppState.token = { id: 0, userType: "", companyId: 0 };
-            break;
-        case ActionType.SaveDecryptedToken:
-            newAppState.token = action.payload.decodedToken;
-            break;
+            case ActionType.SaveDecryptedToken:
+                newAppState.token = action.payload.decryptedToken;
+                break;
+            case ActionType.RemoveDecryptedToken:
+                newAppState.token = undefined;
+                break;
         case
             ActionType.RemoveIndex:
             
@@ -65,12 +65,12 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
             if (action.payload.nameOfList == "company") {
                 const idToRemove = action.payload.id;
                 const updatedList = oldAppState.companiesData.filter((element: ICompanyData) => element.id !== idToRemove);
-                newAppState.users = updatedList;
+                newAppState.companiesData = updatedList;
             }
             if (action.payload.nameOfList == "purchases") {
                 const idToRemove = action.payload.id;
                 const updatedList = oldAppState.purchases.filter((element: IPurchaseData) => element.id !== idToRemove);
-                newAppState.users = updatedList;
+                newAppState.purchases = updatedList;
             }
             break;
 

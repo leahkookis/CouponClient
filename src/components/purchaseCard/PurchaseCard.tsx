@@ -11,6 +11,7 @@ import IPurchaseData from "../../models/IPurchaseData";
 import { AppState } from "../../redux/app-state";
 import { ActionType } from "../../redux/action-types";
 import { choices } from "yargs";
+import ICouponsData from "../../models/ICouponsData";
 
 
 
@@ -32,13 +33,11 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function PurchaseCard(props: IPurchaseData) {
-    let loginData = useSelector((state: AppState) => state.loginData)
-
+    let loginData = useSelector((state: AppState) => state.token)
+    let coupons:ICouponsData[] = useSelector((state: AppState) => state.coupons)
     const navigate = useNavigate();
     let dispatch = useDispatch();
-    let coupon = props;
-    let customer = useSelector((state: AppState) => state.customerData)
-    let timeStamp = "2024-02-02T00:00:00.000+00:00";
+    let thisCoupon = coupons.filter(c=>c.name == props.couponName)[0];
     
     
     
@@ -52,7 +51,7 @@ function PurchaseCard(props: IPurchaseData) {
     return (
         <div className="purchase-card">
            
-            <img className="img-purchase" src="https://www.photo-art.co.il/wp-content/uploads/2017/09/IMG_9006.jpg"></img>
+            <img className="img-purchase" src={thisCoupon.url}></img>
             <div className="details-pur">
                 <div className="purchase-name">
                     {props.companyName}

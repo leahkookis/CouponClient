@@ -23,15 +23,20 @@ import SuccessBuyCoupon from "../SuccessBuyCoupon/SuccessBuyCoupon";
 
 function Layout() {
     let dispatch = useDispatch();
-    useEffect(() => {
+    
+
+      useEffect(() => {
         const token = sessionStorage.getItem("token");
-        if (token != null) {
-            let decodedToken: any = jwt_decode(token)
-            let strSuccessfullLoginResponse: string = decodedToken.sub
-            let successfullLoginResponse: ISuccessfulLoginData = JSON.parse(strSuccessfullLoginResponse);
+        axios.defaults.headers.common["Authorization"] = token;
+        if (token!==null) {
+          let decodedToken: any = jwt_decode(token);
+          let strSuccessfulLoginResponse: string = decodedToken.sub;
+          let decryptedToken: ISuccessfulLoginData = JSON.parse(
+            strSuccessfulLoginResponse
+          );
           dispatch({
             type: ActionType.SaveDecryptedToken,
-            payload: { successfullLoginResponse },
+            payload: { decryptedToken },
           });
           axios.defaults.headers.common["Authorization"] = token;
         }

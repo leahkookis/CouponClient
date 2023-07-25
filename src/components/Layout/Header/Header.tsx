@@ -10,11 +10,13 @@ import ICustomerData from '../../../models/ICustomerData';
 import cart from "../../images/cart.png"
 import axios from 'axios';
 import Companies from '../Menu/Companies/Companies';
+import ICategory from '../../../models/ICategory';
 
 
 function Header() {
     let navigate = useNavigate();
-    let loginData = useSelector((state: AppState) => state.loginData)
+    let loginData = useSelector((state: AppState) => state.token)
+    
     let customer = useSelector((state: AppState) => state.customerData)
     let coupons = useSelector((state: AppState) => state.coupons)
     let dispatch = useDispatch();
@@ -28,7 +30,9 @@ function Header() {
     function logout() {
         sessionStorage.removeItem("token");
         dispatch({ type: ActionType.RemoveDecryptedToken });
+        navigate("/");
         window.location.reload();
+       
         getAllCoupons(1,amountOfPage)
     }
 

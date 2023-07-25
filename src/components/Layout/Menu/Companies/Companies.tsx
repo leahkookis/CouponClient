@@ -26,6 +26,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 function Companies() {
+    let loginData = useSelector((state: AppState) => state.token)
     let companiesList: ICompanyData[] = useSelector((state: AppState) => state.companiesData)
     const [id, setId] = useState("");
     const [name, setName] = useState("");
@@ -146,7 +147,7 @@ function Companies() {
                         <th>Phone Number</th>
                         <th>Edit</th>
                         <th>Remove</th>
-                        <th>Admin details</th>
+                        
                     </tr>
 
                     {companiesList.map((company, index) => (

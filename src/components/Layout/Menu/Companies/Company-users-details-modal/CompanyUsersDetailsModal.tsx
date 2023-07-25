@@ -22,7 +22,7 @@ function CompanyUsersDetailsModal(props: ICompanyUsersDetailsModal) {
 
   async function getUsersByCompany() {
     try {
-      let url = `http://localhost:8080/users/bycompany${props.companyId}`;
+      let url = `http://localhost:8080/users/bycompany?companyid=${props.companyId}`;
       let response = await axios.get(url);
       companyUsers = response.data;
     } catch (e) {

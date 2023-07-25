@@ -45,7 +45,7 @@ function User(props: IPurchaseData) {
     try {
       let url = `http://localhost:8080/purchase/${id}`;
       let response = await axios.delete(url);
-      debugger;
+     
       dispatch({ type: ActionType.RemoveIndex, payload: { id:id, nameOfList:"purchases" } });
 
     } catch (e: any) {
