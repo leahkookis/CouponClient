@@ -1,5 +1,6 @@
 import Users from "../components/Layout/Menu/Users/Users";
 import ICompanyData from "../models/ICompanyData";
+import ICouponsData from "../models/ICouponsData";
 import IPurchaseData from "../models/IPurchaseData";
 import IUserData from "../models/IUserData";
 import { Action } from "./action";
@@ -71,6 +72,11 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
                 const idToRemove = action.payload.id;
                 const updatedList = oldAppState.purchases.filter((element: IPurchaseData) => element.id !== idToRemove);
                 newAppState.purchases = updatedList;
+            }
+            if (action.payload.nameOfList == "coupons") {
+                const idToRemove = action.payload.id;
+                const updatedList = oldAppState.coupons.filter((element: ICouponsData) => element.id !== idToRemove);
+                newAppState.coupons = updatedList;
             }
             break;
 
