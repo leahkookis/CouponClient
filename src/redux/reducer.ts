@@ -1,4 +1,6 @@
 import Users from "../components/Layout/Menu/Users/Users";
+import ICompanyData from "../models/ICompanyData";
+import IPurchaseData from "../models/IPurchaseData";
 import IUserData from "../models/IUserData";
 import { Action } from "./action";
 import { ActionType } from "./action-types";
@@ -31,7 +33,7 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
             newAppState.buyNow = action.payload.countOfBuyProduct;
             break;
         case ActionType.GetPurchase:
-            newAppState.purchaseData = action.payload.purchaseData;
+            newAppState.purchases = action.payload.response;
             break;
         case ActionType.SendPurchaseToBuy:
             newAppState.sendPurchaseToBuy.push(action.payload.purchaseId);
@@ -54,14 +56,25 @@ export function reduce(oldAppState: AppState = new AppState(), action: Action): 
             break;
         case
             ActionType.RemoveIndex:
-            debugger
-            if(action.payload.nameOfList==("users")) {
-            const idToRemove = action.payload.id;
-            const updatedUsers = oldAppState.users.filter((element: IUserData) => element.id !== idToRemove);
-            newAppState.users = updatedUsers;}
             
+            if (action.payload.nameOfList == "users") {
+                const idToRemove = action.payload.id;
+                const updatedList = oldAppState.users.filter((element: IUserData) => element.id !== idToRemove);
+                newAppState.users = updatedList;
+            }
+            if (action.payload.nameOfList == "company") {
+                const idToRemove = action.payload.id;
+                const updatedList = oldAppState.companiesData.filter((element: ICompanyData) => element.id !== idToRemove);
+                newAppState.users = updatedList;
+            }
+            if (action.payload.nameOfList == "purchases") {
+                const idToRemove = action.payload.id;
+                const updatedList = oldAppState.purchases.filter((element: IPurchaseData) => element.id !== idToRemove);
+                newAppState.users = updatedList;
+            }
             break;
-        
+
+
 
 
 

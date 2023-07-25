@@ -1,23 +1,32 @@
-.users{
+.purchases{
     width: 80%;
 }
 
-.users > table ,
-.users > table > tr > th,
-.users > table > tr > td {
+.purchases > table ,
+.purchases > table > tr > th,
+.purchases > table > tr > td {
     
     border: 2px solid black;
     border-collapse: collapse;
     padding: 15px;
 }
 
-.users > table , .users > table > tr{
+.purchases > table , .users > table > tr{
     width: 100%;
 margin-left: 150px;}
 
-.users > table > tr > th,
-.users > table > tr > td {
+.purchases > table > tr > th,
+.purchases > table > tr > td {
     width: 20%;
+}
+th{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 15px;  
+}
+
+table{
+    margin-top: 5%;
 }
 
 .add-user-button{
