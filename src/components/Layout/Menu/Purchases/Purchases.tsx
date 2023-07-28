@@ -6,8 +6,8 @@ import { ActionType } from '../../../../redux/action-types';
 import { AppState } from '../../../../redux/app-state';
 import IPurchaseData from '../../../../models/IPurchaseData';
 import Purchase from './Purchase';
-import "./Purchases.css";
 import ICompanyData from '../../../../models/ICompanyData';
+
 
 
 const customStyles = {
@@ -36,7 +36,7 @@ const Purchases: React.FC = () => {
   const [timeStamp, setTimeStamp] = useState('');
   const purchaseList: IPurchaseData[] = useSelector((state: AppState) => state.purchases);
   const [pageNumber, setPageNumber] = useState(1);
-  const companies :ICompanyData[] = useSelector((state: AppState) => state.companiesData);
+  const companies: ICompanyData[] = useSelector((state: AppState) => state.companiesData);
   const categories = useSelector((state: AppState) => state.categories);
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -97,46 +97,10 @@ const Purchases: React.FC = () => {
   };
 
   return (
-    <div>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div>
-          <label>Name: </label>
-          <input type="text" onChange={(event) => setName(event.target.value)} />
-          <label>Coupon Name </label>
-          <input type="text" onChange={(event) => setCouponName(event.target.value)} />
-        </div>
-        <div>
-          <label>Company Name: </label>
-          <select id="companies" onChange={handleCompanySelectChange}>
-            {companies.map((company, index) => (
-              <option value={company.id}>{company.name}</option>
-            ))}
-            <option value="none">none</option>
-          </select>
-        </div>
-        <div>
-          <label>Category Name: </label>
-          <select id="categories" onChange={handleCategorySelectChange}>
-            {categories.map((category, index) => (
-              <option value={category.id}>{category.name}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Amount: </label>
-          <input type="text" onChange={(event) => setAmount(+event.target.value)} />
-          <label>Time: </label>
-          <input type="text" onChange={(event) => setTimeStamp(event.target.value)} />
-        </div>
-      </Modal>
+    <div className='padding-top'>
 
-      <div className="purchases">
+
+      <div className="users">
   <table>
     <thead>
       <tr>
@@ -146,7 +110,7 @@ const Purchases: React.FC = () => {
         <th>Category Name</th>
         <th>Company Name</th>
         <th>Amount</th>
-        <th>Timestamp</th>
+        <th>Date</th>
         <th>Remove</th>
       </tr>
     </thead>

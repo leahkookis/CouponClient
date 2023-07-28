@@ -12,8 +12,11 @@ import IPurchaseData from "../../../../../models/IPurchaseData";
 import ICustomerData from "../../../../../models/ICustomerData";
 import { ActionType } from "../../../../../redux/action-types";
 import ICompanyData from "../../../../../models/ICompanyData";
-import ConfirmationModal from "../../../../ConfirmationModal/ConfirmationModal";
+
 import CompanyUsersDetailsModal from "../Company-users-details-modal/CompanyUsersDetailsModal";
+import UpdateModal from "../../../../ConfirmationModals/UpdateModal";
+import { MDBBtn, MDBIcon, MDBInput, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader, MDBModalTitle } from "mdb-react-ui-kit";
+import DeleteModal from "../../../../ConfirmationModals/DeleteModal";
 
 
 
@@ -56,7 +59,7 @@ function Company(props: ICompanyData) {
     try {
       let url = `http://localhost:8080/company/${id}`;
       let response = await axios.delete(url);
-      openRemoveCompanyModalIsOpen();
+      setRemoveCompanyModalIsOpen(true);
       dispatch({ type: ActionType.RemoveIndex, payload: { id:id, nameOfList:"company" } });
     } catch (e: any) {
       if (e.response?.data?.errorMessage) {
@@ -130,7 +133,7 @@ function Company(props: ICompanyData) {
       {!editClicked && <td>{phoneNumber}</td>}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Name'
             type="text"
             defaultValue={""+name}
             onChange={(event) => setName(event.target.value)}
@@ -139,7 +142,7 @@ function Company(props: ICompanyData) {
       )}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Address'
             type="text"
             defaultValue={""+address}
             onChange={(event) => setAddress(event.target.value)}
@@ -148,7 +151,7 @@ function Company(props: ICompanyData) {
       )}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Phone Number'
             type="text"
             defaultValue={""+phoneNumber}
             onChange={(event) => setPhoneNumber(event.target.value)}
@@ -156,73 +159,61 @@ function Company(props: ICompanyData) {
         </td>
       )}
       <td>
-        {editClicked ? (
-          <div className="edit-buttons-container">
-            <button className="save-button" onClick={()=>updateCompany()}>Save
+      {editClicked ?(<div className="edit-buttons-container">
+            <button className="btbt" onClick={() => updateCompany()}><MDBIcon  fas icon="paper-plane" />
             </button>
-            <Modal
-              className="modal"
-              isOpen={saveEditDetailsModalIsOpen}
-              onRequestClose={closeSaveEditDetailsModalIsOpen}
-              contentLabel="Save edited details"
+
+            <button className="btbt"
+
+              onClick={() => setEditClicked(false)}
             >
-               <ConfirmationModal title="Success!!" massage={"Company details update successfuly."} closeModel={() => closeSaveEditDetailsModalIsOpen()}/>
-            </Modal>
-            <button
-              className="edit-button"
-              onClick={() => closeEditMode()}
-            >
-              Cancel
+              <MDBIcon fas icon="ban" />
             </button>
+            <MDBModal show={saveEditDetailsModalIsOpen} setShow={setSaveEditDetailsModalIsOpen} tabIndex='-1'>
+
+              <UpdateModal title="Success!!" massage={"Company details update successfuly."} closeModel={() => closeSaveEditDetailsModalIsOpen()} />
+
+            </MDBModal>
           </div>
         ) : (
           <div className="edit-buttons-container">
-            <button
-
-              className="edit-button"
+            <button className="btbt" 
               onClick={() => setEditClicked(true)}
-            > Edit
+            > <MDBIcon far icon="edit" />
             </button>
-          </div>
-        )}
-      </td>
-      <td>
-        <div className="edit-buttons-container">
-          <button
-            className="edit-button"
-            onClick={() => removeCompany()}
-          > remove
-          </button>
-          <Modal
-              className="modal"
-              isOpen={removeCompanyModalIsOpen}
-              onRequestClose={closeRemoveCompanyModalIsOpen}
-              contentLabel="Save edited details"
-            >
-               <ConfirmationModal title="Success!!" massage={"Company removed successfuly."} closeModel={() => closeRemoveCompanyModalIsOpen()}/>
-            </Modal>
-        </div>
-      </td>
-      {/*<td>
-        
-          <div className="edit-buttons-container">
-            <button
-              className="edit-button"
-              onClick={openUsersDetailsModalIsOpen}
-            >
-              Details
+            <button className="btbt " 
+              
+
+              onClick={() => removeCompany()}
+            > <MDBIcon fas icon="trash" />
             </button>
-            <Modal
-                className="modal"
-                isOpen={usersDetailsModalIsOpen}
-                onRequestClose={closeUsersDetailsModalIsOpen}
-                contentLabel="Customer details"
-              >
-                <CompanyUsersDetailsModal companyId={props.id} closeModel={() => closeUsersDetailsModalIsOpen()}/>
-              </Modal>
-          </div>
-        
-        </td> */}
+            </div>)}
+          <MDBModal
+              
+              show={removeCompanyModalIsOpen}
+              setShow={setRemoveCompanyModalIsOpen}
+              tabIndex='-1'
+            >
+               <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Success!!</MDBModalTitle>
+              <MDBBtn className='btn-close' color='none' onClick={closeRemoveCompanyModalIsOpen}></MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody>Company removed successfuly.</MDBModalBody>
+
+            <MDBModalFooter>
+              <MDBBtn color='secondary' onClick={closeRemoveCompanyModalIsOpen}>
+                Close
+              </MDBBtn>
+              
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+            </MDBModal>
+       
+      </td>
+      
     </tr>
 
   );

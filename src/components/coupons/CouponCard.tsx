@@ -13,7 +13,7 @@ import IPurchaseData from "../../models/IPurchaseData";
 
 import ICustomerData from "../../models/ICustomerData";
 import { ActionType } from "../../redux/action-types";
-import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import UpdateModal from "../ConfirmationModals/UpdateModal";
 import SuccessBuyCoupon from "../SuccessBuyCoupon/SuccessBuyCoupon";
 
 
@@ -205,25 +205,7 @@ function Coupon(props: ICouponsData) {
                         <img className="img-coupon-modal" src={props.url}></img>
 
 
-                        {editAble ? (<><label>Name: </label><input type="text" onChange={event => setName(event.target.value)} value={name}></input>
-                            <label>Price: </label><input type="text" onChange={event => setPrice(event.target.value)} value={price}></input>
-                            <label>Description: </label><input type="text" onChange={event => setDescription(event.target.value)} value={description}></input>
-                            <div className="drop-down-box">
-                                <label>Category: </label>
-                                <select
-                                    id="categories"
-                                    defaultValue={"" + props.categoryName}
-                                    onChange={handleCategorySelectChange}
-                                >
-                                    {categoriesData.map((category, index) => <option value={category.id}>{category.name}</option>)}
-
-                                </select>
-                            </div>
-                            <label>End Date: </label><input type="date" onChange={event => setEndDate(event.target.value)} value={endDate}></input>
-                            <label>Image URL </label><input type="text" onChange={event => setUrl(event.target.value)} value={url}></input></>) :
-
-
-                            (<><div className="coupon-name-modal">{props.name}</div><div className="fields">
+                   <><div className="coupon-name-modal">{props.name}</div><div className="fields">
                                 <strong>Price:</strong>{props.price} ILS
                             </div><div className="fields">
                                     <strong>About:</strong>  {props.description}
@@ -238,20 +220,17 @@ function Coupon(props: ICouponsData) {
                                     <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}>-</button>
                                 </div>
 
-                            </>)}
+                            </>
 
 
 
                     </div>
-                    {loginData?.userType != "admin" && (<div className="button-section">
+                   <div className="button-section">
                         <button className="button-modal" onClick={event => buyNow(props.id)}>Buy Now</button>
 
-                    </div>)}
+                    </div>
 
-                    {loginData?.userType == "admin" && (<div className="button-section">
-                        <button className="button-modal" onClick={e => setEditAble(true)}>Edit</button>
-                        <button className="button-modal" onClick={saveCoupon}>Save</button>
-                    </div>)}
+                 
                 </div>
             </Modal>
             <Modal

@@ -3,9 +3,10 @@
 }
 
 td {
-    border: 2px solid black;
-    border-collapse: collapse;
-    padding: 15px;
+    
+        border: 1px solid #009688;
+        padding: 10px;
+    
 
 }
 .user > td > .edit-buttons-container{
@@ -29,5 +30,13 @@ td {
 .user > td > .edit-buttons-container > .edit-button > .icon , .user > td > .edit-buttons-container > .save-button > .icon{
     height: 100%;
     width: 100%;
+}
+.btbt{
+    color: #009688;
+    border:none;
+    margin-right: 15px;
+}
+.padding-top{
+    padding-top: 60px;
 }
 

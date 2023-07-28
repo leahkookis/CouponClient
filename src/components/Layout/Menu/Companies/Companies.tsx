@@ -10,7 +10,9 @@ import Modal from 'react-modal';
 import './Companies.css';
 import ICompanyData from "../../../../models/ICompanyData";
 import Company from "./company/Company";
-import ConfirmationModal from "../../../ConfirmationModal/ConfirmationModal";
+import UpdateModal from "../../../ConfirmationModals/UpdateModal";
+import { MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBBtn, MDBModalBody, MDBInput, MDBModalFooter } from "mdb-react-ui-kit";
+
 const customStyles = {
     content: {
         top: '60%',
@@ -121,32 +123,43 @@ function Companies() {
             <button className="add-user-button" onClick={() => openCompanyModal()}>
                 add Company
             </button>
-            <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-                <div>
-                    <label>Company Name: </label>
-                    <input type="text" onChange={event => setName(event.target.value)}></input>
-                    <label>Address: </label><input type="text" onChange={event => setAddress(event.target.value)} ></input>
-                    <label>Phone Number: </label><input type="text" onChange={event => setPhoneNumber(event.target.value)} ></input>
-                </div>
-                
-                    <button onClick={() => addCompany()}>Save</button>
+            <MDBModal
+        show={modalIsOpen}
 
+        setShow={setIsOpen}
+
+
+      ><MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Add new company:</MDBModalTitle>
+              <MDBBtn className='btn-close' color='none' onClick={closeModal}></MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody>
+            
                 
-            </Modal>
+                <MDBInput label="Company name" className="form-label" type="text" onChange={event => setName(event.target.value)}/>
+                <MDBInput label="Address"className="form-label" type="text" onChange={event => setAddress(event.target.value)}/ >
+                <MDBInput label="Phone number" className="form-label"type="text" onChange={event => setPhoneNumber(event.target.value)}/ >
+      
+            </MDBModalBody>
+            <MDBModalFooter>
+              <MDBBtn color='secondary' onClick={addCompany}>
+                Save
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
+                
             <div className="users">
                 <table>
                     <tr>
                         <th>Company name</th>
                         <th>Address</th>
                         <th>Phone Number</th>
-                        <th>Edit</th>
-                        <th>Remove</th>
+                        <th>Actions</th>
+                     
                         
                     </tr>
 
@@ -156,13 +169,13 @@ function Companies() {
 
                 </table>
             </div>
-            <Modal
+            <MDBModal
                 className="modal"
-                isOpen={addCompanyOpen}
-                onRequestClose={closeAddCompanyOpen}
+                show={addCompanyOpen}
+                setShow={setAddCompanyOpen}
             >
-                <ConfirmationModal title="Success!!" massage={"Company added successfully."} closeModel={() => closeAddCompanyOpen()} />
-            </Modal>
+                <UpdateModal title="Success!!" massage={"Company added successfully."} closeModel={() => closeAddCompanyOpen()} />
+            </MDBModal>
 
 
         </div>

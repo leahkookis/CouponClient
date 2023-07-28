@@ -6,10 +6,11 @@ import { ModifierFlags } from "typescript";
 import Modal from 'react-modal';
 import { ActionType } from "../../../../../redux/action-types";
 import { useDispatch } from "react-redux";
-import "./Coupon.css";
-import ConfirmationModal from "../../../../ConfirmationModal/ConfirmationModal";
+
+import UpdateModal from "../../../../ConfirmationModals/UpdateModal";
 import CustomerDetailsModal from "../../customer-details-modal/CustomerDetailsModal";
 import ICouponsData from "../../../../../models/ICouponsData";
+import { MDBBtn, MDBIcon, MDBInput, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader, MDBModalTitle } from "mdb-react-ui-kit";
 
 
 Modal.setAppElement('#root');
@@ -46,7 +47,7 @@ function Coupon(props: ICouponsData) {
     try {
       let url = `http://localhost:8080/coupons/${id}`;
       let response = await axios.delete(url);
-      openRemoveCouponModalIsOpen();
+      setRemoveUserModalIsOpen(true);
       dispatch({ type: ActionType.RemoveIndex, payload: { id:id, nameOfList:"coupons" } });
     } catch (e: any) {
       if (e.response?.data?.errorMessage) {
@@ -118,10 +119,10 @@ function Coupon(props: ICouponsData) {
       {!editClicked && <td>{categoryName}</td>}
       {!editClicked && <td>{companyName}</td>}
       {!editClicked && <td>{amount}</td>}
-      {!editClicked && <td>{url}</td>}
+      {!editClicked && <td><img className="img-table" src={url} /></td>}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Name'
             type="text"
             defaultValue={""+name}
             onChange={(event) => setName(event.target.value)}
@@ -130,7 +131,7 @@ function Coupon(props: ICouponsData) {
       )}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Price'
             type="number"
             defaultValue={price}
             onChange={(event) => setPrice(+event.target.value)}
@@ -139,7 +140,7 @@ function Coupon(props: ICouponsData) {
       )}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Description'
             type="text"
             defaultValue={description}
             onChange={(event) => setDescription(event.target.value)}
@@ -148,8 +149,8 @@ function Coupon(props: ICouponsData) {
       )}
       {editClicked && (
         <td>
-          <input
-            type="text"
+          <MDBInput label='start date'
+            type="date"
             defaultValue={startDate}
             onChange={(event) => setStartDate(event.target.value)}
           />
@@ -157,8 +158,8 @@ function Coupon(props: ICouponsData) {
       )}
       {editClicked && (
         <td>
-          <input
-            type="text"
+          <MDBInput label='Expiration Date'
+            type="date"
             defaultValue={endDate}
             onChange={(event) => setEndDate(event.target.value)}
           />
@@ -166,25 +167,17 @@ function Coupon(props: ICouponsData) {
       )}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Category'
             type="text"
             defaultValue={""+categoryName}
             onChange={(event) => setCategoryName(event.target.value)}
           />
         </td>
       )}
+      {editClicked &&(<td>{companyName}</td>)}
       {editClicked && (
         <td>
-          <input
-            type="text"
-            defaultValue={""+companyName}
-            onChange={(event) => setCompanyName(event.target.value)}
-          />
-        </td>
-      )}
-      {editClicked && (
-        <td>
-          <input
+          <MDBInput label='Amount'
             type="text"
             defaultValue={amount}
             onChange={(event) => setAmount(+event.target.value)}
@@ -193,7 +186,7 @@ function Coupon(props: ICouponsData) {
       )}
       {editClicked && (
         <td>
-          <input
+          <MDBInput label='Image Url'
             type="text"
             defaultValue={url}
             onChange={(event) => setUrl(event.target.value)}
@@ -201,52 +194,59 @@ function Coupon(props: ICouponsData) {
         </td>
       )}
       <td>
-        {editClicked ? (
-          <div className="edit-buttons-container">
-            <button className="save-button" onClick={()=>updateCoupons()}>Save
+      {editClicked ?(<div className="edit-buttons-container">
+            <button className="btbt" onClick={() => updateCoupons()}><MDBIcon  fas icon="paper-plane" />
             </button>
-            <Modal
-              className="modal"
-              isOpen={saveEditDetailsModalIsOpen}
-              onRequestClose={closeSaveEditDetailsModalIsOpen}
-              contentLabel="Save edited details"
+
+            <button className="btbt"
+
+              onClick={() => setEditClicked(false)}
             >
-               <ConfirmationModal title="Success!!" massage={"Coupon details update successfuly."} closeModel={() => closeSaveEditDetailsModalIsOpen()}/>
-            </Modal>
-            <button
-              className="edit-button"
-              onClick={() => setEditClicked(!editClicked)}
-            >
-              Cancel
+              <MDBIcon fas icon="ban" />
             </button>
+            <MDBModal show={saveEditDetailsModalIsOpen} setShow={setSaveEditDetailsModalIsOpen} tabIndex='-1'>
+
+              <UpdateModal title="Success!!" massage={"Coupon details update successfuly."} closeModel={() => closeSaveEditDetailsModalIsOpen()} />
+
+            </MDBModal>
           </div>
         ) : (
           <div className="edit-buttons-container">
-            <button
-
-              className="edit-button"
-              onClick={() => setEditClicked(!editClicked)}
-            > edit
+            <button className="btbt" 
+              onClick={() => setEditClicked(true)}
+            > <MDBIcon far icon="edit" />
             </button>
-          </div>
-        )}
-      </td>
-      <td>
-        <div className="edit-buttons-container">
-          <button
-            className="edit-button"
-            onClick={() => removeCoupon()}
-          > remove
-          </button>
-          <Modal
-              className="modal"
-              isOpen={removeUserModalIsOpen}
-              onRequestClose={closeRemoveUserModalIsOpen}
+            <button className="btbt " 
+              
+
+              onClick={() => removeCoupon()}
+            > <MDBIcon fas icon="trash" />
+            </button>
+            </div>)}
+          <MDBModal
+              
+              show={removeUserModalIsOpen}
+              setShow={setRemoveUserModalIsOpen}
               contentLabel="Save edited details"
             >
-               <ConfirmationModal title="Success!!" massage={"Coupon removed successfuly."} closeModel={() => closeRemoveUserModalIsOpen()}/>
-            </Modal>
-        </div>
+               <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Success!!</MDBModalTitle>
+              <MDBBtn className='btn-close' color='none' onClick={closeRemoveUserModalIsOpen}></MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody>Company removed successfuly.</MDBModalBody>
+
+            <MDBModalFooter>
+              <MDBBtn color='secondary' onClick={closeRemoveUserModalIsOpen}>
+                Close
+              </MDBBtn>
+              
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+            </MDBModal>
+        
       </td>
        
     </tr>

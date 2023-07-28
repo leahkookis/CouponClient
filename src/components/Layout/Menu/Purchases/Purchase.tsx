@@ -3,13 +3,14 @@ import axios from "axios";
 import { ModifierFlags } from "typescript";
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from "react-redux";
-import "./Purchase.css";
+
 import IPurchaseData from "../../../../models/IPurchaseData";
-import ConfirmationModal from "../../../ConfirmationModal/ConfirmationModal";
 import ICouponsData from "../../../../models/ICouponsData";
 import { AppState } from "../../../../redux/app-state";
 import ICustomerData from "../../../../models/ICustomerData";
 import { ActionType } from "../../../../redux/action-types";
+import { MDBIcon, MDBModal } from "mdb-react-ui-kit";
+import DeleteModal from "../../../ConfirmationModals/DeleteModal";
 
 
 Modal.setAppElement('#root');
@@ -45,7 +46,7 @@ function User(props: IPurchaseData) {
     try {
       let url = `http://localhost:8080/purchase/${id}`;
       let response = await axios.delete(url);
-      debugger;
+      setRemoveUserModalIsOpen(true);
       dispatch({ type: ActionType.RemoveIndex, payload: { id:id, nameOfList:"purchases" } });
 
     } catch (e: any) {
@@ -58,10 +59,7 @@ function User(props: IPurchaseData) {
 
   }
 
-  
-  function closeEditMode() {
-    setEditClicked(false);
-  }
+ 
 
 
   function openRemoveUserModalIsOpen() {
@@ -72,21 +70,7 @@ function User(props: IPurchaseData) {
     setRemoveUserModalIsOpen(false);
   };
 
-  function openCustomerDetailsModalIsOpen() {
-    setCustomerDetailsModalIsOpen(true);
-  }
-
-  const closeCustomerDetailsModalIsOpen = () => {
-    setCustomerDetailsModalIsOpen(false);
-  };
-
-  function openSaveEditDetailsModalIsOpen() {
-    setSaveEditDetailsModalIsOpen(true);
-  }
-
-  const closeSaveEditDetailsModalIsOpen = () => {
-    setSaveEditDetailsModalIsOpen(false);
-  };
+  
 
 
   return (
@@ -105,14 +89,16 @@ function User(props: IPurchaseData) {
       <td>
         <div className="edit-buttons-container">
           <button
-            className="edit-button"
+            className="edit-button btbt"
             onClick={() => removePurchase()}
-          > remove
+          > <MDBIcon fas icon="trash" />
           </button>
 
         </div>
       </td>
-     
+      <MDBModal show={removeUserModalIsOpen} setShow={setRemoveUserModalIsOpen} tabIndex='-1'>
+              <DeleteModal title="Success!!" massage={"Purchase removed successfuly."} closeModel={() => closeRemoveUserModalIsOpen()} />
+            </MDBModal>
     </tr>
 
   );
