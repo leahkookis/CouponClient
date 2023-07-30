@@ -7,7 +7,7 @@ import { AppState } from "../../../../redux/app-state";
 import Coupon from "../../../coupons/CouponCard";
 import Modal from 'react-modal';
 
-import './Companies.css';
+
 import ICompanyData from "../../../../models/ICompanyData";
 import Company from "./company/Company";
 import UpdateModal from "../../../ConfirmationModals/UpdateModal";

@@ -13,7 +13,7 @@ import IPurchaseData from "../../models/IPurchaseData";
 
 import ICustomerData from "../../models/ICustomerData";
 import { ActionType } from "../../redux/action-types";
-import UpdateModal from "../ConfirmationModals/UpdateModal";
+
 import SuccessBuyCoupon from "../SuccessBuyCoupon/SuccessBuyCoupon";
 
 
@@ -173,6 +173,30 @@ function Coupon(props: ICouponsData) {
 
     return (
         <div className="coupon-card">
+     <div className="card">
+  <div className="bg-image hover-overlay ripple image-container" data-mdb-ripple-color="light">
+    <img src={props.url} className="img-fluid"/>
+    <a href="#!">
+      <div className="mask maskstyle"></div>
+    </a>
+  </div>
+  <div className="card-body">
+    <h5 className="card-title">{props.name}</h5>
+    <div className="card-text">{props.price} ILS</div>
+    <div className="card-text">{props.description}</div>
+    <div className="counter">
+                    <button className="counter-btn" onClick={incrementCount}><i className="fas fa-circle-plus"></i></button>
+                    <div>{amount}</div>
+                    <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}><i className="fas fa-circle-minus"></i></button>
+                </div>
+                <button disabled={amount <= 0} title="Buy Now" className="btn btn-lg button-icon-bg" onClick={event => buyNow(props.id)}><i className="button-icon far fa-credit-card"></i></button>
+                <button className="btn btn-lg  button-icon-bg" title="More Details" onClick={event => openCouponModal()}><i className="fas fa-align-justify button-icon"></i></button>
+
+
+            
+  </div>
+</div>
+       {/*} <div className="coupon-card">
             <button className="enter-coupon">
                 <img className="img-coupon" src={props.url}></img>
                 <div className="coupon-name">
@@ -191,6 +215,7 @@ function Coupon(props: ICouponsData) {
 
 
             </button>
+    */}
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
@@ -198,40 +223,36 @@ function Coupon(props: ICouponsData) {
                 contentLabel="Example Modal"
             >
 
-                <button className="button-close" onClick={closeModal}>X</button>
-                <div className="coupon-card-modal">
-                    <div className="name-and-price">
-
-                        <img className="img-coupon-modal" src={props.url}></img>
-
-
-                   <><div className="coupon-name-modal">{props.name}</div><div className="fields">
-                                <strong>Price:</strong>{props.price} ILS
-                            </div><div className="fields">
-                                    <strong>About:</strong>  {props.description}
-                                </div><div className="fields">
-                                    <strong> Category:</strong>{props.categoryName}
-                                </div><div className="fields">
-                                    <strong>Expiration Date:</strong>  {props.endDate}
-                                </div>
-                                <div className="counter">
-                                    <button className="counter-btn" onClick={incrementCount}>+</button>
-                                    <div>{amount}</div>
-                                    <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}>-</button>
-                                </div>
-
-                            </>
-
-
-
-                    </div>
-                   <div className="button-section">
-                        <button className="button-modal" onClick={event => buyNow(props.id)}>Buy Now</button>
-
-                    </div>
-
-                 
+<div className="card mb-3" >
+        <div className="row g-0">
+          <div className="col-md-4">
+            <img
+              src={props.url}
+              alt="Trendy Pants and Shoes"
+              className="img-fluid rounded-start"
+            />
+          </div>
+          <div className="col-md-8">
+            <div className="card-body">
+            <h3 className="card-title"><strong>{props.name}</strong></h3>
+    <div className="card-text"><strong>Price: </strong>{props.price} ILS</div>
+    <div className="card-text"><strong>Description: </strong>{props.description}</div>
+    <div className="card-text"><strong>Category: </strong>{props.categoryName}</div>
+    <div className="counter">
+                    <button className="counter-btn" onClick={incrementCount}><i className="fas fa-circle-plus"></i></button>
+                    <div>{amount}</div>
+                    <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}><i className="fas fa-circle-minus"></i></button>
                 </div>
+                <button disabled={amount <= 0} title="Buy Now" className="btn btn-lg button-icon-bg" onClick={event => buyNow(props.id)}><div className="button-icon">Buy Now</div></button>
+                
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
             </Modal>
             <Modal
                 className="modal"
@@ -243,6 +264,7 @@ function Coupon(props: ICouponsData) {
 
 
         </div>
+        
     )
 }
 
