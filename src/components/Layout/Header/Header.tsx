@@ -30,19 +30,7 @@ function Header() {
     let amountOfPage: number = 5;
     let companyName = 0;
 
-    // async function getCompanyByCompanyId(id:number){
-    //     try {
-           
-    //         let url= await axios.get(`http://localhost:8080/company/{id}`);
-    //         let response1 = url.data;
-    //         let response = response1.data;
 
-    //     } catch (error) {
-    //         alert("something went wrong");
-            
-    //     }
-        
-    //  }
 
     function logout() {
         sessionStorage.removeItem("token");
@@ -89,23 +77,23 @@ function Header() {
     return (
         <div>
             <div className='header-page'>My coupons site</div>
-            <div className='header-navigation header-wrapper'>
+            <div className=' header-wrapper'>
                 <input className='header-nav search' type="text" placeholder='Search' onChange={event => sendSearchText(event.target.value)} />
-                <Link className='cate' to="/"><button onClick={() => getAllCoupons(pageNumber,amountOfPage) } className='header-nav'>Home</button></Link>
+                <div className='header-navigation'><Link className='cate' to="/"><button onClick={() => getAllCoupons(pageNumber,amountOfPage) } className='header-nav'>Home</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(1)} className='header-nav'>Massage</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(2)} className='header-nav'>Food</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(3)} className='header-nav'>Hotels</button></Link>
                 <Link to="/"><button onClick={() => getCouponsByCategory(4)} className='header-nav'>Movies</button></Link>
-                <Link className='cats'to="/"><button onClick={() => getCouponsByCategory(5)} className='header-nav'>Flights</button></Link>
-
+                <Link to="/"><button onClick={() => getCouponsByCategory(5)} className='header-nav'>Flights</button></Link>
+                </div>
                 {loginData == null && (
                     <Link to="/login"><button className='header-nav signin-btn'>Sign In</button></Link>)}
                 {loginData != null && (
-                    <div className='customer-data signin-btn'>
+                    <div className='signin-btn'>
                         
-                        {adminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello Admin</div>)}
-                        {companyAdminMode && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello</div>)}
-                        {customer != null && (<div className='header-nav' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {customer.name}</div>)}
+                        {adminMode && (<div className='header-nav signin-btn' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello Admin</div>)}
+                        {companyAdminMode && (<div className='header-nav signin-btn' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello</div>)}
+                        {customer != null && (<div className='header-nav signin-btn' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {customer.name}</div>)}
 
                         <div className={showAccountOptions ? "account-options" : "account-options-active"}
                                 onMouseEnter={() => setShowAccountOptions(true)}

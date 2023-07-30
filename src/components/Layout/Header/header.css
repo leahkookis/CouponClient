@@ -1,6 +1,6 @@
 
 .header-nav{
-    display: inline-block;
+
     padding: 15px;
     background: #009688;
     color: #fff;
@@ -9,12 +9,8 @@
     border-width: 0px;
    
 }
-.cate{
-    padding-left: 300px;
-}
-.cats{
-    padding-right: 400px;
-}
+
+
 .header-nav:hover{
     background: #fff;
     color: black;
@@ -22,8 +18,12 @@
 .header-navigation{
     display: flex;
     background: #009688;
-
+    justify-content: center;
   
+}
+.signin-btn{
+    align-self: flex-end;
+    width: 7rem;
 }
 .header-page{
     background: black;
@@ -33,11 +33,11 @@
 }
 
 .search{
-    float: left;
-    background-color: #fff;
+    align-self: flex-start;
+    background-color: #c4c4c4;
     border-color: #053b36;
-    border-width: 2px;
-
+    border-width: 0px;
+width: 10%;
       
 }
 .customer-data{
@@ -56,11 +56,10 @@
     padding: 5.5px;
 }
 
-.header-wrapper .header-menu-links-button , .login-button{
+.header-wrapper .header-menu-links-button {
     height: 3rem;
-    width: 8rem;
-    justify-content: center;
-    align-items: center;
+    width: 7rem;
+
     border: 1px solid transparent;
     color: white;
     background-color: #009688;
@@ -82,6 +81,7 @@
 
 .ReactModal__Overlay--after-open{
     display: flex;
+
 }
 
 .header-wrapper .buttons{
@@ -90,9 +90,10 @@
     flex-wrap: wrap;
 }
 
-.header-wrapper .icons{
-    color: white;
-    display: none;
+.header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    background-color: #009688;
 }
 
 .header-wrapper .account-icon-container>h3{
