@@ -40,7 +40,7 @@ function Coupons() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [categoryName, setCategoryName] = useState("");
-  const [categotyId, setCategotyId] = useState(0);
+  const [categoryId, setCategoryId] = useState(0);
   const [companyName, setCompanyName] = useState("");
   const [companyId, setCompanyId] = useState(0);
   const [amount, setAmount] = useState(0);
@@ -96,7 +96,7 @@ function Coupons() {
 
   async function addCoupon() {
 
-    let coupon = { name, price, description, startDate, endDate, company: { id: companyId, name: companyName }, category: { id: categotyId, name: categoryName }, amount, url };
+    let coupon = { name, price, description, startDate, endDate, company: { id: companyId, name: companyName }, category: { id: categoryId, name: categoryName }, amount, url };
     try {
       const response = await axios.post("http://localhost:8080/coupons", coupon)
       closeModal()
@@ -109,7 +109,7 @@ function Coupons() {
         endDate: endDate,
         companyId: companyId,
         companyName: companyName,
-        categotyId: categotyId,
+        categoryId: categoryId,
         categoryName: categoryName,
         amount: amount,
         url: url
@@ -149,7 +149,7 @@ function Coupons() {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedCategory = +event.target.value;
-    setCompanyId(selectedCategory);
+    setCategoryId(selectedCategory);
   };
 
 
@@ -192,17 +192,14 @@ function Coupons() {
               
               
                 
-                <select aria-labelledby="Default select example" className="form-select sele" placeholder="User Type" id="dropdown" onChange={event => handleCategorySelectChange}>
+                <select aria-labelledby="Default select example" className="form-select sele" placeholder="User Type" id="dropdown" onChange={handleCategorySelectChange}>
                 <option>Select Category</option>
                 {categories.map((category, index) => <option value={category.id}>{category.name}</option>)}
             <option value="none">none</option>
 
                 </select>
                  
-                <select aria-labelledby="Default select example" className="form-select sele"
-                  id="companies"
-                  onChange={handleCompanySelectChange}
-                >
+                <select aria-labelledby="Default select example" className="form-select sele"  id="companies" onChange={handleCompanySelectChange}>
                   <option>Select Company</option>
                   {companies.map((comapny, index) => <option value={comapny.id}>{comapny.name}</option>)}
                   <option value="none">none</option>
@@ -242,7 +239,7 @@ function Coupons() {
           </tr>
 
           {couponsList.map((coupon, index) => (
-            <Coupon id={coupon.id} name={coupon.name} price={coupon.price} description={coupon.description} startDate={coupon.startDate} endDate={coupon.endDate} categoryName={coupon.categoryName} categotyId={coupon.categotyId} companyName={coupon.companyName} companyId={coupon.companyId} amount={coupon.amount} url={coupon.url} />
+            <Coupon id={coupon.id} name={coupon.name} price={coupon.price} description={coupon.description} startDate={coupon.startDate} endDate={coupon.endDate} categoryName={coupon.categoryName} categoryId={coupon.categoryId} companyName={coupon.companyName} companyId={coupon.companyId} amount={coupon.amount} url={coupon.url} />
           ))}
 
         </table>

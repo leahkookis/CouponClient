@@ -118,7 +118,7 @@ function Coupon(props: ICouponsData) {
     let [name, setName] = useState("" + props.name);
     let [price, setPrice] = useState("" + props.price);
     let [description, setDescription] = useState("" + props.description);
-    let [category, setCategory] = useState(props.categotyId);
+    let [category, setCategory] = useState(props.categoryId);
     let [endDate, setEndDate] = useState("" + props.endDate);
     let company = props.companyId;
     let startDate = endDate;
@@ -238,7 +238,7 @@ function Coupon(props: ICouponsData) {
                 isOpen={isSuccessPurchase}
                 onRequestClose={closeConirmationModal}
             >
-                <SuccessBuyCoupon id={id} name={name} price={props.price} description={description} startDate={startDate} endDate={endDate} categoryName={props.categoryName} categotyId={category} companyName={props.companyName} companyId={company} amount={amount} url={url} />
+                <SuccessBuyCoupon id={id} name={name} price={props.price} description={description} startDate={startDate} endDate={endDate} categoryName={props.categoryName} categoryId={category} companyName={props.companyName} companyId={company} amount={amount} url={url} />
             </Modal>
 
 

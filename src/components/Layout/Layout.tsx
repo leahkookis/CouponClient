@@ -62,6 +62,8 @@ function Layout() {
                         <Route path="/admin/purchases" element={<Purchases />} />
                         <Route path="/admin/companies" element={<Companies />} />
                         <Route path="/company/coupons" element={<Coupons />} />
+                        <Route path="/company/purchases" element={<Purchases />} />
+
 
                         
 
