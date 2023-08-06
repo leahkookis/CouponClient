@@ -49,7 +49,7 @@ function SuccessBuyCoupon(props: ICouponsData) {
         <MDBModalDialog className="modal-lg">
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle ><i className="fas fa-gift icon-gift"></i> 
+              <MDBModalTitle ><div className="gift"><i className="fas fa-gift icon-gift"></i> </div>
               </MDBModalTitle>
               {/* <MDBBtn className='btn-close' color='none' ></MDBBtn> */}
             </MDBModalHeader>

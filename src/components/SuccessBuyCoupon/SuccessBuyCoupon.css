@@ -1,3 +1,10 @@
+.gift{
+    width: 300px;
+    color: aqua;
+    display: flex;
+    justify-content: center;
+}
 .icon-gift{
     width: 300px;
+    color: aqua;
 }

@@ -239,7 +239,7 @@ function Coupon(props: ICouponsData) {
             <MDBModal
                 show={isSuccessPurchase} setShow={setIsSuccessPurchase}
             >
-                <SuccessBuyCoupon id={id} name={name} price={props.price} description={description} startDate={startDate} endDate={endDate} categoryName={props.categoryName} categotyId={category} companyName={props.companyName} companyId={company} amount={amount} url={url} />
+                <SuccessBuyCoupon id={id} name={name} price={props.price} description={description} startDate={startDate} endDate={endDate} categoryName={props.categoryName} categoryId={category} companyName={props.companyName} companyId={company} amount={amount} url={url} />
             </MDBModal>
 
 
