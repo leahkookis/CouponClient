@@ -7,10 +7,11 @@ import Modal from 'react-modal';
 import { ActionType } from "../../../../../redux/action-types";
 import { useDispatch } from "react-redux";
 
-import UpdateModal from "../../../../ConfirmationModals/UpdateModal";
+
 import CustomerDetailsModal from "../../customer-details-modal/CustomerDetailsModal";
 import ICouponsData from "../../../../../models/ICouponsData";
 import { MDBBtn, MDBIcon, MDBInput, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader, MDBModalTitle } from "mdb-react-ui-kit";
+import UpdateModal from "../../../../ConfirmationModals/UpdateModal";
 
 
 Modal.setAppElement('#root');

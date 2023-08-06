@@ -8,7 +8,8 @@ import PurchaseCard from "../purchaseCard/PurchaseCard";
 import { ActionType } from "../../redux/action-types";
 
 import ICouponsData from "../../models/ICouponsData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBBtn, MDBModalBody, MDBModalFooter } from "mdb-react-ui-kit";
 
 function SuccessBuyCoupon(props: ICouponsData) {
     const customer = useSelector((state: AppState) => state.customerData)
@@ -18,6 +19,8 @@ function SuccessBuyCoupon(props: ICouponsData) {
     useEffect(() => {
         getPurchaseByCustomer()
     }, [1]);
+
+    let navigate = useNavigate()
 
 
     async function getPurchaseByCustomer() {
@@ -33,28 +36,48 @@ function SuccessBuyCoupon(props: ICouponsData) {
 
     }
 
+    function goToHome(){
+        navigate("/");
+    }
 
 
+    function goToMyPurcheses(){
+        navigate("/cart");
+    }
 
     return (
-        <div >
-            <div className="title-buy">Hey</div>
-            <div className="message-buy">Your coupon has been successfully purchased.</div>
-            <div className="details-buy">
-                Coupon details:</div>
-            <div className="coupon-name-buy">{props.name}</div>
-            <div className="fields">
-                <strong>Price:</strong>{props.price} ILS
-            </div><div className="fields">
-                <strong>About:</strong>  {props.description}
-            </div>
-            <Link to="cart" className="link go-to-purchases">View your purchases</Link>
-            <Link to="/" className="link go-to-purchases">Continue shopping</Link>
+        <MDBModalDialog className="modal-lg">
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle ><i className="fas fa-gift icon-gift"></i> 
+              </MDBModalTitle>
+              {/* <MDBBtn className='btn-close' color='none' ></MDBBtn> */}
+            </MDBModalHeader>
+            <MDBModalBody>
+                 <h2 className="card-title"><strong>Your coupon has been successfully purchased.</strong></h2><br></br>
+                 <strong>Name: </strong>{props.name}
+    <div className="card-text"><strong>Price: </strong>{props.price} ILS</div>
+    <div className="card-text"><strong>Description: </strong>{props.description}</div></MDBModalBody>
+
+            <MDBModalFooter>
+              <MDBBtn className="right" color='secondary' onClick={()=>goToMyPurcheses()}>
+              View your purchases
+              </MDBBtn>
+              <MDBBtn color='secondary' onClick={()=>goToHome()}>
+              Continue shopping
+              
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+        
+        
+           
 
 
 
 
-        </div>
+        
 
     );
 

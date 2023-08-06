@@ -25,6 +25,8 @@ function Header() {
     let dispatch = useDispatch();
     let adminMode = loginData?.userType == 'admin' ? true : false;
     let companyAdminMode = loginData?.userType == 'company' ? true : false;
+    let customerMode = loginData?.userType == 'customer' ? true : false;
+
     let [showAccountOptions, setShowAccountOptions] = useState(false);
     let[pageNumber, setPageNumber]  = useState(1);
     let amountOfPage: number = 5;
@@ -93,7 +95,7 @@ function Header() {
                         
                         {adminMode && (<div className='header-nav signin-btn' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello Admin</div>)}
                         {companyAdminMode && (<div className='header-nav signin-btn' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello</div>)}
-                        {customer != null && (<div className='header-nav signin-btn' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {customer.name}</div>)}
+                        {customerMode && (<div className='header-nav signin-btn' onMouseEnter={() => setShowAccountOptions(true)} onMouseLeave={() => setShowAccountOptions(false)}>Hello {customer?.name}</div>)}
 
                         <div className={showAccountOptions ? "account-options" : "account-options-active"}
                                 onMouseEnter={() => setShowAccountOptions(true)}

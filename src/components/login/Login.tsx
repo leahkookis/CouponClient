@@ -12,6 +12,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ActionType } from '../../redux/action-types';
 import IPurchaseData from '../../models/IPurchaseData';
+import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 
 function Login() {
   const navigate = useNavigate();
@@ -72,22 +73,19 @@ function Login() {
             </div>
           </div>
           <div>
-            <h1>Login</h1>
-            <div >
-              <img src={email} alt="email" className="email" />
-              <input type="text" className="name input-login" placeholder='User Name' onChange={event => setUserName(event.target.value)} /><br />
-            </div>
-            <div >
-              <img src={lock} alt="lock" className="email" />
-              <input type="password" className="name input-login" placeholder='Password' onChange={event => setPassword(event.target.value)} /><br />
-            </div>
-            <div >
-              <input type="button" className="login-button input-login" value="Login" onClick={onButtonClick} /><br />
-            </div>
+            
+            
+              
+              <MDBInput label="User name" className="form-label" type="text" onChange={event => setUserName(event.target.value)} />
+              <MDBInput label="Password" className="form-label" type="password" onChange={event => setPassword(event.target.value)} />
+         
+            
+              <MDBBtn color='secondary' className='btn-lg'  onClick={onButtonClick} >Login</MDBBtn><br />
+            
 
 
-            <input type="button" className="forgotPassword input-login" value="Forgot password" onClick={onForgotPasswordClick} />
-            <input type="button" className="signUp input-login" value="sign up" onClick={onSignUpClick} /><br />
+            <div>Not registered yet? <Link to={'/register'}>Sign Up</Link></div>
+            
 
 
           </div>

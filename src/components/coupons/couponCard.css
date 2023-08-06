@@ -28,6 +28,17 @@
   overflow: hidden;
   /* מבטל את חלקי התמונה שחורצים מחוץ לגבולות הקונטיינר */
 }
+.img-modal{
+  height: 400px;
+  width: 200px;
+  overflow: hidden;
+}
+.img-modal img{
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+
+}
 
 .image-container img {
   width: 100%;
@@ -44,11 +55,10 @@
 }
 
 .coupon-card-modal {
-  padding: 15px;
-  width: 700px;
+  padding: 30px;
+  width: 300px;
   height: 350px;
-  background-color: #009688;
-  border-radius: 30px;
+ 
 
 
 }
@@ -142,6 +152,13 @@
   margin: 1px;
 }
 
+
+.counter-modal {
+  display: flex;
+  margin-left: 3px;
+  margin-top: 3px;
+}
+
 .button-icon {
   background: none;
   border: none;
@@ -161,4 +178,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.coupon-body{
+  width: 250px;
+  margin-top:50px;
+  padding-left: 50px;
 }

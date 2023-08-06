@@ -40,8 +40,20 @@ function Layout() {
             payload: { decryptedToken },
           });
           axios.defaults.headers.common["Authorization"] = token;
+          if(decryptedToken.userType=='customer'){
+            getCustomer(decryptedToken.id);
+          }
         }
-      }, []);
+      }, [1]);
+
+      async function getCustomer(id:number) {
+       
+            const customerDataResponse = await axios.get("http://localhost:8080/customer/" + id);
+            let customerDataRe = customerDataResponse.data;
+            console.log(customerDataRe)
+            dispatch({ type: ActionType.CustomerData, payload: { customerData: customerDataRe } });
+            
+        }
     
     return (
        

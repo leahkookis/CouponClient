@@ -5,7 +5,7 @@ import axios from "axios";
 import { ActionType } from "../../../../redux/action-types";
 
 import Modal from 'react-modal';
-import UpdateModal from "../../../ConfirmationModals/UpdateModal";
+
 import Company from "../Companies/company/Company";
 import ICompanyData from "../../../../models/ICompanyData";
 import IUserData from "../../../../models/IUserData";
@@ -13,6 +13,7 @@ import ICouponsData from "../../../../models/ICouponsData";
 import ICategory from "../../../../models/ICategory";
 import Coupon from "./Coupon/Coupon";
 import { MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBBtn, MDBModalBody, MDBInput, MDBModalFooter } from "mdb-react-ui-kit";
+import UpdateModal from "../../../ConfirmationModals/UpdateModal";
 
 
 const customStyles = {

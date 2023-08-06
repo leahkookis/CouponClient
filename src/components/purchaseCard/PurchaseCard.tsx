@@ -39,8 +39,6 @@ function PurchaseCard(props: IPurchaseData) {
     let dispatch = useDispatch();
     let thisCoupon = coupons.filter(c=>c.name == props.couponName)[0];
     
-    
-    
 
     
 
@@ -49,29 +47,25 @@ function PurchaseCard(props: IPurchaseData) {
 
 
     return (
-        <div className="card mb-3" >
-        <div className="row g-0">
-          <div className="col-md-4">
-            <img
-              src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
-              alt="Trendy Pants and Shoes"
-              className="img-fluid rounded-start"
-            />
-          </div>
-          <div className="col-md-8">
-            <div className="card-body">
-              <h5 className="card-title">{props.name}</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural lead-in to
-                additional content. This content is a little bit longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+       
+        <div className="coupon-card">
+        <div className="card">
+     <div className="bg-image hover-overlay ripple image-container" data-mdb-ripple-color="light">
+       <img src={thisCoupon.url} className="img-fluid"/>
+       <a href="#!">
+         <div className="mask maskstyle"></div>
+       </a>
+     </div>
+    
+     <div className="card-body">
+       <h5 className="card-title">{thisCoupon.name}</h5>
+       <div className="card-text">{thisCoupon.price} ILS</div>
+       <div className="card-text">{thisCoupon.description}</div>
+       
+   
+       </div>        
+     </div>
+   </div>
 
 
     )

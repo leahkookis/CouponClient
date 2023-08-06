@@ -15,6 +15,7 @@ import ICustomerData from "../../models/ICustomerData";
 import { ActionType } from "../../redux/action-types";
 
 import SuccessBuyCoupon from "../SuccessBuyCoupon/SuccessBuyCoupon";
+import { MDBModal } from "mdb-react-ui-kit";
 
 
 
@@ -174,7 +175,7 @@ function Coupon(props: ICouponsData) {
     return (
         <div className="coupon-card">
      <div className="card">
-  <div className="bg-image hover-overlay ripple image-container" data-mdb-ripple-color="light">
+  <div className="bg-image hover-overlay ripple image-container" data-mdb-ripple-color="light" onClick={event=> openCouponModal()}>
     <img src={props.url} className="img-fluid"/>
     <a href="#!">
       <div className="mask maskstyle"></div>
@@ -196,26 +197,7 @@ function Coupon(props: ICouponsData) {
             
   </div>
 </div>
-       {/*} <div className="coupon-card">
-            <button className="enter-coupon">
-                <img className="img-coupon" src={props.url}></img>
-                <div className="coupon-name">
-                    {props.name}
-                </div>
-                <div>
-                    {props.price} ILS
-                </div>
-                <div className="counter">
-                    <button className="counter-btn" onClick={incrementCount}>+</button>
-                    <div>{amount}</div>
-                    <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}>-</button>
-                </div>
-                <button disabled={amount <= 0} title="Buy Now" className=" button-icon" onClick={event => buyNow(props.id)}><img src={cart} alt="Buy now" className="cart" /></button>
-                <button className=" button-icon" title="More Details" onClick={event => openCouponModal()}><img src={details} alt="Buy now" className="cart" /></button>
-
-
-            </button>
-    */}
+      
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
@@ -223,22 +205,22 @@ function Coupon(props: ICouponsData) {
                 contentLabel="Example Modal"
             >
 
-<div className="card mb-3" >
+<div className="card mb-2" >
         <div className="row g-0">
-          <div className="col-md-4">
+          <div className="col-md-4 img-modal">
             <img
               src={props.url}
-              alt="Trendy Pants and Shoes"
+              
               className="img-fluid rounded-start"
             />
           </div>
-          <div className="col-md-8">
-            <div className="card-body">
+          <div className="col-md-8 coupon-card-modal">
+            <div className="card-body coupon-body">
             <h3 className="card-title"><strong>{props.name}</strong></h3>
     <div className="card-text"><strong>Price: </strong>{props.price} ILS</div>
     <div className="card-text"><strong>Description: </strong>{props.description}</div>
     <div className="card-text"><strong>Category: </strong>{props.categoryName}</div>
-    <div className="counter">
+    <div className="counter-modal">
                     <button className="counter-btn" onClick={incrementCount}><i className="fas fa-circle-plus"></i></button>
                     <div>{amount}</div>
                     <button disabled={amount <= 0} className="counter-btn" onClick={decrementCount}><i className="fas fa-circle-minus"></i></button>
@@ -254,13 +236,11 @@ function Coupon(props: ICouponsData) {
       </div>
 
             </Modal>
-            <Modal
-                className="modal"
-                isOpen={isSuccessPurchase}
-                onRequestClose={closeConirmationModal}
+            <MDBModal
+                show={isSuccessPurchase} setShow={setIsSuccessPurchase}
             >
                 <SuccessBuyCoupon id={id} name={name} price={props.price} description={description} startDate={startDate} endDate={endDate} categoryName={props.categoryName} categotyId={category} companyName={props.companyName} companyId={company} amount={amount} url={url} />
-            </Modal>
+            </MDBModal>
 
 
         </div>

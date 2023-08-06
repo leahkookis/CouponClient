@@ -7,16 +7,17 @@ import Modal from 'react-modal';
 import { ActionType } from "../../../../../redux/action-types";
 import { useDispatch, useSelector } from "react-redux";
 import "./User.css";
-import UpdateModal from "../../../../ConfirmationModals/UpdateModal";
+
 import CustomerDetailsModal from "../../customer-details-modal/CustomerDetailsModal";
 import { MDBBtn, MDBIcon, MDBInput, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader, MDBModalTitle } from "mdb-react-ui-kit";
-import DeleteModal from "../../../../ConfirmationModals/DeleteModal";
+
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import DetailsModal from "../../../../ConfirmationModals/DetailsModal";
+
 import { MDBBadge, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import { AppState } from "../../../../../redux/app-state";
 import ICompanyData from "../../../../../models/ICompanyData";
+import UpdateModal from "../../../../ConfirmationModals/UpdateModal";
 
 
 
@@ -177,11 +178,11 @@ function User(props: IUserData) {
               onClick={() => setEditClicked(true)}
             > <MDBIcon far icon="edit" />
             </button>
-            <button className="btbt"
+            <button className="btbt" 
               disabled={userType == "customer"}
 
               onClick={() => removeUser()}
-            > <MDBIcon fas icon="trash" />
+            > <MDBIcon disabled={userType == "customer"} fas icon="trash" />
             </button>
             <MDBModal show={removeUserModalIsOpen} setShow={setRemoveUserModalIsOpen} tabIndex='-1'>
             <MDBModalDialog>
