@@ -56,7 +56,7 @@ function CouponsContainer(){
                     if(normalizeSubText===""){return true}
                     return coupon.name.toLowerCase().trim().includes(normalizeSubText)||coupon.description.toLowerCase().trim().includes(normalizeSubText)||coupon.categoryName.toLowerCase().trim().includes(normalizeSubText);
                 })
-            .map((coupon, index) => <Coupon key={index} id={coupon.id} name={coupon.name} price={coupon.price} description={coupon.description} startDate={coupon.startDate} endDate={coupon.endDate} categoryName={coupon.categoryName} categotyId={coupon.categotyId} companyName={coupon.companyName} companyId={coupon.companyId} amount={coupon.amount} url={coupon.url}/>)}
+            .map((coupon, index) => <Coupon key={index} id={coupon.id} name={coupon.name} price={coupon.price} description={coupon.description} startDate={coupon.startDate} endDate={coupon.endDate} categoryName={coupon.categoryName} categoryId={coupon.categoryId} companyName={coupon.companyName} companyId={coupon.companyId} amount={coupon.amount} url={coupon.url}/>)}
         </div>
     );
 

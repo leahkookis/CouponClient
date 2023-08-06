@@ -26,7 +26,7 @@ function Coupon(props: ICouponsData) {
   const [startDate, setStartDate] = useState(props.startDate);
   const [endDate, setEndDate] = useState(props.endDate);
   const [categoryName, setCategoryName] = useState(props.categoryName);
-  const [categotyId, setCategotyId] = useState(props.categotyId);
+  const [categoryId, setCategoryId] = useState(props.categoryId);
   const [companyId, setCompanyId] = useState(props.companyId);
   const [amount, setAmount] = useState(props.amount);
   const [url, setUrl] = useState(props.url);
@@ -35,11 +35,8 @@ function Coupon(props: ICouponsData) {
   const [customerDetailsModalIsOpen, setCustomerDetailsModalIsOpen] = useState(false);
   const [saveEditDetailsModalIsOpen, setSaveEditDetailsModalIsOpen] = useState(false);
   const [editClicked, setEditClicked] = useState(false);
-  let companies: any[] = [];
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [text, setText] = useState("");
   let dispatch = useDispatch();
-  let [usersList, setUsersList] = useState<IUserData[]>([]);
 
 
 
@@ -61,12 +58,16 @@ function Coupon(props: ICouponsData) {
   }
 
   async function updateCoupons() {
-    
-    let coupon = { name, price, description, startDate,endDate ,company:{ id:companyId, name:companyName}, category:{id:categotyId , name:categoryName},amount, url };
+    let coupon = { id, name, price, description, startDate,endDate , category:{id:categoryId , name:categoryName},company:{ id:companyId, name:companyName},amount, url };
+   
     try {
-      let response = await axios.put("http://localhost:8080/coupons", coupon);
-      closeEditMode();
-      openSaveEditDetailsModalIsOpen();
+      let response = await axios.put("http://localhost:8080/coupons", coupon)      
+      setSaveEditDetailsModalIsOpen(true);
+      
+      //setEditClicked(false);
+
+
+
     } catch (e: any) {
       if (e.response?.data?.errorMessage) {
         alert(e.response.data.errorMessage);
@@ -236,7 +237,7 @@ function Coupon(props: ICouponsData) {
               <MDBModalTitle>Success!!</MDBModalTitle>
               <MDBBtn className='btn-close' color='none' onClick={closeRemoveUserModalIsOpen}></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody>Company removed successfuly.</MDBModalBody>
+            <MDBModalBody>Coupon removed successfuly.</MDBModalBody>
 
             <MDBModalFooter>
               <MDBBtn color='secondary' onClick={closeRemoveUserModalIsOpen}>

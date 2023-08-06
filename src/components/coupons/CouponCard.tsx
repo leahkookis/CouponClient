@@ -119,7 +119,7 @@ function Coupon(props: ICouponsData) {
     let [name, setName] = useState("" + props.name);
     let [price, setPrice] = useState("" + props.price);
     let [description, setDescription] = useState("" + props.description);
-    let [category, setCategory] = useState(props.categotyId);
+    let [category, setCategory] = useState(props.categoryId);
     let [endDate, setEndDate] = useState("" + props.endDate);
     let company = props.companyId;
     let startDate = endDate;

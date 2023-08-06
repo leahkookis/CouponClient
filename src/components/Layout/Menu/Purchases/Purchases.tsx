@@ -30,29 +30,34 @@ const Purchases: React.FC = () => {
   const [couponPrice, setCouponPrice] = useState(0);
   const [categoryName, setCategoryName] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [companyId, setCompanyId] = useState(1);
   const [categoryId, setCategoryId] = useState(1);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [timeStamp, setTimeStamp] = useState('');
   const purchaseList: IPurchaseData[] = useSelector((state: AppState) => state.purchases);
   const [pageNumber, setPageNumber] = useState(1);
   const companies: ICompanyData[] = useSelector((state: AppState) => state.companiesData);
   const categories = useSelector((state: AppState) => state.categories);
-
   const [modalIsOpen, setIsOpen] = useState(false);
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const amountOfPage: number = 5;
+  let loginData = useSelector((state: AppState) => state.token)
+  const [companyId, setCompanyId] = useState(loginData?.companyId || 1);
+  const [customerId, setCustomerId] = useState(loginData?.id);
+
 
   useEffect(() => {
     getAllCompanies(pageNumber, amountOfPage);
   }, [pageNumber]);
-
   useEffect(() => {
     getPurchaseByPage(pageNumber);
   }, [pageNumber]);
-
+  useEffect(() => {
+    getPurchaseByCompanyId(companyId,pageNumber);
+  }, [pageNumber]);
+  
   async function getPurchaseByPage(pageNumber: number) {
+    if(loginData?.userType=="admin"){
     try {
       const url = `http://localhost:8080/purchase?page=${pageNumber}`;
       const response1 = await axios.get(url);
@@ -63,7 +68,35 @@ const Purchases: React.FC = () => {
       alert('Failed to retrieve purchases');
     }
   }
+}
 
+  async function getPurchaseByCompanyId(companyId:number, pageNumber: number) {
+    if(loginData?.userType=="company"){
+
+    try {
+      const url = `http://localhost:8080/purchase/bycompany?companyId=${companyId}&page=${pageNumber}`;
+      const response1 = await axios.get(url);
+      const response = response1.data;
+      dispatch({ type: ActionType.GetPurchase, payload: { response } });
+    } catch (e) {
+      console.error(e);
+      alert('Failed to retrieve purchases');
+    }
+  }
+}
+  // async function getPurchaseByCustomerId(customerId:number, pageNumber: number) {
+  //   if(loginData?.userType=="customer"){
+  //   try {
+  //     const url = `http://localhost:8080/purchase/bycustomer?customerId=${customerId}&page=${pageNumber}`;
+  //     const response1 = await axios.get(url);
+  //     const response = response1.data;
+  //     dispatch({ type: ActionType.GetPurchase, payload: { response } });
+  //   } catch (e) {
+  //     console.error(e);
+  //     alert('Failed to retrieve purchases');
+  //   }
+  // }
+  // }
   async function getAllCompanies(pageNumber: number, amountOfPage: number) {
     try {
       const url = await axios.get(`http://localhost:8080/company?page=${pageNumber}`);
