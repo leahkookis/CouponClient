@@ -57,7 +57,7 @@ function Header() {
             dispatch({ type: ActionType.GetCoupons, payload: { response } })
 
         } catch (error) {
-            alert("something...");
+            alert("something went wrong");
 
         }
     }
@@ -69,7 +69,7 @@ function Header() {
                 dispatch({ type: ActionType.GetCoupons, payload: { response } })
     
             } catch (error) {
-                alert("something...");
+                alert("something went wrong ");
     
             }
         }

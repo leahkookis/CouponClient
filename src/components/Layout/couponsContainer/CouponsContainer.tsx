@@ -31,7 +31,8 @@ function CouponsContainer(){
             dispatch({type: ActionType.GetCoupons, payload: {response}})
 
         } catch (error) {
-            alert("something...");
+            
+            alert("something went wrong");
             
         }
         
@@ -45,7 +46,7 @@ function CouponsContainer(){
             dispatch({type: ActionType.GetCategories, payload: {response}})
 
         } catch (error) {
-            alert("something...");
+            alert("something went wrong");
 
         }
 

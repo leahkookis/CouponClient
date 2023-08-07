@@ -10,27 +10,31 @@ import { ActionType } from "../../redux/action-types";
 import ICouponsData from "../../models/ICouponsData";
 import { Link, useNavigate } from "react-router-dom";
 import { MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBBtn, MDBModalBody, MDBModalFooter } from "mdb-react-ui-kit";
+import ICustomerData from "../../models/ICustomerData";
 
 function SuccessBuyCoupon(props: ICouponsData) {
-    const customer = useSelector((state: AppState) => state.customerData)
+    const customer:ICustomerData = useSelector((state: AppState) => state.customerData)
     const getSelectedCouponsIds = useSelector((state: AppState) => state.sendPurchaseToBuy)
     const cartProductsArray: IPurchaseData[] = useSelector((state: AppState) => state.purchases)
+    // const [customerId, setcustomerId] = useState();
     let dispatch = useDispatch();
     useEffect(() => {
-        getPurchaseByCustomer()
-    }, [1]);
-
+      if (customer && customer.id) {
+          getPurchaseByCustomer(customer.id);
+      }
+  }, [customer]);
     let navigate = useNavigate()
 
 
-    async function getPurchaseByCustomer() {
+    async function getPurchaseByCustomer(customerId:number) {
         try {
-            let url = `http://localhost:8080/purchase/bycustomer?customerid=${customer.id}`;
+          debugger
+            let url = `http://localhost:8080/purchase/bycustomer?customerid=${customerId}`;
             let customerPurchase = await axios.get(url);
             let purchaseData = customerPurchase.data;
             dispatch({ type: ActionType.GetPurchase, payload: { purchaseData: purchaseData } })
         } catch (error) {
-            alert("something...");
+            alert("something went wrong");
 
         }
 
