@@ -150,7 +150,7 @@ function Header() {
 
                             )}
                             {companyAdminMode && (
-                                <><Link className="header-menu-links" to="/company/coupons/bycompany"  onClick={() => getCouponsBycompanyId(loginData?.companyId || 1,pageNumber)}>
+                                <><Link className="header-menu-links" to="/company/coupons/bycompany"  onClick={() => getCouponsBycompanyId(loginData?.companyId || 0,pageNumber)}>
                                     <button
                                         className="header-menu-links-button"
                                         onClick={() => setShowAccountOptions(!showAccountOptions)}

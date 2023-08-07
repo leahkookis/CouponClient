@@ -75,8 +75,7 @@ function Coupon(props: ICouponsData) {
         try {
             const response = await axios.post("http://localhost:8080/purchase", { timeStamp, customer, coupon, amount });
             dispatch({ type: ActionType.BuyNow, payload: { countOfBuyProduct } });
-            closeModal();
-            debugger;
+            closeModal()
             title = "success";
             massage = "Successffuly purchase {coupon.name}";
             openIsSuccessPurchase();

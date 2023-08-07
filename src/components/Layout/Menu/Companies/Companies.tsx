@@ -73,6 +73,7 @@ function Companies() {
         };
 
         try {
+            
             const response = await axios.post("http://localhost:8080/company", company)
             closeModal()
             let newCompany: ICompanyData = {

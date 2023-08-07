@@ -44,7 +44,7 @@ function Coupons() {
   const [categoryId, setCategoryId] = useState(0);
   const [companyName, setCompanyName] = useState("");
   let loginData = useSelector((state: AppState) => state.token)
-  const [companyId, setCompanyId] = useState(loginData?.companyId ||1);
+  const [companyId, setCompanyId] = useState(loginData?.companyId ||0);
   const [amount, setAmount] = useState(0);
   const [url, setUrl] = useState("");
 
@@ -59,6 +59,9 @@ function Coupons() {
   let dispatch = useDispatch();
   let amountOfPage: number = 5;
 
+  useEffect(() => {
+    getCouponsBycompanyId(companyId, pageNumber);
+  }, [pageNumber]);
 
   useEffect(() => {
     getAllCompanies(pageNumber, amountOfPage)
@@ -68,9 +71,7 @@ function Coupons() {
     getCouponsByPage(pageNumber);
   }, [pageNumber]);
 
-  useEffect(() => {
-    getCouponsBycompanyId(companyId, pageNumber);
-  }, [companyId]);
+
 
   async function getCouponsByPage(pageNumber: number) {
     if(loginData?.userType=="admin"){
@@ -87,8 +88,8 @@ function Coupons() {
   }
 } 
   async function getCouponsBycompanyId(companyId:number, pageNumber: number) {
-    
     if (loginData?.userType === "company"){
+      
     try {
       let url = `http://localhost:8080/coupons/bycompany?companyId=${companyId}&page=${pageNumber}`;
       let response1 = await axios.get(url);

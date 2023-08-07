@@ -28,11 +28,11 @@ function SuccessBuyCoupon(props: ICouponsData) {
 
     async function getPurchaseByCustomer(customerId:number) {
         try {
-          debugger
+          
             let url = `http://localhost:8080/purchase/bycustomer?customerid=${customerId}`;
             let customerPurchase = await axios.get(url);
-            let purchaseData = customerPurchase.data;
-            dispatch({ type: ActionType.GetPurchase, payload: { purchaseData: purchaseData } })
+            let response = customerPurchase.data;
+            dispatch({ type: ActionType.GetPurchase, payload: { purchaseData: response } })
         } catch (error) {
             alert("something went wrong");
 
@@ -64,10 +64,10 @@ function SuccessBuyCoupon(props: ICouponsData) {
     <div className="card-text"><strong>Description: </strong>{props.description}</div></MDBModalBody>
 
             <MDBModalFooter>
-              <MDBBtn className="right" color='secondary' onClick={()=>goToMyPurcheses()}>
+              <MDBBtn className="right" color='secondary' onClick={()=> goToMyPurcheses()}>
               View your purchases
               </MDBBtn>
-              <MDBBtn color='secondary' onClick={()=>goToHome()}>
+              <MDBBtn color='secondary' onClick={ () => goToHome()}>
               Continue shopping
               
               </MDBBtn>
