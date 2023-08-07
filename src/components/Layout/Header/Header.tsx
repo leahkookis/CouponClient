@@ -29,7 +29,7 @@ function Header() {
 
     let [showAccountOptions, setShowAccountOptions] = useState(false);
     let[pageNumber, setPageNumber]  = useState(1);
-    let amountOfPage: number = 5;
+    let amountOfPage: number = 7;
     let companyName = 0;
 
 
@@ -74,6 +74,18 @@ function Header() {
             }
         }
     
+        async function getCouponsBycompanyId(companyId:number, pageNumber: number) {
+            try {
+              let url = `http://localhost:8080/coupons/bycompany?companyId=${companyId}&page=${pageNumber}`;
+              let response1 = await axios.get(url);
+              let response = response1.data;
+        
+              dispatch({ type: ActionType.GetCoupons, payload: { response } });
+            } catch (e) {
+              console.error(e);
+              alert("Failed to retrieve coupons");
+            }
+          }
 
 
     return (
@@ -138,7 +150,7 @@ function Header() {
 
                             )}
                             {companyAdminMode && (
-                                <><Link className="header-menu-links" to="/company/coupons">
+                                <><Link className="header-menu-links" to="/company/coupons/bycompany"  onClick={() => getCouponsBycompanyId(loginData?.companyId || 1,pageNumber)}>
                                     <button
                                         className="header-menu-links-button"
                                         onClick={() => setShowAccountOptions(!showAccountOptions)}

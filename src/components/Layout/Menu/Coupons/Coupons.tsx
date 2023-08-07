@@ -43,7 +43,8 @@ function Coupons() {
   const [categoryName, setCategoryName] = useState("");
   const [categoryId, setCategoryId] = useState(0);
   const [companyName, setCompanyName] = useState("");
-  const [companyId, setCompanyId] = useState(0);
+  let loginData = useSelector((state: AppState) => state.token)
+  const [companyId, setCompanyId] = useState(loginData?.companyId ||1);
   const [amount, setAmount] = useState(0);
   const [url, setUrl] = useState("");
 
@@ -67,7 +68,12 @@ function Coupons() {
     getCouponsByPage(pageNumber);
   }, [pageNumber]);
 
+  useEffect(() => {
+    getCouponsBycompanyId(companyId, pageNumber);
+  }, [companyId]);
+
   async function getCouponsByPage(pageNumber: number) {
+    if(loginData?.userType=="admin"){
     try {
       let url = `http://localhost:8080/coupons?page=${pageNumber}`;
       let response1 = await axios.get(url);
@@ -76,9 +82,25 @@ function Coupons() {
       dispatch({ type: ActionType.GetCoupons, payload: { response } });
     } catch (e) {
       console.error(e);
-      alert("Failed to retrieve users");
+      alert("Failed to retrieve coupons");
     }
   }
+} 
+  async function getCouponsBycompanyId(companyId:number, pageNumber: number) {
+    
+    if (loginData?.userType === "company"){
+    try {
+      let url = `http://localhost:8080/coupons/bycompany?companyId=${companyId}&page=${pageNumber}`;
+      let response1 = await axios.get(url);
+      let response = response1.data;
+
+      dispatch({ type: ActionType.GetCoupons, payload: { response } });
+    } catch (e) {
+      console.error(e);
+      alert("Failed to get coupons");
+    }
+  }
+}
   async function getAllCompanies(pageNumber: number, amountOfPage: number) {
     try {
 
